@@ -5,9 +5,10 @@ using UnityEngine;
 public class converstation_frame : MonoBehaviour
 {
     // Start is called before the first frame update
+    Animator anime;
     void Start()
     {
-        
+        anime = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -15,5 +16,12 @@ public class converstation_frame : MonoBehaviour
     {
         
     }
-    
+    public void enter()
+    {
+        anime.SetTrigger("open");
+    }
+    public void exit()
+    {
+        anime.SetTrigger("close");
+    }
 }
