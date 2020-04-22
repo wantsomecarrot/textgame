@@ -7,12 +7,14 @@ public class GameManager_s : MonoBehaviour
     // Start is called before the first frame update
     private Text_s Text ;
     private  test_level levelmanager;
-    public float level=1;
+    private converstation_frame talkframe;
+    public float level=0;
     public string gamemode = "converstation";
     void Start()
     {
         Text = GameObject.Find("Words").GetComponent<Text_s>();
         levelmanager = GameObject.Find("LevelManager").GetComponent<test_level>();
+        talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
         levelmanager.story(level);
 
     }
@@ -30,10 +32,16 @@ public class GameManager_s : MonoBehaviour
                 next_level();
                 break;
             case "searching":
-                break;
+                if ( Input.GetMouseButtonDown(0)) {
+                }
+                    break;
             case "list":
                 break;
         }
+    }
+    public void talkbegin() {
+        talkframe.enter();
+        gamemode = "converstation";
     }
      public void Speak(string word)//將文字傳給對話框
     {

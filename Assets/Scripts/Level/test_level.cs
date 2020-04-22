@@ -19,6 +19,9 @@ public class test_level : MonoBehaviour
     }
     public void story(float level) {
         switch (level) {
+            case 0:
+                gamemanager.talkbegin();
+                break;
             case 1:
                 gamemanager.Speak("Sun is shining,birds are singing.");
                 break;
