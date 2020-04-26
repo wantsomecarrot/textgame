@@ -8,14 +8,17 @@ public class GameManager_s : MonoBehaviour
     private Text_s Text ;
     private  test_level levelmanager;
     private converstation_frame talkframe;
+    public string nowweareat = "story";
     public float level=0;
     public string gamemode = "converstation";
+    private RaycastHit hit ;
+    private Ray mouseray;
     void Start()
     {
         Text = GameObject.Find("Words").GetComponent<Text_s>();
         levelmanager = GameObject.Find("LevelManager").GetComponent<test_level>();
         talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
-        levelmanager.story(level);
+        levelmanager.story(nowweareat,level);
 
     }
 
@@ -32,7 +35,13 @@ public class GameManager_s : MonoBehaviour
                 next_level();
                 break;
             case "searching":
+                mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if ( Input.GetMouseButtonDown(0)) {
+                    if (Physics.Raycast(mouseray, out hit, 1000f))
+                    {
+                        nowweareat = hit.transform.name;
+                        levelmanager.story(nowweareat, level);
+                    }
                 }
                     break;
             case "list":
@@ -43,13 +52,19 @@ public class GameManager_s : MonoBehaviour
         talkframe.enter();
         gamemode = "converstation";
     }
-     public void Speak(string word)//將文字傳給對話框
+    public void talkend()
+    {
+        talkframe.exit();
+        level = 0;
+        gamemode = "searching";
+    }
+    public void Speak(string word)//將文字傳給對話框
     {
         Text.type_start(word);
     }
     public void next_level()//關卡數值+1傳給關卡總管
     {
         level++;
-        levelmanager.story(level);
+        levelmanager.story(nowweareat ,level);
     }
 }

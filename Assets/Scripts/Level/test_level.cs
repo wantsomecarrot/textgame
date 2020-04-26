@@ -15,25 +15,67 @@ public class test_level : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    public void story(float level) {
-        switch (level) {
+    public void story(string name, float level)
+    {
+        switch (name)
+        {
+            case "story":
+                switch (level)
+        {
             case 0:
                 gamemanager.talkbegin();
-                break;
-            case 1:
                 gamemanager.Speak("Sun is shining,birds are singing.");
                 break;
-            case 2:
+            case 1:
                 gamemanager.Speak("A day like this,a kid like you.");
                 break;
-            case 3:
+            case 2:
                 gamemanager.Speak("SHOULD BE BURNED IN THE HELL.");
+                break;
+            case 3:
+                gamemanager.talkend();
                 break;
             default:
                 break;
         }
+                break;
+            case "ball":
+                switch (level)
+                {
 
+                    case 0:
+                        gamemanager.talkbegin();
+                        gamemanager.Speak("This is a ball.");
+                        break;
+                    case 1:
+                        gamemanager.talkend();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "box":
+                switch (level)
+                {
+
+                    case 0:
+                        gamemanager.talkbegin();
+                        gamemanager.Speak("This is a box.");
+                        break;
+                    case 1:
+                        gamemanager.Speak("Why is this thing floating above?");
+                        break;
+                    case 2:
+                        gamemanager.talkend();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+        }
     }
+
+
 }
