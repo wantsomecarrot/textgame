@@ -5,7 +5,7 @@ using UnityEngine;
 public class converstation_frame : MonoBehaviour
 {
     // Start is called before the first frame update
-    Animator anime;
+    public Animator anime;
     void Start()
     {
         anime = GetComponent<Animator>();

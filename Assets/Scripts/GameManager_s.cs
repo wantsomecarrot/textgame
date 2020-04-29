@@ -44,19 +44,35 @@ public class GameManager_s : MonoBehaviour
                     }
                 }
                     break;
-            case "list":
+            case "inanime":
+                if (talkframe.anime.GetCurrentAnimatorStateInfo(0).IsName("frame_on")) {
+                    gamemode = "converstation";
+                    level++ ;
+                    levelmanager.story(nowweareat, level);
+                }
+                    
+                break;
+            case "outanime":
+                if (talkframe.anime.GetCurrentAnimatorStateInfo(0).IsName("off"))
+                {
+                    gamemode = "searching";
+                    Text.type_clear();
+                }
+
                 break;
         }
     }
     public void talkbegin() {
         talkframe.enter();
-        gamemode = "converstation";
+        gamemode = "inanime";
+
     }
     public void talkend()
     {
         talkframe.exit();
+        
         level = 0;
-        gamemode = "searching";
+        gamemode = "outanime";
     }
     public void Speak(string word)//將文字傳給對話框
     {

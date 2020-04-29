@@ -26,15 +26,17 @@ public class test_level : MonoBehaviour
         {
             case 0:
                 gamemanager.talkbegin();
+               break;
+            case 1:
                 gamemanager.Speak("Sun is shining,birds are singing.");
                 break;
-            case 1:
+            case 2:
                 gamemanager.Speak("A day like this,a kid like you.");
                 break;
-            case 2:
+            case 3:
                 gamemanager.Speak("SHOULD BE BURNED IN THE HELL.");
                 break;
-            case 3:
+            case 4:
                 gamemanager.talkend();
                 break;
             default:
@@ -47,9 +49,11 @@ public class test_level : MonoBehaviour
 
                     case 0:
                         gamemanager.talkbegin();
-                        gamemanager.Speak("This is a ball.");
                         break;
                     case 1:
+                        gamemanager.Speak("This is a ball.");
+                        break;
+                    case 2:
                         gamemanager.talkend();
                         break;
                     default:
@@ -62,12 +66,15 @@ public class test_level : MonoBehaviour
 
                     case 0:
                         gamemanager.talkbegin();
-                        gamemanager.Speak("This is a box.");
                         break;
                     case 1:
-                        gamemanager.Speak("Why is this thing floating above?");
+                        
+                        gamemanager.Speak("This is a box.");
                         break;
                     case 2:
+                        gamemanager.Speak("Why is this thing floating above?");
+                        break;
+                    case 3:
                         gamemanager.talkend();
                         break;
                     default:

@@ -24,10 +24,14 @@ public class Text_s : MonoBehaviour
     {
         StartCoroutine(type(words));
     }
+    public void type_clear()
+    {
+        text.text = string.Empty;
+    }
     IEnumerator type(string word)
     {
         type_delay = 0.1f;
-        text.text=string.Empty;
+        type_clear();
         typing = true;
         
         foreach (char letter in word.ToCharArray())
