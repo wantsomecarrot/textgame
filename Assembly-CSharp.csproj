@@ -60,9 +60,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\button.cs" />
     <Compile Include="Assets\Scripts\converstation_frame.cs" />
     <Compile Include="Assets\Scripts\GameManager_s.cs" />
     <Compile Include="Assets\Scripts\Level\test_level.cs" />
+    <Compile Include="Assets\Scripts\option.cs" />
     <Compile Include="Assets\Scripts\Text_s.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Lin/Documents/textgame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
