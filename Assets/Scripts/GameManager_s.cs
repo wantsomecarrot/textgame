@@ -13,11 +13,14 @@ public class GameManager_s : MonoBehaviour
     public string gamemode = "converstation";
     private RaycastHit hit ;
     private Ray mouseray;
+    private string optionram ;
+    private option optionframe;
     void Start()
     {
         Text = GameObject.Find("Words").GetComponent<Text_s>();
         levelmanager = GameObject.Find("LevelManager").GetComponent<test_level>();
         talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
+        optionframe = GameObject.Find("Option").GetComponent<option>();
         levelmanager.story(nowweareat,level);
 
     }
@@ -25,6 +28,7 @@ public class GameManager_s : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         switch (gamemode)
         {
             case "converstation":
@@ -60,7 +64,22 @@ public class GameManager_s : MonoBehaviour
                 }
 
                 break;
+            case "option":
+                ;
+
+                break;
         }
+    }
+    public void optionstart()
+    {
+        optionram = gamemode;
+        gamemode = "option";
+        optionframe.enter();
+    }
+    public void optionend()
+    {
+        gamemode = optionram;
+        optionframe.exit();
     }
     public void talkbegin() {
         talkframe.enter();
