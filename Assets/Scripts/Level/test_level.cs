@@ -51,7 +51,7 @@ public class test_level : MonoBehaviour
                         gamemanager.talkbegin();
                         break;
                     case 1:
-                        gamemanager.Speak("This is a ball.");
+                        gamemanager.Speak("這是顆球。");
                         break;
                     case 2:
                         gamemanager.talkend();
@@ -69,10 +69,10 @@ public class test_level : MonoBehaviour
                         break;
                     case 1:
                         
-                        gamemanager.Speak("This is a box.");
+                        gamemanager.Speak("這是個箱子。");
                         break;
                     case 2:
-                        gamemanager.Speak("Why is this thing floating above?");
+                        gamemanager.Speak("這東西怎麼會飄在空中？");
                         break;
                     case 3:
                         gamemanager.talkend();
