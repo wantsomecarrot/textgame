@@ -25,8 +25,8 @@ public class test_level : MonoBehaviour
                 switch (level)
         {
             case 0:
-                gamemanager.talkbegin();
-               break;
+                        gamemanager.talk("begin");
+                        break;
             case 1:
                 gamemanager.Speak("Sun is shining,birds are singing.");
                 break;
@@ -37,8 +37,8 @@ public class test_level : MonoBehaviour
                 gamemanager.Speak("SHOULD BE BURNED IN THE HELL.");
                 break;
             case 4:
-                gamemanager.talkend();
-                break;
+                        gamemanager.talk("end");
+                        break;
             default:
                 break;
         }
@@ -48,13 +48,13 @@ public class test_level : MonoBehaviour
                 {
 
                     case 0:
-                        gamemanager.talkbegin();
+                        gamemanager.talk("begin");
                         break;
                     case 1:
                         gamemanager.Speak("這是顆球。");
                         break;
                     case 2:
-                        gamemanager.talkend();
+                        gamemanager.talk("end");
                         break;
                     default:
                         break;
@@ -65,7 +65,7 @@ public class test_level : MonoBehaviour
                 {
 
                     case 0:
-                        gamemanager.talkbegin();
+                        gamemanager.talk("begin");
                         break;
                     case 1:
                         
@@ -75,7 +75,7 @@ public class test_level : MonoBehaviour
                         gamemanager.Speak("這東西怎麼會飄在空中？");
                         break;
                     case 3:
-                        gamemanager.talkend();
+                        gamemanager.talk("end");
                         break;
                     default:
                         break;

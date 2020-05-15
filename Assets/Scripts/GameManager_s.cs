@@ -13,8 +13,9 @@ public class GameManager_s : MonoBehaviour
     public string gamemode = "converstation";//遊戲狀態暫存
     private RaycastHit hit ;//滑鼠偵測暫存
     private Ray mouseray;//鐳射暫存
-    private string optionram ;//進入選項之前的遊戲狀態暫存
-    private option optionframe;//選項腳本
+    private option optionframe;//
+    public string anime =null;//
+    public bool optionbool = false;//
     void Start()
     {
         Text = GameObject.Find("Words").GetComponent<Text_s>();
@@ -22,77 +23,88 @@ public class GameManager_s : MonoBehaviour
         talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
         optionframe = GameObject.Find("Option").GetComponent<option>();
         levelmanager.story(nowweareat,level);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        switch (gamemode)
+        if (anime == null)
         {
-            case "converstation":
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))//偵測空白鍵，若文字未顯示完畢則加速，否則進入下一段
-            if (Text.typing)
-                Text.type_delay = 0.01F;
+            if (optionbool) { }
+                
             else
-                next_level();
-                break;
-            case "searching":
-                mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if ( Input.GetMouseButtonDown(0)) {
-                    if (Physics.Raycast(mouseray, out hit, 1000f))
-                    {
-                        nowweareat = hit.transform.name;
-                        levelmanager.story(nowweareat, level);
-                    }
+            {
+                switch (gamemode)
+                {
+                    case "converstation":
+                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))//偵測空白鍵，若文字未顯示完畢則加速，否則進入下一段
+                            if (Text.typing)
+                                Text.type_delay = 0.01F;
+                            else
+                                next_level();
+                        break;
+                    case "searching":
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                            if (Physics.Raycast(mouseray, out hit, 1000f))
+                            {
+                                nowweareat = hit.transform.name;
+                                levelmanager.story(nowweareat, level);
+                            }
+                        }
+                        break;
                 }
-                    break;
-            case "inanime":
-                if (talkframe.anime.GetCurrentAnimatorStateInfo(0).IsName("frame_on")) {
+            }
+        }
+        else { 
+        switch (anime)
+        {
+            case "textframein":
+                if (talkframe.anime.GetCurrentAnimatorStateInfo(0).IsName("frame_on"))
+                {
                     gamemode = "converstation";
-                    level++ ;
+                    level++;
                     levelmanager.story(nowweareat, level);
-                }
-                    
+                        anime = null;
+                    }
+
                 break;
-            case "outanime":
+            case "textframeout":
                 if (talkframe.anime.GetCurrentAnimatorStateInfo(0).IsName("off"))
                 {
                     gamemode = "searching";
                     Text.type_clear();
-                }
-
+                        anime = null;
+                    }
                 break;
-            case "option":
-                ;
-
-                break;
+        }
         }
     }
     public void optionstart()
     {
-        optionram = gamemode;
-        gamemode = "option";
+        optionbool = true;
         optionframe.enter();
     }
     public void optionend()
     {
-        gamemode = optionram;
+        optionbool = false;
         optionframe.exit();
     }
-    public void talkbegin() {
-        talkframe.enter();
-        gamemode = "inanime";
-
-    }
-    public void talkend()
-    {
-        talkframe.exit();
-        
-        level = 0;
-        gamemode = "outanime";
-        nowweareat = "search";
+    public void talk(string commend) {
+        switch (commend)
+        {
+            case"begin":
+             talkframe.enter();
+                anime = "textframein";
+                break;
+            case "end":
+                talkframe.exit();
+                level = 0;
+                anime = "textframeout";
+                nowweareat = "search";
+                break;
+        }
     }
     public void Speak(string word)//將文字傳給文字腳本
     {
@@ -103,4 +115,6 @@ public class GameManager_s : MonoBehaviour
         level++;
         levelmanager.story(nowweareat ,level);
     }
+    
 }
+
