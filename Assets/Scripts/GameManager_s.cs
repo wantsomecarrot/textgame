@@ -30,7 +30,10 @@ public class GameManager_s : MonoBehaviour
     {
         if (anime == null)
         {
-            if (optionbool) { }
+            if (optionbool)
+            {
+
+            }
                 
             else
             {
@@ -44,6 +47,14 @@ public class GameManager_s : MonoBehaviour
                                 next_level();
                         break;
                     case "searching":
+                        if (Input.mousePosition.x <= Screen.width * 0.25f)
+                        {
+                            Camera.main.transform.Rotate(0,-1,0);
+                        }
+                        else if (Input.mousePosition.x >= Screen.width * 0.75f)
+                        {
+                            Camera.main.transform.Rotate(0, 1, 0);
+                        }
                         if (Input.GetMouseButtonDown(0))
                         {
                             mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);

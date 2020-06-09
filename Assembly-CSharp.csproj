@@ -66,6 +66,8 @@
     <Compile Include="Assets\Scripts\Level\test_level.cs" />
     <Compile Include="Assets\Scripts\option.cs" />
     <Compile Include="Assets\Scripts\Text_s.cs" />
+    <Compile Include="Assets\UCLAGameLab\Scripts\MeshCreatorData.cs" />
+    <None Include="Assets\UCLAGameLab\Documentation\versions.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Lin/Documents/textgame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

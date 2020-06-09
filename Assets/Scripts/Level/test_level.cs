@@ -28,13 +28,13 @@ public class test_level : MonoBehaviour
                         gamemanager.talk("begin");
                         break;
             case 1:
-                gamemanager.Speak("Sun is shining,birds are singing.");
+                gamemanager.Speak("那麼...測試開始。");
                 break;
             case 2:
-                gamemanager.Speak("A day like this,a kid like you.");
+                gamemanager.Speak("看看這樣的場景O不OK。");
                 break;
             case 3:
-                gamemanager.Speak("SHOULD BE BURNED IN THE HELL.");
+                gamemanager.Speak("各種有的沒的新功能也都會在這裡測試。");
                 break;
             case 4:
                         gamemanager.talk("end");
@@ -81,7 +81,86 @@ public class test_level : MonoBehaviour
                         break;
                 }
                 break;
+            case "planecarrot":
+                switch (level)
+                {
+
+                    case 0:
+                        gamemanager.talk("begin");
+                        break;
+                    case 1:
+
+                        gamemanager.Speak("這是貼了透明貼圖的平面物件。");
+                        break;
+                    case 2:
+                        gamemanager.Speak("比紙還要薄，只有一面看得到，另一面甚至看過來是透明的。");
+                        break;
+                    case 3:
+                        gamemanager.Speak("連影子都沒有，跟鬼一樣，可憐那。");
+                        break;
+                    case 4:
+                        gamemanager.talk("end");
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "boardcarrot":
+                switch (level)
+                {
+
+                    case 0:
+                        gamemanager.talk("begin");
+                        break;
+                    case 1:
+
+                        gamemanager.Speak("這是紙板物件。");
+                        break;
+                    case 2:
+                        gamemanager.Speak("直接輸入圖片，變成一片有厚度的紙板。");
+                        break;
+                    case 3:
+                        gamemanager.Speak("中間的過程讓插件幫你一鍵搞定。");
+                        break;
+                    case 4:
+                        gamemanager.Speak("你居然使用插件！？相容性出事的話你能負責嗎？");
+                        break;
+                    case 5:
+                        gamemanager.talk("end");
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "boxcarrot":
+                switch (level)
+                {
+                    case 0:
+                        gamemanager.talk("begin");
+                        break;
+                    case 1:
+
+                        gamemanager.Speak("這是箱子物件上貼上圖片的透明貼圖。");
+                        break;
+                    case 2:
+                        gamemanager.Speak("有厚度，兩面，但是側面也會出現被擠扁的圖片。");
+                        break;
+                    case 3:
+                        gamemanager.Speak("你還不能裝正常的collider，他會用一整片箱子collider擋你。");
+                        break;
+                    case 4:
+                        gamemanager.Speak("而且沒有影子，透明貼圖是不是都這樣？");
+                        break;
+                    case 5:
+                        gamemanager.talk("end");
+                        break;
+                    default:
+                        break;
+                }
+                break; 
+                
         }
+
     }
 
 
