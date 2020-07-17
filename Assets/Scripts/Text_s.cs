@@ -11,9 +11,7 @@ public class Text_s : MonoBehaviour
     public Text text;
     void Start()
     {
-
         text = GetComponent<Text>();
-
     }
 
     // Update is called once per frame

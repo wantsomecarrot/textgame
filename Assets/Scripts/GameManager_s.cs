@@ -8,6 +8,7 @@ public class GameManager_s : MonoBehaviour
     private Text_s Text ;//文字腳本
     private  test_level levelmanager;//關卡腳本
     private converstation_frame talkframe;//對話界面腳本
+    private item_frame itemframe;
     public string nowweareat = "story";//當下使用劇本的暫存
     public float level=0;//當下使用劇本的對話階段暫存
     public string gamemode = "converstation";//遊戲狀態暫存
@@ -16,13 +17,18 @@ public class GameManager_s : MonoBehaviour
     private option optionframe;//
     public string anime =null;//
     public bool optionbool = false;//
+    public List<string> playeritem ;
+    public string resentitem;
     void Start()
     {
         Text = GameObject.Find("Words").GetComponent<Text_s>();
         levelmanager = GameObject.Find("LevelManager").GetComponent<test_level>();
         talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
         optionframe = GameObject.Find("Option").GetComponent<option>();
+        itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
         levelmanager.story(nowweareat,level);
+        playeritem.Insert(0,"empty");
+     
     }
 
     // Update is called once per frame
@@ -32,15 +38,13 @@ public class GameManager_s : MonoBehaviour
         {
             if (optionbool)
             {
-
             }
-                
             else
             {
                 switch (gamemode)
                 {
                     case "converstation":
-                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))//偵測空白鍵，若文字未顯示完畢則加速，否則進入下一段
+                        if (Input.GetKeyDown(KeyCode.Space) )//偵測空白鍵，若文字未顯示完畢則加速，否則進入下一段
                             if (Text.typing)
                                 Text.type_delay = 0.01F;
                             else
@@ -49,11 +53,11 @@ public class GameManager_s : MonoBehaviour
                     case "searching":
                         if (Input.mousePosition.x <= Screen.width * 0.25f)
                         {
-                            Camera.main.transform.Rotate(0,-1,0);
+                            Camera.main.transform.Rotate(0,-0.5f,0);
                         }
                         else if (Input.mousePosition.x >= Screen.width * 0.75f)
                         {
-                            Camera.main.transform.Rotate(0, 1, 0);
+                            Camera.main.transform.Rotate(0, 0.5f, 0);
                         }
                         if (Input.GetMouseButtonDown(0))
                         {
