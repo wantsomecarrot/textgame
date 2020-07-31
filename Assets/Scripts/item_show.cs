@@ -17,7 +17,6 @@ public class item_show : MonoBehaviour
         
     }
     public void loadimage(string name) {
-        Debug.Log(name);
-        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = (Sprite)Resources.Load<Sprite>(name);
+        
     } 
 }
