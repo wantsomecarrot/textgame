@@ -14,7 +14,6 @@ public class converstation_frame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
     public void enter()
     {
