@@ -6,7 +6,7 @@ public class GameManager_s : MonoBehaviour
 {
     // Start is called before the first frame update
     private Text_s Text ;//文字腳本
-    private  test_level levelmanager;//關卡腳本
+    private  test_level_BETA levelmanager;//關卡腳本
     private converstation_frame talkframe;//對話界面腳本
     private item_frame itemframe;
     public string nowweareat = "story";//當下使用劇本的暫存
@@ -22,7 +22,7 @@ public class GameManager_s : MonoBehaviour
     void Start()
     {
         Text = GameObject.Find("Words").GetComponent<Text_s>();
-        levelmanager = GameObject.Find("LevelManager").GetComponent<test_level>();
+        levelmanager = GameObject.Find("LevelManager").GetComponent<test_level_BETA>();
         talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
         optionframe = GameObject.Find("Option").GetComponent<option>();
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
@@ -62,8 +62,10 @@ public class GameManager_s : MonoBehaviour
                         if (Input.GetMouseButtonDown(0))
                         {
                             mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
                             if (Physics.Raycast(mouseray, out hit, 1000f))
                             {
+                                Debug.Log(hit.transform.name);
                                 nowweareat = hit.transform.name;
                                 levelmanager.story(nowweareat, level);
                             }
