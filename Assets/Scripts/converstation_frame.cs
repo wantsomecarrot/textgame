@@ -9,8 +9,6 @@ public class converstation_frame : MonoBehaviour
     public Animator anime;
     void Start()
     {
-        Button btn = this.GetComponent<Button>();
-        btn.onClick.AddListener(OnClick);
         anime = GetComponent<Animator>();
     }
 
@@ -26,8 +24,5 @@ public class converstation_frame : MonoBehaviour
     {
         anime.SetTrigger("close");
     }
-    public void OnClick()
-    {
-       
-    }
+
 }

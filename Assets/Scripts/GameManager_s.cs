@@ -66,8 +66,7 @@ public class GameManager_s : MonoBehaviour
                             mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                             if (Physics.Raycast(mouseray, out hit, 1000f))
-                            {
-                                Debug.Log(hit.transform.name);
+                            { 
                                 nowweareat = hit.transform.name;
                                 levelmanager.story(nowweareat, level);
                             }
