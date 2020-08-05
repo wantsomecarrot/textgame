@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class converstation_frame : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class converstation_frame : MonoBehaviour
     public Animator anime;
     void Start()
     {
+        Button btn = this.GetComponent<Button>();
+        btn.onClick.AddListener(OnClick);
         anime = GetComponent<Animator>();
     }
 
@@ -22,5 +25,9 @@ public class converstation_frame : MonoBehaviour
     public void exit()
     {
         anime.SetTrigger("close");
+    }
+    public void OnClick()
+    {
+       
     }
 }
