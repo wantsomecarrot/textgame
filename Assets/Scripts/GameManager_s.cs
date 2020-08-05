@@ -17,6 +17,7 @@ public class GameManager_s : MonoBehaviour
     private option optionframe;//
     public string anime =null;//
     public bool optionbool = false;//
+    public List<string> flag;
     public List<string> playeritem ;
     public string resentitem;
     void Start()
