@@ -38,19 +38,32 @@ public class GameManager_s : MonoBehaviour
     {
         if (anime == null)
         {
-            if (optionbool)
+            
+            if (Input.GetMouseButtonDown(0))
             {
+                switch (gamemode)
+            {
+                case "converstation":
+                            if (Text.typing)
+                                Text.type_delay = 0.01F;
+                            else
+                                next_level();
+                        break;
+                case "searching":
+                        mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(mouseray, out hit, 1000f))
+                {
+                    nowweareat = hit.transform.name;
+                    levelmanager.story(nowweareat, level);
+                }
+                    break;
+            }
             }
             else
             {
                 switch (gamemode)
                 {
                     case "converstation":
-                        if (Input.GetKeyDown(KeyCode.Space) )//偵測空白鍵，若文字未顯示完畢則加速，否則進入下一段
-                            if (Text.typing)
-                                Text.type_delay = 0.01F;
-                            else
-                                next_level();
                         break;
                     case "searching":
                         if (Input.mousePosition.x <= Screen.width * 0.25f)
@@ -61,16 +74,7 @@ public class GameManager_s : MonoBehaviour
                         {
                             Camera.main.transform.Rotate(0, 0.5f, 0);
                         }
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                            if (Physics.Raycast(mouseray, out hit, 1000f))
-                            { 
-                                nowweareat = hit.transform.name;
-                                levelmanager.story(nowweareat, level);
-                            }
-                        }
+                        
                         break;
                 }
             }
@@ -132,6 +136,13 @@ public class GameManager_s : MonoBehaviour
     {
         level++;
         levelmanager.story(nowweareat ,level);
+    }
+    public void skip() {
+        if (gamemode == "converstation"&&nowweareat== "story")
+        {
+            level = 40;
+            levelmanager.story(nowweareat, level);
+        }
     }
     
 }

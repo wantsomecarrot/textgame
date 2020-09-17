@@ -412,7 +412,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak("我把紙片抽出來，上面寫著些什麼。");
                             break;
                         case 3:
-                            gamemanager.Speak("_ _ ：8 _");
+                            gamemanager.Speak("_ _ ：5 _");
                             break;
                         case 4:
                             gamemanager.flag.Add("curtain");
