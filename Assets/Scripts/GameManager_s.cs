@@ -38,17 +38,10 @@ public class GameManager_s : MonoBehaviour
     {
         if (anime == null)
         {
-            
             if (Input.GetMouseButtonDown(0))
             {
                 switch (gamemode)
             {
-                case "converstation":
-                            if (Text.typing)
-                                Text.type_delay = 0.01F;
-                            else
-                                next_level();
-                        break;
                 case "searching":
                         mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(mouseray, out hit, 1000f))
@@ -64,6 +57,9 @@ public class GameManager_s : MonoBehaviour
                 switch (gamemode)
                 {
                     case "converstation":
+                        if (Input.GetKey(KeyCode.Space)) {
+                            converstationclickframe();
+                        }
                         break;
                     case "searching":
                         if (Input.mousePosition.x <= Screen.width * 0.25f)
@@ -113,8 +109,9 @@ public class GameManager_s : MonoBehaviour
         optionbool = false;
         optionframe.exit();
     }
-    public void talk(string commend) {
-        switch (commend)
+    public void talk(string commend)//對話框動畫指令
+    {
+        switch (commend)//開始或結束
         {
             case"begin":
              talkframe.enter();
@@ -132,16 +129,26 @@ public class GameManager_s : MonoBehaviour
     {
         Text.type_start(word);
     }
-    public void next_level()//關卡數值+1傳給關卡腳本
+    public void next_level()//關卡數值+1，並傳給關卡腳本
     {
         level++;
         levelmanager.story(nowweareat ,level);
     }
-    public void skip() {
+    public void skip()//跳過劇情事件
+    {
         if (gamemode == "converstation"&&nowweareat== "story")
         {
             level = 40;
             levelmanager.story(nowweareat, level);
+        }
+    }
+    public void converstationclickframe()//對話事件
+    {
+        if (gamemode== "converstation") {
+            if (Text.typing)
+                Text.type_delay = 0.01F;
+            else
+                next_level();
         }
     }
     
