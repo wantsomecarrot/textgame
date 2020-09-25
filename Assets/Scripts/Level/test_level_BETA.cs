@@ -17,6 +17,20 @@ public class test_level_BETA : MonoBehaviour
     {
 
     }
+    public int skipvalue(string name)
+    {
+        int value=0;
+        switch (name)
+        {
+            case "story":
+                value = 40;
+                break;
+            default:
+                value = 0;
+                break;
+        }
+        return value;
+    }
     public void story(string name, float level)
     {
         switch (name)

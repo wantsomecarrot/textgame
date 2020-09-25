@@ -36,24 +36,6 @@ public class GameManager_s : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (anime == null)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                switch (gamemode)
-            {
-                case "searching":
-                        mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(mouseray, out hit, 1000f))
-                {
-                    nowweareat = hit.transform.name;
-                    levelmanager.story(nowweareat, level);
-                }
-                    break;
-            }
-            }
-            else
-            {
                 switch (gamemode)
                 {
                     case "converstation":
@@ -62,7 +44,15 @@ public class GameManager_s : MonoBehaviour
                         }
                         break;
                     case "searching":
-                        if (Input.mousePosition.x <= Screen.width * 0.25f)
+                        if (Input.GetMouseButtonDown(0)) {
+                            mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                            if (Physics.Raycast(mouseray, out hit, 1000f))
+                            {
+                                nowweareat = hit.transform.name;
+                                levelmanager.story(nowweareat, level);
+                            }
+                        }
+                            if (Input.mousePosition.x <= Screen.width * 0.25f)
                         {
                             Camera.main.transform.Rotate(0,-0.5f,0);
                         }
@@ -70,34 +60,31 @@ public class GameManager_s : MonoBehaviour
                         {
                             Camera.main.transform.Rotate(0, 0.5f, 0);
                         }
-                        
                         break;
-                }
-            }
-        }
-        else { 
-        switch (anime)
-        {
-            case "textframein":
-                if (talkframe.anime.GetCurrentAnimatorStateInfo(0).IsName("frame_on"))
-                {
-                    gamemode = "converstation";
-                    level++;
-                    levelmanager.story(nowweareat, level);
-                        anime = null;
-                    }
+                case "anime":
+                    switch (anime)
+                    {
+                        case "textframein":
+                            if (talkframe.anime.GetCurrentAnimatorStateInfo(0).IsName("frame_on"))
+                            {
+                                gamemode = "converstation";
+                                level++;
+                                levelmanager.story(nowweareat, level);
+                                anime = null;
+                            }
 
-                break;
-            case "textframeout":
-                if (talkframe.anime.GetCurrentAnimatorStateInfo(0).IsName("off"))
-                {
-                    gamemode = "searching";
-                    Text.type_clear();
-                        anime = null;
+                            break;
+                        case "textframeout":
+                            if (talkframe.anime.GetCurrentAnimatorStateInfo(0).IsName("off"))
+                            {
+                                gamemode = "searching";
+                                Text.type_clear();
+                                anime = null;
+                            }
+                            break;
                     }
-                break;
-        }
-        }
+                    break;
+            }
     }
     public void optionstart()
     {
@@ -114,10 +101,12 @@ public class GameManager_s : MonoBehaviour
         switch (commend)//開始或結束
         {
             case"begin":
+                gamemode = "anime";
              talkframe.enter();
                 anime = "textframein";
                 break;
             case "end":
+                gamemode = "anime";
                 talkframe.exit();
                 level = 0;
                 anime = "textframeout";
@@ -136,15 +125,16 @@ public class GameManager_s : MonoBehaviour
     }
     public void skip()//跳過劇情事件
     {
-        if (gamemode == "converstation"&&nowweareat== "story")
+        if (gamemode == "converstation"&& levelmanager.skipvalue(nowweareat) != 0)
         {
-            level = 40;
+            level = levelmanager.skipvalue(nowweareat);
             levelmanager.story(nowweareat, level);
         }
     }
     public void converstationclickframe()//對話事件
     {
-        if (gamemode== "converstation") {
+        if (gamemode== "converstation")
+        {
             if (Text.typing)
                 Text.type_delay = 0.01F;
             else
