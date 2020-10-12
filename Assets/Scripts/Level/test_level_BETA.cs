@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class test_level_BETA : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager_s gamemanager;
-    
+    public Sprite empty;
+    public Sprite carrot;
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
@@ -15,11 +17,11 @@ public class test_level_BETA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public int skipvalue(string name)
     {
-        int value=0;
+        int value = 0;
         switch (name)
         {
             case "story":
@@ -725,9 +727,8 @@ public class test_level_BETA : MonoBehaviour
                     }
                 }
                 break;
-        
         }
     }
     
-
+    
 }

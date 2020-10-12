@@ -1,16 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[CreateAssetMenu]
+public class talkform : ScriptableObject {
 
-public class talkform : MonoBehaviour
-{
-    private string words;
-    private string speaker;
-    private string effect;
-    talkform(string words, string speaker,string effect)
-    {
-        words = this.words;
-        speaker = this.speaker;
-        effect = this.effect;
-    }
+    public string words;
+    public string speaker;
+    public string effect;
+
 }
