@@ -6,8 +6,8 @@ public class test_level_BETA : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager_s gamemanager;
-    public
-    void Start()
+
+    public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
     }
@@ -165,12 +165,6 @@ public class test_level_BETA : MonoBehaviour
                         break;
                 }
                 break;
-        }
-    }
-    public void search(string name, float level)
-    {
-        switch (name)
-        {
             case "bed":
                 switch (level)
                 {
@@ -731,9 +725,9 @@ public class test_level_BETA : MonoBehaviour
                     }
                 }
                 break;
-
+        
         }
-
-
     }
+    
+
 }

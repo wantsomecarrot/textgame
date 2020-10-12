@@ -53,15 +53,23 @@ public class GameManager_s : MonoBehaviour
                                 levelmanager.story(nowweareat, level);
                             }
                         }
-                            if (Input.mousePosition.x <= Screen.width * 0.25f)
+                            if (Input.mousePosition.x <= Screen.width * 0.05f)
                         {
                             Camera.main.transform.Rotate(0,-0.5f,0);
                         }
-                        else if (Input.mousePosition.x >= Screen.width * 0.75f)
+                        else if (Input.mousePosition.x >= Screen.width * 0.95f)
                         {
                             Camera.main.transform.Rotate(0, 0.5f, 0);
                         }
-                        break;
+                        else if (Input.mousePosition.x <= Screen.width * 0.25f && Input.mousePosition.x > Screen.width * 0.05f)
+                        {
+                            Camera.main.transform.Rotate(0, -0.15f, 0);
+                        }
+                        else if (Input.mousePosition.x >= Screen.width * 0.75f && Input.mousePosition.x < Screen.width * 0.95f)
+                        {
+                            Camera.main.transform.Rotate(0, 0.15f, 0);
+                        }
+                break;
                 case "anime":
                     switch (anime)
                     {
