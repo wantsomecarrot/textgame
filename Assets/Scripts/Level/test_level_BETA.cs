@@ -9,6 +9,10 @@ public class test_level_BETA : MonoBehaviour
     private GameManager_s gamemanager;
     public Sprite empty;
     public Sprite carrot;
+    public Sprite Akun;
+    public Sprite Akunhappy;
+    public Sprite AkunWTF;
+    public Sprite Akunitsfine;
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
@@ -311,6 +315,10 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak("我又嘗試翻了一些其他書頁，但是都是空白的，真奇怪。");
                             break;
                         case 2:
+                            gamemanager.Speak("找到了一根胡蘿蔔～");
+                            gamemanager.playeritem.Add("carrot");
+                            break;
+                        case 3:
                             gamemanager.talk("end");
                             break;
                         default:

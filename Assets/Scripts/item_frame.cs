@@ -13,7 +13,14 @@ public class item_frame : MonoBehaviour
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
         loaditems(gamemanager.playeritem);
     }
+    public void enter
+    {
 
+    }
+    public void exist
+    {
+
+    }
     void Update()
     {
 
@@ -26,9 +33,10 @@ public class item_frame : MonoBehaviour
     {
 
     }
+
     IEnumerator loaditemlist(List<string> itemlist)
     {
-        for (int i = transform.childCount; i>=0; i-=1 ) {
+        for (int i = 0; i <itemlist.Count; i++) {
 
 
             

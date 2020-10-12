@@ -111,6 +111,7 @@ public class GameManager_s : MonoBehaviour
             case"begin":
                 gamemode = "anime";
              talkframe.enter();
+
                 anime = "textframein";
                 break;
             case "end":
