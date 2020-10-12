@@ -15,7 +15,7 @@ public class test_level_BETA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     public int skipvalue(string name)
     {
@@ -165,6 +165,12 @@ public class test_level_BETA : MonoBehaviour
                         break;
                 }
                 break;
+        }
+    }
+    public void search(string name, float level)
+    {
+        switch (name)
+        {
             case "bed":
                 switch (level)
                 {
