@@ -6,7 +6,7 @@ public class test_level_BETA : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager_s gamemanager;
-
+    
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();

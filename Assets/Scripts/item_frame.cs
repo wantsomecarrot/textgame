@@ -7,7 +7,7 @@ public class item_frame : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager_s gamemanager;
-    public Image[] itemframe= new Image[15];
+    public GameObject item_0, item_1, item_2, item_3, item_4, item_5, item_6;
     void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
@@ -20,11 +20,13 @@ public class item_frame : MonoBehaviour
     }
     public void loaditems(List<string> itemlist)
     {
-
-        StartCoroutine( loaditem(itemlist));
+        StartCoroutine( loaditemlist(itemlist));
     }
+    public void loaditem()
+    {
 
-    IEnumerator loaditem(List<string> itemlist)
+    }
+    IEnumerator loaditemlist(List<string> itemlist)
     {
         for (int i = transform.childCount; i>=0; i-=1 ) {
 
