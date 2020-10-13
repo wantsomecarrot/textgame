@@ -25,9 +25,9 @@ public class item_frame : MonoBehaviour
     {
 
     }
-    public void loaditems(List<string> loaditemlist)
+    public void loaditems()
     {
-        loaditemimage(itemimage[0], gamemanager.spriteDATA.ContainsKey(gamemanager.resentitem));
+        loaditemimage(itemimage[0], gamemanager.spriteDATA[gamemanager.resentitem]);
         StartCoroutine(loaditemlist(gamemanager.playeritem));
     }
     public void loaditemimage(Image image,Sprite sprite)
@@ -37,8 +37,8 @@ public class item_frame : MonoBehaviour
 
     IEnumerator loaditemlist(List<string> itemlist)
     {
-        for (int i = 0; i <itemlist.Count; i++) {
-            loaditemimage(itemimage[i+1], gamemanager.spriteDATA.ContainsKey(gamemanager.playeritem[i]));
+        for (int i = 0; i < itemlist.Count; i++) {
+            loaditemimage(itemimage[i + 1], gamemanager.spriteDATA[itemlist[i]]);
         }
         yield return null;
     }

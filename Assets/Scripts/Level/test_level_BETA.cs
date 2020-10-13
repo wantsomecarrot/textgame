@@ -21,8 +21,8 @@ public class test_level_BETA : MonoBehaviour
         {
             spriteDATA.Add(imagename[i],DATAimage[i]);
         }
-        spriteDATA.Clear;
-        DATAimage.Clear;
+        imagename.Clear();
+        DATAimage.Clear();
         yield return null;
     }
     // Update is called once per frame
