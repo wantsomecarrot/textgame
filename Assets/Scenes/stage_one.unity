@@ -1563,7 +1563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e245a435e54fa2d40805a07242543a10, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1984,13 +1984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4979aea0abd814192d9feac3840e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item_0: {fileID: 519880156}
-  item_1: {fileID: 683557113}
-  item_2: {fileID: 520324307}
-  item_3: {fileID: 1961297277}
-  item_4: {fileID: 1694927718}
-  item_5: {fileID: 851521281}
-  item_6: {fileID: 1808333175}
+  itemimage: []
 --- !u!1 &763059951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,13 +2806,11 @@ MonoBehaviour:
   nowweareat: story
   level: 0
   gamemode: converstation
-  talkform: {fileID: 0}
   anime: 
   optionbool: 0
   flag: []
   playeritem: []
   resentitem: 
-  DATAimage: []
 --- !u!4 &1040992910
 Transform:
   m_ObjectHideFlags: 0
