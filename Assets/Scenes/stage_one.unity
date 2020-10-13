@@ -1984,7 +1984,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4979aea0abd814192d9feac3840e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemimage: []
+  itemimage:
+  - {fileID: 519880156}
+  - {fileID: 683557113}
+  - {fileID: 520324307}
+  - {fileID: 1961297277}
+  - {fileID: 1694927718}
+  - {fileID: 851521281}
+  - {fileID: 1808333175}
+  anime: {fileID: 0}
 --- !u!1 &763059951
 GameObject:
   m_ObjectHideFlags: 0

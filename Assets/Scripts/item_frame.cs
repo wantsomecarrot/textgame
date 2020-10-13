@@ -16,11 +16,11 @@ public class item_frame : MonoBehaviour
     }
     public void enter()
     {
-        anime.SetBool("open",true);
+        anime.SetBool("in",true);
     }
     public void exit()
     {
-        anime.SetBool("open",false);
+        anime.SetBool("in",false);
     }
     void Update()
     {
