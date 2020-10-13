@@ -7,17 +7,24 @@ public class test_level_BETA : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager_s gamemanager;
-    public Sprite empty;
-    public Sprite carrot;
-    public Sprite Akun;
-    public Sprite Akunhappy;
-    public Sprite AkunWTF;
-    public Sprite Akunitsfine;
+    public List<Sprite> DATAimage;
+    public List<string> imagename;
+    public Dictionary<string, Sprite> spriteDATA;
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
+        StartCoroutine(Getimage());
     }
-
+    IEnumerator Getimage()
+    {
+        for (int i = 0; i < imagename.Count; i++)
+        {
+            spriteDATA.Add(imagename[i],DATAimage[i]);
+        }
+        spriteDATA.Clear;
+        DATAimage.Clear;
+        yield return null;
+    }
     // Update is called once per frame
     void Update()
     {

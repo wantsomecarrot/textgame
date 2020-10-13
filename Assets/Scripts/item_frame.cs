@@ -7,17 +7,17 @@ public class item_frame : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager_s gamemanager;
-    public GameObject item_0, item_1, item_2, item_3, item_4, item_5, item_6;
+    public List<Image>itemimage;
     void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
-        loaditems(gamemanager.playeritem);
+        
     }
-    public void enter
+    public void enter()
     {
 
     }
-    public void exist
+    public void exist()
     {
 
     }
@@ -25,21 +25,20 @@ public class item_frame : MonoBehaviour
     {
 
     }
-    public void loaditems(List<string> itemlist)
+    public void loaditems(List<string> loaditemlist)
     {
-        StartCoroutine( loaditemlist(itemlist));
+        loaditemimage(itemimage[0], gamemanager.spriteDATA.ContainsKey(gamemanager.resentitem));
+        StartCoroutine(loaditemlist(gamemanager.playeritem));
     }
-    public void loaditem()
+    public void loaditemimage(Image image,Sprite sprite)
     {
-
+        image.sprite = sprite;
     }
 
     IEnumerator loaditemlist(List<string> itemlist)
     {
         for (int i = 0; i <itemlist.Count; i++) {
-
-
-            
+            loaditemimage(itemimage[i+1], gamemanager.spriteDATA.ContainsKey(gamemanager.playeritem[i]));
         }
         yield return null;
     }

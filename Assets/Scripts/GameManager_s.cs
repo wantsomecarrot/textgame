@@ -16,12 +16,12 @@ public class GameManager_s : MonoBehaviour
     private RaycastHit hit ;//滑鼠偵測暫存
     private Ray mouseray;//鐳射暫存
     private option optionframe;//
-    public talkform talkform;
     public string anime =null;//
     public bool optionbool = false;//
     public List<string> flag;
     public List<string> playeritem ;
     public string resentitem;
+    public Dictionary<string, Sprite> spriteDATA;
     void Start()
     {
         Text = GameObject.Find("Words").GetComponent<Text_s>();
@@ -30,8 +30,8 @@ public class GameManager_s : MonoBehaviour
         optionframe = GameObject.Find("Option").GetComponent<option>();
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
         levelmanager.story(nowweareat,level);
-        playeritem.Insert(0,"empty");
-        talkform = GetComponent<talkform>();
+        resentitem ="empty";
+        spriteDATA = levelmanager.spriteDATA;
     }
 
     // Update is called once per frame
