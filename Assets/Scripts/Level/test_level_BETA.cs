@@ -9,7 +9,7 @@ public class test_level_BETA : MonoBehaviour
     private GameManager_s gamemanager;
     public List<Sprite> DATAimage;
     public List<string> imagename;
-    public Dictionary<string, Sprite> spriteDATA;
+    public Dictionary<string, Sprite> spriteDATA=new Dictionary<string, Sprite>();
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();

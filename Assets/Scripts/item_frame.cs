@@ -8,18 +8,19 @@ public class item_frame : MonoBehaviour
     // Start is called before the first frame update
     private GameManager_s gamemanager;
     public List<Image>itemimage;
+    public Animator anime;
     void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
-        
+        anime = GetComponent<Animator>();
     }
     public void enter()
     {
-
+        anime.SetBool("open",true);
     }
-    public void exist()
+    public void exit()
     {
-
+        anime.SetBool("open",false);
     }
     void Update()
     {

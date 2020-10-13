@@ -111,12 +111,13 @@ public class GameManager_s : MonoBehaviour
             case"begin":
                 gamemode = "anime";
              talkframe.enter();
-
+                itemframe.exit();
                 anime = "textframein";
                 break;
             case "end":
                 gamemode = "anime";
                 talkframe.exit();
+                itemframe.enter();
                 level = 0;
                 anime = "textframeout";
                 nowweareat = "search";
