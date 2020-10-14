@@ -16,11 +16,19 @@ public class item_frame : MonoBehaviour
     }
     public void enter()
     {
+        loaditems();
         anime.SetBool("in",true);
     }
     public void exit()
     {
         anime.SetBool("in",false);
+    }
+    public void click()
+    {
+        if (anime.GetCurrentAnimatorStateInfo(0).IsName("item_on"))
+            anime.SetTrigger("hide");
+        else if (anime.GetCurrentAnimatorStateInfo(0).IsName("item_off"))
+            anime.SetTrigger("show");
     }
     void Update()
     {

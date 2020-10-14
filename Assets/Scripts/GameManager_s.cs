@@ -31,7 +31,6 @@ public class GameManager_s : MonoBehaviour
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
         levelmanager.story(nowweareat,level);
         resentitem ="empty";
-        spriteDATA = levelmanager.spriteDATA;
     }
 
     // Update is called once per frame

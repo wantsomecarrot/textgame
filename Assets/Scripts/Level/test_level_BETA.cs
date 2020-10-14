@@ -14,6 +14,7 @@ public class test_level_BETA : MonoBehaviour
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
         StartCoroutine(Getimage());
+        gamemanager.spriteDATA = spriteDATA;
     }
     IEnumerator Getimage()
     {
