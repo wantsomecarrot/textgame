@@ -40,7 +40,6 @@ public class GameManager_s : MonoBehaviour
         talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
         optionframe = GameObject.Find("Option").GetComponent<option>();
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
-
         levelmanager.story(nowweareat,level);
         resentitem ="empty";
     }
@@ -167,6 +166,18 @@ public class GameManager_s : MonoBehaviour
                 next_level();
         }
     }
-    
+    public void selectitem(int num)
+    {
+        if (num <= playeritem.Count) { 
+        if (playeritem[num - 1] != resentitem) {
+            resentitem = playeritem[num - 1];
+            itemframe.loaditems();
+        }
+        else if (playeritem[num - 1] == resentitem) {
+            resentitem = "empty";
+            itemframe.loaditems();
+        }
+    }
+    }
 }
 

@@ -8,7 +8,17 @@ public class item_frame : MonoBehaviour
     // Start is called before the first frame update
     private GameManager_s gamemanager;
     public List<Image>itemimage;
+    
     public Animator anime;
+    private bool animating()
+    {
+        bool animating = false;
+        if (anime.GetCurrentAnimatorStateInfo(0).IsName("item_show")|| anime.GetCurrentAnimatorStateInfo(0).IsName("item_hide"))
+        {
+            animating = true;
+        }
+        return animating;
+    }
     void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
@@ -34,8 +44,9 @@ public class item_frame : MonoBehaviour
     }
     void Update()
     {
-
+        
     }
+
     public void loaditems()
     {
         loaditemimage(itemimage[0], gamemanager.spriteDATA[gamemanager.resentitem]);
