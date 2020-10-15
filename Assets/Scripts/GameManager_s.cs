@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameManager_s : MonoBehaviour
 {
@@ -22,6 +23,16 @@ public class GameManager_s : MonoBehaviour
     public List<string> playeritem ;
     public string resentitem;
     public Dictionary<string, Sprite> spriteDATA;
+
+    private bool IsTouchedUI()
+    {
+        bool touchedUI = false;
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            touchedUI = true;
+        }
+        return touchedUI;
+    }
     void Start()
     {
         Text = GameObject.Find("Words").GetComponent<Text_s>();
@@ -29,6 +40,7 @@ public class GameManager_s : MonoBehaviour
         talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
         optionframe = GameObject.Find("Option").GetComponent<option>();
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
+
         levelmanager.story(nowweareat,level);
         resentitem ="empty";
     }
@@ -36,6 +48,7 @@ public class GameManager_s : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
                 switch (gamemode)
                 {
                     case "converstation":
@@ -44,30 +57,34 @@ public class GameManager_s : MonoBehaviour
                         }
                         break;
                     case "searching":
-                        if (Input.GetMouseButtonDown(0)) {
-                            mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                            if (Physics.Raycast(mouseray, out hit, 1000f))
-                            {
-                                nowweareat = hit.transform.name;
-                                levelmanager.story(nowweareat, level);
-                            }
-                        }
-                            if (Input.mousePosition.x <= Screen.width * 0.05f)
+                if (IsTouchedUI() == false)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                        if (Physics.Raycast(mouseray, out hit, 1000f))
                         {
-                            Camera.main.transform.Rotate(0,-0.5f,0);
+                            nowweareat = hit.transform.name;
+                            levelmanager.story(nowweareat, level);
                         }
-                        else if (Input.mousePosition.x >= Screen.width * 0.95f)
-                        {
-                            Camera.main.transform.Rotate(0, 0.5f, 0);
-                        }
-                        else if (Input.mousePosition.x <= Screen.width * 0.25f && Input.mousePosition.x > Screen.width * 0.05f)
-                        {
-                            Camera.main.transform.Rotate(0, -0.15f, 0);
-                        }
-                        else if (Input.mousePosition.x >= Screen.width * 0.75f && Input.mousePosition.x < Screen.width * 0.95f)
-                        {
-                            Camera.main.transform.Rotate(0, 0.15f, 0);
-                        }
+                    }
+                    if (Input.mousePosition.x <= Screen.width * 0.05f)
+                    {
+                        Camera.main.transform.Rotate(0, -0.5f, 0);
+                    }
+                    else if (Input.mousePosition.x >= Screen.width * 0.95f)
+                    {
+                        Camera.main.transform.Rotate(0, 0.5f, 0);
+                    }
+                    else if (Input.mousePosition.x <= Screen.width * 0.25f && Input.mousePosition.x > Screen.width * 0.05f)
+                    {
+                        Camera.main.transform.Rotate(0, -0.15f, 0);
+                    }
+                    else if (Input.mousePosition.x >= Screen.width * 0.75f && Input.mousePosition.x < Screen.width * 0.95f)
+                    {
+                        Camera.main.transform.Rotate(0, 0.15f, 0);
+                    }
+                }
                 break;
                 case "anime":
                     switch (anime)
