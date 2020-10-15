@@ -143,6 +143,10 @@ public class GameManager_s : MonoBehaviour
     {
         Text.type_start(word);
     }
+    public void Speak2(talkform talk)//將文字傳給文字腳本
+    {
+        Text.type_start(talk.words);
+    }
     public void next_level()//關卡數值+1，並傳給關卡腳本
     {
         level++;

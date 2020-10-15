@@ -31,7 +31,8 @@ public class item_frame : MonoBehaviour
     }
     public void exit()
     {
-        anime.SetTrigger("hide");
+        if (anime.GetCurrentAnimatorStateInfo(0).IsName("item_on"))
+            anime.SetTrigger("hide");
         anime.SetBool("in",false);
     }
     public void click()

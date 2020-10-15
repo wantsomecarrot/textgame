@@ -539,21 +539,51 @@ public class test_level_BETA : MonoBehaviour
                 }
                 break;
             case "bussinesscase":
-                switch (level)
-                {
+                if (gamemanager.resentitem == "carrot") {
+                    switch (level)
+                    {
+                        case 0:
+                            gamemanager.talk("begin");
+                            break;
+                        case 1:
 
-                    case 0:
-                        gamemanager.talk("begin");
-                        break;
-                    case 1:
+                            gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
+                            break;
+                        case 2:
 
-                        gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
-                        break;
-                    case 2:
-                        gamemanager.talk("end");
-                        break;
-                    default:
-                        break;
+                            gamemanager.Speak("我：");
+                            break;
+                        case 3:
+
+                            gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
+                            break;
+                        case 4:
+
+                            gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
+                            break;
+                        case 5:
+                            gamemanager.talk("end");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                    else {
+                    switch (level)
+                    {
+                        case 0:
+                            gamemanager.talk("begin");
+                            break;
+                        case 1:
+
+                            gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
+                            break;
+                        case 2:
+                            gamemanager.talk("end");
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 break;
             case "clock":
