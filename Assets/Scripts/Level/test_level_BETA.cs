@@ -551,17 +551,19 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 2:
 
-                            gamemanager.Speak("我：");
+                            gamemanager.Speak("我：這根蘿蔔應該可以從鎖孔裡面督進去.....嗎？");
                             break;
                         case 3:
 
-                            gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
+                            gamemanager.Speak("總之先試試看吧！");
                             break;
                         case 4:
 
-                            gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
+                            gamemanager.Speak("啊。蘿蔔壞掉了....");
                             break;
                         case 5:
+                            gamemanager.resentitem = "empty";
+                            gamemanager.playeritem.Remove("carrot");
                             gamemanager.talk("end");
                             break;
                         default:
