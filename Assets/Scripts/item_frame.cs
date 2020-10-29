@@ -8,7 +8,7 @@ public class item_frame : MonoBehaviour
     // Start is called before the first frame update
     private GameManager_s gamemanager;
     public List<Image>itemimage;
-    
+    public Sprite realempty;
     public Animator anime;
     private bool animating()
     {
@@ -50,8 +50,10 @@ public class item_frame : MonoBehaviour
 
     public void loaditems()
     {
+        
         loaditemimage(itemimage[0], gamemanager.spriteDATA[gamemanager.resentitem]);
         StartCoroutine(loaditemlist(gamemanager.playeritem));
+        Debug.Log("here!");
     }
     public void loaditemimage(Image image,Sprite sprite)
     {
@@ -60,9 +62,15 @@ public class item_frame : MonoBehaviour
 
     IEnumerator loaditemlist(List<string> itemlist)
     {
-        for (int i = 0; i < itemlist.Count; i++) {
-            loaditemimage(itemimage[i + 1], gamemanager.spriteDATA[itemlist[i]]);
+        
+        for (int i = 1; i <= itemimage.Count; i++) {
+            if (i <= itemlist.Count)
+                loaditemimage(itemimage[i], gamemanager.spriteDATA[itemlist[i-1]]);
+            else
+                loaditemimage(itemimage[i], realempty);
+            Debug.Log(i);
         }
+        
         yield return null;
     }
 }
