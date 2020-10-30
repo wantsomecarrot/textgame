@@ -139,13 +139,14 @@ public class GameManager_s : MonoBehaviour
                 break;
         }
     }
-    public void Speak(string word)//將文字傳給文字腳本
+    /*public void Speak(string word)//將文字傳給文字腳本
     {
         Text.type_start(word);
-    }
-    public void Speak2(talkform talk)//將文字傳給文字腳本
+    }*/
+    public void Speak(talkform talk)//將文字傳給文字腳本
     {
         Text.type_start(talk.words);
+        Text.speaker_name_set(talk.speaker);
     }
     public void next_level()//關卡數值+1，並傳給關卡腳本
     {

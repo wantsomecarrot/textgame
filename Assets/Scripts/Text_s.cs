@@ -8,6 +8,7 @@ public class Text_s : MonoBehaviour
     // Start is called before the first frame update
     public bool typing=false ;
     public float type_delay;
+    public Text speaker;
     public Text text;
     void Start()
     {
@@ -39,5 +40,9 @@ public class Text_s : MonoBehaviour
             yield return new WaitForSeconds(type_delay);
         }
         typing = false;
+    }
+    public void speaker_name_set(string name)
+    {
+        speaker.text = name;
     }
 }

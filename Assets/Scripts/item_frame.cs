@@ -53,7 +53,7 @@ public class item_frame : MonoBehaviour
         
         loaditemimage(itemimage[0], gamemanager.spriteDATA[gamemanager.resentitem]);
         StartCoroutine(loaditemlist(gamemanager.playeritem));
-        Debug.Log("here!");
+
     }
     public void loaditemimage(Image image,Sprite sprite)
     {
@@ -63,12 +63,12 @@ public class item_frame : MonoBehaviour
     IEnumerator loaditemlist(List<string> itemlist)
     {
         
-        for (int i = 1; i <= itemimage.Count; i++) {
+        for (int i = 1; i < itemimage.Count; i++) {
             if (i <= itemlist.Count)
                 loaditemimage(itemimage[i], gamemanager.spriteDATA[itemlist[i-1]]);
             else
                 loaditemimage(itemimage[i], realempty);
-            Debug.Log(i);
+           
         }
         
         yield return null;

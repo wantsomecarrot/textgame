@@ -5,7 +5,7 @@ using UnityEngine;
 public class test_level : MonoBehaviour
 {
     // Start is called before the first frame update
-    private GameManager_s gamemanager;
+    /*private GameManager_s gamemanager;
     public  
     void Start()
     {
@@ -162,6 +162,6 @@ public class test_level : MonoBehaviour
         }
 
     }
-
+    */
 
 }
