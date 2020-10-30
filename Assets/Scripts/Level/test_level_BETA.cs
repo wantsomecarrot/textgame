@@ -56,139 +56,139 @@ public class test_level_BETA : MonoBehaviour
                         gamemanager.talk("begin");
                         break;
                     case 1:
-                        gamemanager.Speak(new talkform().words = "我緊緊的握住了那雙逐漸冰冷的手。".speaker = " ");
+                        gamemanager.Speak(new talkform("血液在大雨滂沱中漫開。", " ", " ", " "));
                         break;
                     case 2:
-                        gamemanager.Speak(new talkform(words = "我緊緊的握住了那雙逐漸冰冷的手。", speaker = " "));
+                        gamemanager.Speak(new talkform("我緊緊的握住了那雙逐漸冰冷的手。"," ", " ", " "));
                         break;
                     case 3:
-                        gamemanager.Speak(new talkform(words = "視線是模糊的，分不清是雨水還是淚。", speaker = " "));
+                        gamemanager.Speak(new talkform( "視線是模糊的，分不清是雨水還是淚。"," ", " ", " "));
                         break;
                     case 4:
-                        gamemanager.Speak(new talkform(words = "我做了一個夢，很長，很久。", speaker = " "));
+                        gamemanager.Speak(new talkform("我做了一個夢，很長，很久。"," ", " ", " "));
                         break;
                     case 5:
-                        gamemanager.Speak(new talkform(words = "我感覺到有人在呼喊我的名字，很遙遠、很遙遠。", speaker = " "));
+                        gamemanager.Speak(new talkform("我感覺到有人在呼喊我的名字，很遙遠、很遙遠。"," ", " ", " "));
                         break;
                     case 6:
-                        gamemanager.Speak(new talkform(words = "嗚呃。", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("嗚呃。","艾德里安", " ", " "));
                         break;
                     case 7:
-                        gamemanager.Speak(new talkform(words = "一本書砸在我的臉上。", speaker = " "));
+                        gamemanager.Speak(new talkform("一本書砸在我的臉上。"," ", " ", " "));
                         break;
                     case 8:
-                        gamemanager.Speak(new talkform(words = "非常……", speaker = "？？？"));
+                        gamemanager.Speak(new talkform("非常……","？？？", " ", " "));
                         break;
                     case 9:
-                        gamemanager.Speak(new talkform(words = "……？", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("……？","艾德里安", " ", " "));
                         break;
                     case 10:
-                        gamemanager.Speak(new talkform(words = "非常對不起！！！", speaker = "？？？"));
+                        gamemanager.Speak(new talkform("非常對不起！！！","？？？", " ", " "));
                         break;
                     case 11:
-                        gamemanager.Speak(new talkform(words = "咦？這麼突然？", speaker = " "));
+                        gamemanager.Speak(new talkform("咦？這麼突然？"," ", " ", " "));
                         break;
                     case 12:
-                        gamemanager.Speak(new talkform(words = "你還好嗎！？有沒有哪裡受傷！？", speaker = "？？？"));
+                        gamemanager.Speak(new talkform("你還好嗎！？有沒有哪裡受傷！？","？？？", " ", " "));
                         break;
                     case 13:
-                        gamemanager.Speak(new talkform(words = "啊、啊，沒有大礙。", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("啊、啊，沒有大礙。","艾德里安", " ", " "));
                         break;
                     case 14:
-                        gamemanager.Speak(new talkform(words = "砸在臉上的書已經被我拿到手上。", speaker = " "));
+                        gamemanager.Speak(new talkform("砸在臉上的書已經被我拿到手上。"," ", " ", " "));
                         break;
                     case 15:
-                        gamemanager.Speak(new talkform(words = "看來是她不小心將書砸到我的臉上了。", speaker = " "));
+                        gamemanager.Speak(new talkform("看來是她不小心將書砸到我的臉上了。"," ", " ", " "));
                         break;
                     case 16:
-                        gamemanager.Speak(new talkform(words = "那就好了……要是害你怎麼了，大概又要被酒保先生說笑了。", speaker = "？？？"));
+                        gamemanager.Speak(new talkform("那就好了……要是害你怎麼了，大概又要被酒保先生說笑了。","？？？", " ", " "));
                         break;
                     case 17:
-                        gamemanager.Speak(new talkform(words = "酒保先生？", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("酒保先生？","艾德里安", " ", " "));
                         break;
                     case 18:
-                        gamemanager.Speak(new talkform(words = "聽她一說，我很快的從驚醒中理解到自己來到了一個陌生的地方。", speaker = " "));
+                        gamemanager.Speak(new talkform("聽她一說，我很快的從驚醒中理解到自己來到了一個陌生的地方。"," ", " ", " "));
                         break;
                     case 19:
-                        gamemanager.Speak(new talkform(words = "我並不認識她口中說的人，也不認識「她」本人。", speaker = " "));
+                        gamemanager.Speak(new talkform("我並不認識她口中說的人，也不認識「她」本人。"," ", " ", " "));
                         break;
                     case 20:
-                        gamemanager.Speak(new talkform(words = "啊，那個晚點再說吧。", speaker = "？？？"));
+                        gamemanager.Speak(new talkform("啊，那個晚點再說吧。","？？？", " ", " "));
                         break;
                     case 21:
-                        gamemanager.Speak(new talkform(words = "我是喵可，其實我們現在遇到了有點棘手的問題……", speaker = "？？？"));
+                        gamemanager.Speak(new talkform("我是喵可，其實我們現在遇到了有點棘手的問題……","？？？", " ", " "));
                         break;
                     case 22:
-                        gamemanager.Speak(new talkform(words = "能先告訴我你的名字嗎？", speaker = "喵可"));
+                        gamemanager.Speak(new talkform("能先告訴我你的名字嗎？","喵可", " ", " "));
                         break;
                     case 23:
-                        gamemanager.Speak(new talkform(words = "一段再正常不過的開場白，理所當然的，我知道自己的名字。", speaker = " "));
+                        gamemanager.Speak(new talkform("一段再正常不過的開場白，理所當然的，我知道自己的名字。"," ", " ", " "));
                         break;
                     case 24:
-                        gamemanager.Speak(new talkform(words = "——卻也只想的起來自己的名字。", speaker = " "));
+                        gamemanager.Speak(new talkform("——卻也只想的起來自己的名字。"," ", " ", " "));
                         break;
                     case 25:
-                        gamemanager.Speak(new talkform(words = "艾德里安，可以叫艾德就好。", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("艾德里安，可以叫艾德就好。","艾德里安", " ", " "));
                         break;
                     case 26:
-                        gamemanager.Speak(new talkform(words = "說說那個棘手的問題吧，你會先提表示有點緊急？", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("說說那個棘手的問題吧，你會先提表示有點緊急？","艾德里安", " ", " "));
                         break;
                     case 27:
-                        gamemanager.Speak(new talkform(words = "嗚嗯……其實，在我進來之後，這間房間被反鎖住了。", speaker = "喵可"));
+                        gamemanager.Speak(new talkform("嗚嗯……其實，在我進來之後，這間房間被反鎖住了。","喵可", " ", " "));
                         break;
                     case 28:
-                        gamemanager.Speak(new talkform(words = "……這還真是玄妙的狀況。", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("……這還真是玄妙的狀況。","艾德里安", " ", " "));
                         break;
                     case 29:
-                        gamemanager.Speak(new talkform(words = "艾德會不會知道鑰匙在哪裡呢？", speaker = "喵可"));
+                        gamemanager.Speak(new talkform("艾德會不會知道鑰匙在哪裡呢？","喵可", " ", " "));
                         break;
                     case 30:
-                        gamemanager.Speak(new talkform(words = "這是一個好問題。", speaker = " "));
+                        gamemanager.Speak(new talkform("這是一個好問題。"," ", " ", " "));
                         break;
                     case 31:
-                        gamemanager.Speak(new talkform(words = "……可惜的是，我好像除了名字以外，什麼都想不起來。", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("……可惜的是，我好像除了名字以外，什麼都想不起來。","艾德里安", " ", " "));
                         break;
                     case 32:
-                        gamemanager.Speak(new talkform(words = "字面意思，我的腦袋真的是一片空白。", speaker = " "));
+                        gamemanager.Speak(new talkform("字面意思，我的腦袋真的是一片空白。"," ", " ", " "));
                         break;
                     case 33:
-                        gamemanager.Speak(new talkform(words = "想不起來在這裡的原因，想不起來自己過去曾經待在哪裡。", speaker = " "));
+                        gamemanager.Speak(new talkform("想不起來在這裡的原因，想不起來自己過去曾經待在哪裡。"," ", " ", " "));
                         break;
                     case 34:
-                        gamemanager.Speak(new talkform(words = "當然，這間房間我也沒有任何印象。", speaker = " "));
+                        gamemanager.Speak(new talkform("當然，這間房間我也沒有任何印象。"," ", " ", " "));
                         break;
                     case 35:
-                        gamemanager.Speak(new talkform(words = "………", speaker = "喵可"));
+                        gamemanager.Speak(new talkform("………","喵可", " ", " "));
                         break;
                     case 36:
-                        gamemanager.Speak(new talkform(words = "………", speaker = "喵可"));
+                        gamemanager.Speak(new talkform("………","喵可", " ", " "));
                         break;
                     case 37:
-                        gamemanager.Speak(new talkform(words = "不過那個不是重點，先嘗試找到出去的方法吧？", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("不過那個不是重點，先嘗試找到出去的方法吧？","艾德里安", " ", " "));
                         break;
                     case 38:
-                        gamemanager.Speak(new talkform(words = "艾德你……", speaker = "喵可"));
+                        gamemanager.Speak(new talkform("艾德你……","喵可", " ", " "));
                         break;
                     case 39:
-                        gamemanager.Speak(new talkform(words = "是？", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("是？","艾德里安", " ", " "));
                         break;
                     case 40:
-                        gamemanager.Speak(new talkform(words = "太過冷靜了吧！一個失去記憶的人會這麼冷靜的嗎？", speaker = "喵可"));
+                        gamemanager.Speak(new talkform("太過冷靜了吧！一個失去記憶的人會這麼冷靜的嗎？","喵可", " ", " "));
                         break;
                     case 41:
-                        gamemanager.Speak(new talkform(words = "喵可說的沒錯，但我的內心卻意外的毫無波瀾。", speaker = " "));
+                        gamemanager.Speak(new talkform("喵可說的沒錯，但我的內心卻意外的毫無波瀾。"," ", " ", " "));
                         break;
                     case 42:
-                        gamemanager.Speak(new talkform(words = "一種直覺告訴我，絕對不用擔心找不到自己的記憶。", speaker = " "));
+                        gamemanager.Speak(new talkform("一種直覺告訴我，絕對不用擔心找不到自己的記憶。"," ", " ", " "));
                         break;
                     case 43:
-                        gamemanager.Speak(new talkform(words = "我也不曉得，心情意外的平靜。", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("我也不曉得，心情意外的平靜。","艾德里安", " ", " "));
                         break;
                     case 44:
-                        gamemanager.Speak(new talkform(words = "總而言之，先在房間裡面翻找看看吧？", speaker = "艾德里安"));
+                        gamemanager.Speak(new talkform("總而言之，先在房間裡面翻找看看吧？","艾德里安", " ", " "));
                         break;
                     case 45:
-                        gamemanager.Speak(new talkform(words = "好、好吧，嗯、嗯，沒問題！", speaker = "喵可"));
+                        gamemanager.Speak(new talkform("好、好吧，嗯、嗯，沒問題！","喵可", " ", " "));
                         break;
                     case 56:
                         gamemanager.talk("end");
