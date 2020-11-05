@@ -190,7 +190,7 @@ public class test_level_BETA : MonoBehaviour
                     case 45:
                         gamemanager.Speak(new talkform("好、好吧，嗯、嗯，沒問題！","喵可", " ", " "));
                         break;
-                    case 56:
+                    case 46:
                         gamemanager.talk("end");
                         break;
                     default:
