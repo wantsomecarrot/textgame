@@ -197,36 +197,24 @@ public class test_level_BETA : MonoBehaviour
                         break;
                 }
                 break;
-            /*case "bed":
-                switch (level)
+            case "bed":
+                if (gamemanager.flag.Contains("bed"))
                 {
-                    case 0:
-                        gamemanager.talk("begin");
-                        break;
-                    case 1:
-                        gamemanager.Speak("一張雙人大床，我剛從上面爬下來。話說回來，為什麼是雙人床？");
-                        break;
-                    case 2:
-                        gamemanager.talk("end");
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case "lamp":
-                if (gamemanager.flag.Contains("lamp"))
-                {
-
                     switch (level)
                     {
-
                         case 0:
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            gamemanager.Speak("房間裡的光源，燈火在裏頭搖曳著。");
+                            gamemanager.Speak(new talkform("一張雙人大床，我們剛檢查過它。。", " ", " ", " "));
                             break;
                         case 2:
+                            gamemanager.Speak(new talkform("哈啾！", "艾德里安", " ", " "));
+                            break;
+                        case 3:
+                            gamemanager.Speak(new talkform("可惡的灰塵", "", " ", " "));
+                            break;
+                        case 4:
                             gamemanager.talk("end");
                             break;
                         default:
@@ -237,483 +225,41 @@ public class test_level_BETA : MonoBehaviour
                 {
                     switch (level)
                     {
-
                         case 0:
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            gamemanager.Speak("一盞壁燈，房間的光源似乎全都來自於他。");
+                            gamemanager.Speak(new talkform("一張雙人大床，我剛從上面爬下來。", " ", " ", " "));
                             break;
                         case 2:
-                            gamemanager.Speak("我：燈罩上好像寫了些字。");
+                            gamemanager.Speak(new talkform("話說回來，床底下會有什麼嗎？", "艾德里安", " ", " "));
                             break;
                         case 3:
-                            gamemanager.Speak("_ _ ：_ 3");
+                            gamemanager.Speak(new talkform("我鑽進去看看吧！", "喵可", " ", " "));
                             break;
                         case 4:
-                            gamemanager.flag.Add("lamp");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                break;
-            case "bookshelf":
-                switch (level)
-                {
-
-                    case 0:
-                        gamemanager.talk("begin");
-                        break;
-                    case 1:
-
-                        gamemanager.Speak("書櫃上頭擺滿了書本，但有些似乎落在了地板上頭。");
-                        break;
-                    case 2:
-                        gamemanager.talk("end");
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case "window":
-                if (gamemanager.flag.Contains("window"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("窗戶似乎無法看出去，外面只有一片漆黑。");
-                            break;
-                        case 2:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("我：奇怪？");
-                            break;
-                        case 2:
-                            gamemanager.Speak("喵可：怎麼了？");
-                            break;
-                        case 3:
-                            gamemanager.Speak("我：這裡房間的窗戶是看不到外面的嗎？");
-                            break;
-                        case 4:
-                            gamemanager.Speak("喵可：不……我的房間是看的到外面的呢。");
+                            gamemanager.Speak(new talkform("等等，我來吧。", "艾德里安", " ", " "));
                             break;
                         case 5:
-                            gamemanager.Speak("所以是只有這間房間看不到外面的嗎？");
+                            gamemanager.Speak(new talkform("知道該說是她神經大條還是什麼呢……", " ", " ", " "));
                             break;
                         case 6:
-                            gamemanager.flag.Add("window");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                break;
-            case "book":
-                if (gamemanager.flag.Contains("book"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("我又嘗試翻了一些其他書頁，但是都是空白的，真奇怪。");
-                            break;
-                        case 2:
-                            gamemanager.Speak("找到了一根胡蘿蔔～");
-                            gamemanager.playeritem.Add("carrot");
-                            break;
-                        case 3:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("我撿起幾本書翻看。");
-                            break;
-                        case 2:
-                            gamemanager.Speak("我：嗯？");
-                            break;
-                        case 3:
-                            gamemanager.Speak("上頭好像寫了什麼。");
-                            break;
-                        case 4:
-                            gamemanager.Speak("_ 4 ：_ _");
-                            break;
-                        case 5:
-                            gamemanager.flag.Add("book");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                break;
-            case "carpet":
-                if (gamemanager.flag.Contains("carpet"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("毛茸茸的地毯，邊角有狼的花紋裝飾。");
-                            break;
-                        case 2:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("毛茸茸的地毯，邊角有狼的花紋裝飾。");
-                            break;
-                        case 2:
-                            gamemanager.Speak("邊角的地方下面好像有什麼東西？");
-                            break;
-                        case 3:
-                            gamemanager.Speak("藏在地毯底下的地板刻著字。");
-                            break;
-                        case 4:
-                            gamemanager.Speak("1_ ：_ _");
-                            break;
-                        case 5:
-                            gamemanager.flag.Add("carpet");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                break;
-            case "curtain":
-                if (gamemanager.flag.Contains("curtain"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("造型典雅的窗簾。");
-                            break;
-                        case 2:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("造型典雅的窗簾，拉繩上好像綁著一張紙。");
-                            break;
-                        case 2:
-                            gamemanager.Speak("我把紙片抽出來，上面寫著些什麼。");
-                            break;
-                        case 3:
-                            gamemanager.Speak("_ _ ：5 _");
-                            break;
-                        case 4:
-                            gamemanager.flag.Add("curtain");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                break;
-            case "dressingtable":
-                switch (level)
-                {
-
-                    case 0:
-                        gamemanager.talk("begin");
-                        break;
-                    case 1:
-                        gamemanager.Speak("一組造型典雅的梳妝台，上面的鏡子倒映著房間。");
-                        break;
-                    case 2:
-                        gamemanager.Speak("邊邊刻上了貓咪的雕花，真是細緻。");
-                        break;
-                    case 3:
-                        gamemanager.talk("end");
-                        break;
-                    default:
-                        break;
-                }
-                break;
-
-            case "planecarrot":
-                switch (level)
-                {
-
-                    case 0:
-                        gamemanager.talk("begin");
-                        break;
-                    case 1:
-
-                        gamemanager.Speak("這是貼了透明貼圖的平面物件。");
-                        break;
-                    case 2:
-                        gamemanager.Speak("比紙還要薄，只有一面看得到，另一面甚至看過來是透明的。");
-                        break;
-                    case 3:
-                        gamemanager.Speak("連影子都沒有，跟鬼一樣，可憐那。");
-                        break;
-                    case 4:
-                        gamemanager.talk("end");
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case "bedsidetable":
-                switch (level)
-                {
-
-                    case 0:
-                        gamemanager.talk("begin");
-                        break;
-                    case 1:
-
-                        gamemanager.Speak("造型簡單的床頭櫃，櫃子似乎還打不開。");
-                        break;
-                    case 2:
-                        gamemanager.talk("end");
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case "chair":
-                switch (level)
-                {
-                    case 0:
-                        gamemanager.talk("begin");
-                        break;
-                    case 1:
-
-                        gamemanager.Speak("結實的木頭椅子，上面躺著一顆軟墊。");
-                        break;
-                    case 2:
-                        gamemanager.Speak("坐起來感覺很舒服的樣子。");
-                        break;
-                    case 3:
-                        gamemanager.talk("end");
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case "bussinesscase":
-                if (gamemanager.resentitem == "carrot") {
-                    switch (level)
-                    {
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-
-                            gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
-                            break;
-                        case 2:
-
-                            gamemanager.Speak("我：這根蘿蔔應該可以從鎖孔裡面督進去.....嗎？");
-                            break;
-                        case 3:
-
-                            gamemanager.Speak("總之先試試看吧！");
-                            break;
-                        case 4:
-
-                            gamemanager.Speak("啊。蘿蔔壞掉了....");
-                            break;
-                        case 5:
-                            gamemanager.resentitem = "empty";
-                            gamemanager.playeritem.Remove("carrot");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                    else {
-                    switch (level)
-                    {
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-
-                            gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
-                            break;
-                        case 2:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                break;
-            case "clock":
-                if (gamemanager.flag.Contains("key"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("一個貓咪時鐘，我真的沒想到他居然是貓咪時鐘……");
-                            break;
-                        case 2:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else if (gamemanager.flag.Contains("curtain") && gamemanager.flag.Contains("carpet") && gamemanager.flag.Contains("book") && gamemanager.flag.Contains("lamp"))
-                {
-                    switch (level)
-                    {
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("我：這個四字的密碼，很像一個時間呢");
-                            break;
-                        case 2:
-                            gamemanager.Speak("我：這個布穀鳥鐘有沒有辦法調整呢？");
-                            break;
-                        case 3:
-                            gamemanager.Speak("我將房間一旁的椅子搬了過來，取下軟墊踩上去拿下時鐘。");
-                            break;
-                        case 4:
-                            gamemanager.Speak("我：太好了，似乎可以調看看。");
-                            break;
-                        case 5:
-                            gamemanager.Speak("我把時鐘的時間調整到與找到的數字一致，時鐘叮了一聲後，一隻貓咪從裡面彈了出來");
-                            break;
-                        case 6:
-                            gamemanager.Speak("我：居然是貓咪嗎？");
+                            gamemanager.Speak(new talkform("她可是穿裙子的啊。", " ", " ", " "));
                             break;
                         case 7:
-                            gamemanager.Speak("喵可：雖然跟想像的不一樣，但是好可愛喔~我也想裝一個在房間裡了。");
+                            gamemanager.Speak(new talkform("我掀開床單，趴下身來看了進去。", " ", " ", " "));
                             break;
                         case 8:
-                            gamemanager.Speak("如果是這麼可愛的東西，的確很適合她。");
+                            gamemanager.Speak(new talkform("可惜裡面只有灰塵。", " ", " ", " "));
                             break;
                         case 9:
-                            gamemanager.Speak("我觀察了一下沒有回到時鐘裡的貓咪。");
+                            gamemanager.Speak(new talkform("有找到什麼嗎？", "喵可", " ", " "));
                             break;
                         case 10:
-                            gamemanager.Speak("牠的嘴上叼著一根鑰匙。");
+                            gamemanager.Speak(new talkform("嗯……空空如也呢。", "艾德里安", " ", " "));
                             break;
                         case 11:
-                            gamemanager.Speak("喵可：看起來跟門鎖的裝飾一樣呢，應該就是門的要是沒錯了。馬上試試看吧！");
-                            break;
-                        case 12:
-                            gamemanager.flag.Add("key");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else if (gamemanager.flag.Contains("clock"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("木製樹屋外觀的時鐘，這麼說來應該是個布穀鳥鐘了。");
-                            break;
-                        case 2:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-                else
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("我：這種房子的造型應該是布穀鳥鐘吧？");
-                            break;
-                        case 2:
-                            gamemanager.Speak("喵可：我還是第一次看到實體的布穀鳥鐘呢。");
-                            break;
-                        case 3:
-                            gamemanager.Speak("我：那你的房間時鐘是什麼樣子的？");
-                            break;
-                        case 4:
-                            gamemanager.Speak("喵可：我是用懷錶在看時間的，所以房間裡沒有擺時鐘呢。");
-                            break;
-                        case 5:
-                            gamemanager.flag.Add("clock");
+                            gamemanager.flag.Add("bed");
                             gamemanager.talk("end");
                             break;
                         default:
@@ -721,47 +267,61 @@ public class test_level_BETA : MonoBehaviour
                     }
                 }
                 break;
-            case "door":
-                if (gamemanager.flag.Contains("key"))
-                {
-                    switch (level)
+                case "light":
+                    if (gamemanager.flag.Contains("light"))
                     {
+                        switch (level)
+                        {
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("房間裡的光源，燈火在裏頭搖曳著。"," "," "," "));
+                                break;
+                            case 2:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (level)
+                        {
 
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak("鑰匙剛剛好的放入了鎖裡。");
-                            break;
-                        case 2:
-                            gamemanager.Speak("門喀嗤一聲，被打開了。");
-                            break;
-                        case 3:
-                            gamemanager.Speak("喵可：打開了！");
-                            break;
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("一盞壁燈，房間的光源似乎全都來自於他。", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.Speak(new talkform("唔、好亮。", "艾德里安", " ", " "));
+                                break;
+                            case 3:
+                                gamemanager.Speak(new talkform("壁燈裡面有什麼東西在一閃一閃的。", " ", " ", " "));
+                                break;
                         case 4:
-                            gamemanager.Speak("我：真是太好了！你能玩到這邊就代表沒有BUG。第一關BETA已結束！");
+                            gamemanager.Speak(new talkform("獲得了密碼碎片。", " ", " ", " "));
                             break;
                         case 5:
-                            gamemanager.Speak("目前做到的功能與寫好的文本加起來就到這邊，感謝您的遊玩！");
-                            break;
-                        case 6:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
+                                gamemanager.flag.Add("light");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                }
-                else if (gamemanager.flag.Contains("door"))
-                {
+                    break;
+                case "bookshelf":
                     switch (level)
                     {
-
                         case 0:
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            gamemanager.Speak("上了鎖的門，想要出去只能快點找到鑰匙了。");
+                            gamemanager.Speak(new talkform("書櫃上頭擺滿了書本，但有些似乎落在了地板上頭。"," "," "," "));
                             break;
                         case 2:
                             gamemanager.talk("end");
@@ -769,9 +329,204 @@ public class test_level_BETA : MonoBehaviour
                         default:
                             break;
                     }
-                }
-                else
-                {
+                    break;
+                case "window":
+                    if (gamemanager.flag.Contains("window"))
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("窗戶似乎無法看出去，外面只有一片漆黑。", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("奇怪？", "艾德里安", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.Speak(new talkform("怎麼了？", "喵可", " ", " "));
+                                break;
+                            case 3:
+                                gamemanager.Speak(new talkform("這裡房間的窗戶是看不到外面的嗎？", "艾德里安", " ", " "));
+                                break;
+                            case 4:
+                                gamemanager.Speak(new talkform("不……我的房間是看的到外面的呢。", "喵可", " ", " "));
+                                break;
+                            case 5:
+                                gamemanager.Speak(new talkform("所以是只有這間房間看不到外面的嗎？", " ", " ", " "));
+                                break;
+                            case 6:
+                                gamemanager.flag.Add("window");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                case "book":
+                    if (gamemanager.flag.Contains("book"))
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("我又嘗試翻了一些其他書頁，但是都是空白的，真奇怪。", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.Speak(new talkform("這裡的書本都是白的嗎？", " ", " ", " "));
+                                break;
+                            case 3:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("我撿起幾本書翻看。", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.Speak(new talkform("嗯？", "艾德里安", " ", " "));
+                                break;
+                            case 3:
+                                gamemanager.Speak(new talkform("書頁裡夾著一片透明的碎片", " ", " ", " "));
+                                break;
+                            case 4:
+                                gamemanager.Speak(new talkform("獲得了密碼碎片。", " ", " ", " "));
+                                break;
+                            case 5:
+                                gamemanager.flag.Add("book");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                case "carpet":
+                    if (gamemanager.flag.Contains("carpet"))
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("毛茸茸的地毯，邊角有狼的花紋裝飾。", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("毛茸茸的地毯，邊角有狼的花紋裝飾。", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.Speak(new talkform("邊角的地方下面好像有什麼東西？", " ", " ", " "));
+                                break;
+                            case 3:
+                                gamemanager.Speak(new talkform("藏在地毯底下的地板刻著字。", " ", " ", " "));
+                                break;
+                            case 4:
+                            gamemanager.Speak(new talkform("獲得了密碼碎片。", " ", " ", " "));
+                            break;
+                            case 5:
+                                gamemanager.flag.Add("carpet");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                /*
+                case "curtain":
+                    if (gamemanager.flag.Contains("curtain"))
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak("造型典雅的窗簾。");
+                                break;
+                            case 2:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak("造型典雅的窗簾，拉繩上好像綁著一張紙。");
+                                break;
+                            case 2:
+                                gamemanager.Speak("我把紙片抽出來，上面寫著些什麼。");
+                                break;
+                            case 3:
+                                gamemanager.Speak("_ _ ：5 _");
+                                break;
+                            case 4:
+                                gamemanager.flag.Add("curtain");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                case "dressingtable":
                     switch (level)
                     {
 
@@ -779,20 +534,318 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            gamemanager.Speak("轉了轉手把，絲紋不動。");
+                            gamemanager.Speak("一組造型典雅的梳妝台，上面的鏡子倒映著房間。");
                             break;
                         case 2:
-                            gamemanager.Speak("真的被鎖上了呢……");
+                            gamemanager.Speak("邊邊刻上了貓咪的雕花，真是細緻。");
                             break;
                         case 3:
-                            gamemanager.flag.Add("door");
                             gamemanager.talk("end");
                             break;
                         default:
                             break;
                     }
-                }
-                break;*/
+                    break;
+
+                case "planecarrot":
+                    switch (level)
+                    {
+
+                        case 0:
+                            gamemanager.talk("begin");
+                            break;
+                        case 1:
+
+                            gamemanager.Speak("這是貼了透明貼圖的平面物件。");
+                            break;
+                        case 2:
+                            gamemanager.Speak("比紙還要薄，只有一面看得到，另一面甚至看過來是透明的。");
+                            break;
+                        case 3:
+                            gamemanager.Speak("連影子都沒有，跟鬼一樣，可憐那。");
+                            break;
+                        case 4:
+                            gamemanager.talk("end");
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "bedsidetable":
+                    switch (level)
+                    {
+
+                        case 0:
+                            gamemanager.talk("begin");
+                            break;
+                        case 1:
+
+                            gamemanager.Speak("造型簡單的床頭櫃，櫃子似乎還打不開。");
+                            break;
+                        case 2:
+                            gamemanager.talk("end");
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "chair":
+                    switch (level)
+                    {
+                        case 0:
+                            gamemanager.talk("begin");
+                            break;
+                        case 1:
+
+                            gamemanager.Speak("結實的木頭椅子，上面躺著一顆軟墊。");
+                            break;
+                        case 2:
+                            gamemanager.Speak("坐起來感覺很舒服的樣子。");
+                            break;
+                        case 3:
+                            gamemanager.talk("end");
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "bussinesscase":
+                    if (gamemanager.resentitem == "carrot") {
+                        switch (level)
+                        {
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+
+                                gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
+                                break;
+                            case 2:
+
+                                gamemanager.Speak("我：這根蘿蔔應該可以從鎖孔裡面督進去.....嗎？");
+                                break;
+                            case 3:
+
+                                gamemanager.Speak("總之先試試看吧！");
+                                break;
+                            case 4:
+
+                                gamemanager.Speak("啊。蘿蔔壞掉了....");
+                                break;
+                            case 5:
+                                gamemanager.resentitem = "empty";
+                                gamemanager.playeritem.Remove("carrot");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                        else {
+                        switch (level)
+                        {
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+
+                                gamemanager.Speak("規矩的黑色公事包，在房裡顯得有些突兀。");
+                                break;
+                            case 2:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                case "clock":
+                    if (gamemanager.flag.Contains("key"))
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak("一個貓咪時鐘，我真的沒想到他居然是貓咪時鐘……");
+                                break;
+                            case 2:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if (gamemanager.flag.Contains("curtain") && gamemanager.flag.Contains("carpet") && gamemanager.flag.Contains("book") && gamemanager.flag.Contains("lamp"))
+                    {
+                        switch (level)
+                        {
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak("我：這個四字的密碼，很像一個時間呢");
+                                break;
+                            case 2:
+                                gamemanager.Speak("我：這個布穀鳥鐘有沒有辦法調整呢？");
+                                break;
+                            case 3:
+                                gamemanager.Speak("我將房間一旁的椅子搬了過來，取下軟墊踩上去拿下時鐘。");
+                                break;
+                            case 4:
+                                gamemanager.Speak("我：太好了，似乎可以調看看。");
+                                break;
+                            case 5:
+                                gamemanager.Speak("我把時鐘的時間調整到與找到的數字一致，時鐘叮了一聲後，一隻貓咪從裡面彈了出來");
+                                break;
+                            case 6:
+                                gamemanager.Speak("我：居然是貓咪嗎？");
+                                break;
+                            case 7:
+                                gamemanager.Speak("喵可：雖然跟想像的不一樣，但是好可愛喔~我也想裝一個在房間裡了。");
+                                break;
+                            case 8:
+                                gamemanager.Speak("如果是這麼可愛的東西，的確很適合她。");
+                                break;
+                            case 9:
+                                gamemanager.Speak("我觀察了一下沒有回到時鐘裡的貓咪。");
+                                break;
+                            case 10:
+                                gamemanager.Speak("牠的嘴上叼著一根鑰匙。");
+                                break;
+                            case 11:
+                                gamemanager.Speak("喵可：看起來跟門鎖的裝飾一樣呢，應該就是門的要是沒錯了。馬上試試看吧！");
+                                break;
+                            case 12:
+                                gamemanager.flag.Add("key");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if (gamemanager.flag.Contains("clock"))
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak("木製樹屋外觀的時鐘，這麼說來應該是個布穀鳥鐘了。");
+                                break;
+                            case 2:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    else
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak("我：這種房子的造型應該是布穀鳥鐘吧？");
+                                break;
+                            case 2:
+                                gamemanager.Speak("喵可：我還是第一次看到實體的布穀鳥鐘呢。");
+                                break;
+                            case 3:
+                                gamemanager.Speak("我：那你的房間時鐘是什麼樣子的？");
+                                break;
+                            case 4:
+                                gamemanager.Speak("喵可：我是用懷錶在看時間的，所以房間裡沒有擺時鐘呢。");
+                                break;
+                            case 5:
+                                gamemanager.flag.Add("clock");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                case "door":
+                    if (gamemanager.flag.Contains("key"))
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak("鑰匙剛剛好的放入了鎖裡。");
+                                break;
+                            case 2:
+                                gamemanager.Speak("門喀嗤一聲，被打開了。");
+                                break;
+                            case 3:
+                                gamemanager.Speak("喵可：打開了！");
+                                break;
+                            case 4:
+                                gamemanager.Speak("我：真是太好了！你能玩到這邊就代表沒有BUG。第一關BETA已結束！");
+                                break;
+                            case 5:
+                                gamemanager.Speak("目前做到的功能與寫好的文本加起來就到這邊，感謝您的遊玩！");
+                                break;
+                            case 6:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if (gamemanager.flag.Contains("door"))
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak("上了鎖的門，想要出去只能快點找到鑰匙了。");
+                                break;
+                            case 2:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak("轉了轉手把，絲紋不動。");
+                                break;
+                            case 2:
+                                gamemanager.Speak("真的被鎖上了呢……");
+                                break;
+                            case 3:
+                                gamemanager.flag.Add("door");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;*/
         }
     }
     
