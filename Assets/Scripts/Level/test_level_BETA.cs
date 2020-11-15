@@ -10,6 +10,7 @@ public class test_level_BETA : MonoBehaviour
     public List<Sprite> DATAimage;
     public List<string> imagename;
     public Dictionary<string, Sprite> spriteDATA=new Dictionary<string, Sprite>();
+    public List<GameObject> cameralist;
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
@@ -57,9 +58,11 @@ public class test_level_BETA : MonoBehaviour
                         break;
                     case 1:
                         gamemanager.Speak(new talkform("血液在大雨滂沱中漫開。", " ", " ", " "));
+                        
                         break;
                     case 2:
                         gamemanager.Speak(new talkform("我緊緊的握住了那雙逐漸冰冷的手。"," ", " ", " "));
+                        
                         break;
                     case 3:
                         gamemanager.Speak(new talkform( "視線是模糊的，分不清是雨水還是淚。"," ", " ", " "));

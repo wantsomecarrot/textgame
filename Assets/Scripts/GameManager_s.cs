@@ -21,7 +21,8 @@ public class GameManager_s : MonoBehaviour
     public bool optionbool = false;//
     public List<string> flag;
     public List<string> playeritem ;
-    public string resentitem;
+    public string resentitem = "empty";
+    public int resentcamera = 0 ;
     public Dictionary<string, Sprite> spriteDATA;
 
     private bool IsTouchedUI()
@@ -41,7 +42,7 @@ public class GameManager_s : MonoBehaviour
         optionframe = GameObject.Find("Option").GetComponent<option>();
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
         levelmanager.story(nowweareat,level);
-        resentitem ="empty";
+        
     }
 
     // Update is called once per frame
@@ -182,7 +183,18 @@ public class GameManager_s : MonoBehaviour
             resentitem = "empty";
             itemframe.loaditems();
         }
+        }
+        
     }
+    public void camerachange(int cameranumber)
+    {
+        levelmanager.cameralist[resentcamera].SetActive(false);
+        levelmanager.cameralist[cameranumber].SetActive(true);
+        resentcamera = cameranumber;
+    }
+    public void loadgame()
+    {
+
     }
 }
 
