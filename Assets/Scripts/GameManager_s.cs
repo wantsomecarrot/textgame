@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class GameManager_s : MonoBehaviour
@@ -14,6 +15,7 @@ public class GameManager_s : MonoBehaviour
     public string nowweareat = "story";//當下使用劇本的暫存
     public float level=0;//當下使用劇本的對話階段暫存
     public string gamemode = "converstation";//遊戲狀態暫存
+    public string UImode = "game";
     private RaycastHit hit ;//滑鼠偵測暫存
     private Ray mouseray;//鐳射暫存
     private option optionframe;//

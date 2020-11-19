@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/stage_one.unity
     guid: 05cf1729f79799c4f8cbd75384c322a5
+  - enabled: 1
+    path: Assets/Scenes/mian_menu.unity
+    guid: 5767a7ed717efda4e9ef6e960a534864
   m_configObjects: {}
