@@ -8,9 +8,11 @@ public class MenuManager : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameObject starttext;
+    private GameObject black;
     void Start()
     {
         starttext = GameObject.Find("start");
+        black = GameObject.Find("blackfront");
     }
 
     // Update is called once per frame
@@ -20,6 +22,10 @@ public class MenuManager : MonoBehaviour
             starttext.GetComponent<Animator>().SetTrigger("Start");
         }
         if (starttext.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("starttext_void"))
+        {
+            black.GetComponent<Animator>().SetTrigger("fadein");
+        }
+        if (black.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("black_on"))
         {
             load();
         }
