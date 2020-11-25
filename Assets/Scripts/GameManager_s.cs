@@ -11,23 +11,25 @@ public class GameManager_s : MonoBehaviour
     private Text_s Text ;//文字腳本
     private  test_level_BETA levelmanager;//關卡腳本
     private converstation_frame talkframe;//對話界面腳本
-    private item_frame itemframe;
+    private item_frame itemframe;//物品欄腳本
+    public blackcontrol black;
     public string nowweareat = "story";//當下使用劇本的暫存
     public float level=0;//當下使用劇本的對話階段暫存
     public string gamemode = "converstation";//遊戲狀態暫存
-    public string UImode = "game";
+    public string UImode = "game";//?
     private RaycastHit hit ;//滑鼠偵測暫存
     private Ray mouseray;//鐳射暫存
-    private option optionframe;//
-    public string anime =null;//
-    public bool optionbool = false;//
-    public List<string> flag;
-    public List<string> playeritem ;
-    public string resentitem = "empty";
-    public int resentcamera = 0 ;
-    public Dictionary<string, Sprite> spriteDATA;
-
-    private bool IsTouchedUI()
+    private option optionframe;//?
+    public string anime =null;//動畫名稱暫存
+    public bool optionbool = false;//？
+    public List<string> flag;//劇情要素蒐集區
+    public List<string> playeritem ;//玩家物品蒐集區
+    public string resentitem = "empty";//手上物品暫存
+    public int resentcamera = 0 ;//現在的攝影機
+    private string blackstate ;//黑幕開關暫存
+    public Dictionary<string, Sprite> spriteDATA;//存圖區
+    
+    private bool IsTouchedUI()//判斷是否摸著UI圖標
     {
         bool touchedUI = false;
         if (EventSystem.current.IsPointerOverGameObject())
@@ -43,6 +45,7 @@ public class GameManager_s : MonoBehaviour
         talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
         optionframe = GameObject.Find("Option").GetComponent<option>();
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
+        black = GameObject.Find("blackback").GetComponent<blackcontrol>();
         levelmanager.story(nowweareat,level);
         
     }
@@ -108,6 +111,13 @@ public class GameManager_s : MonoBehaviour
                                 anime = null;
                             }
                             break;
+                        case "effectblackfadeout":
+                        if (black.anime.GetCurrentAnimatorStateInfo(0).IsName("black_off"))
+                        {
+                            gamemode = "converstation";
+                            anime = null;
+                        }
+                        break;
                     }
                     break;
             }
@@ -156,14 +166,14 @@ public class GameManager_s : MonoBehaviour
         level++;
         levelmanager.story(nowweareat ,level);
     }
-    public void skip()//跳過劇情事件
+    /*public void skip()//跳過劇情事件,已拔除
     {
         if (gamemode == "converstation"&& levelmanager.skipvalue(nowweareat) != 0)
         {
             level = levelmanager.skipvalue(nowweareat);
             levelmanager.story(nowweareat, level);
         }
-    }
+    }*/
     public void converstationclickframe()//對話事件
     {
         if (gamemode== "converstation")
@@ -174,7 +184,7 @@ public class GameManager_s : MonoBehaviour
                 next_level();
         }
     }
-    public void selectitem(int num)
+    public void selectitem(int num)//選取物品事件
     {
         if (num <= playeritem.Count) { 
         if (playeritem[num - 1] != resentitem) {
@@ -188,11 +198,24 @@ public class GameManager_s : MonoBehaviour
         }
         
     }
-    public void camerachange(int cameranumber)
+    public void camerachange(int cameranumber)//切換攝影機事件
     {
         levelmanager.cameralist[resentcamera].SetActive(false);
         levelmanager.cameralist[cameranumber].SetActive(true);
         resentcamera = cameranumber;
+    }
+    public void effect(string effecttype)
+    {
+        switch (effecttype)
+        {
+            case "blackfadeout":
+                blackstate = "off";
+                gamemode = "anime";
+                anime = "effectblackfadeout";
+                black.anime.SetTrigger("fadeout");
+                black.state = blackstate;
+                break;
+        }
     }
     public void loadgame()
     {
