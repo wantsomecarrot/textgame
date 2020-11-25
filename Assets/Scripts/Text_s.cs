@@ -26,6 +26,7 @@ public class Text_s : MonoBehaviour
     public void type_clear()
     {
         text.text = string.Empty;
+        speaker.text = string.Empty;
     }
     IEnumerator type(string word)
     {

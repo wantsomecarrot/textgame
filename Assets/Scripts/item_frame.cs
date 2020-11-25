@@ -10,7 +10,7 @@ public class item_frame : MonoBehaviour
     public List<Image>itemimage;
     public Sprite realempty;
     public Animator anime;
-    private bool animating()
+    /*private bool animating()
     {
         bool animating = false;
         if (anime.GetCurrentAnimatorStateInfo(0).IsName("item_show")|| anime.GetCurrentAnimatorStateInfo(0).IsName("item_hide"))
@@ -18,7 +18,7 @@ public class item_frame : MonoBehaviour
             animating = true;
         }
         return animating;
-    }
+    }*/
     void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
@@ -27,13 +27,14 @@ public class item_frame : MonoBehaviour
     public void enter()
     {
         loaditems();
-        anime.SetBool("in",true);
+        anime.SetTrigger("enter");
     }
     public void exit()
     {
         if (anime.GetCurrentAnimatorStateInfo(0).IsName("item_on"))
             anime.SetTrigger("hide");
-        anime.SetBool("in",false);
+        if (anime.GetCurrentAnimatorStateInfo(0).IsName("item_out")==false)
+            anime.SetTrigger("exit");
     }
     public void click()
     {
