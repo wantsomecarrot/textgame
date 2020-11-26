@@ -11,6 +11,7 @@ public class test_level_BETA : MonoBehaviour
     public List<string> imagename;
     public Dictionary<string, Sprite> spriteDATA=new Dictionary<string, Sprite>();
     public List<GameObject> cameralist;
+    public List<GameObject> zoomlist;
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
@@ -856,8 +857,17 @@ public class test_level_BETA : MonoBehaviour
                         }
                     }
                     break;*/
+                    
         }
     }
-    
-    
-}
+    public void clickbag(string type) {
+        switch (type) {
+            case "bussinesscase":
+                break;
+        }
+    }
+    public void quite(GameObject zoom)
+    {
+        zoom.SetActive (false);
+    }
+    }
