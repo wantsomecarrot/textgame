@@ -69,7 +69,6 @@ public class item_frame : MonoBehaviour
                 loaditemimage(itemimage[i], gamemanager.spriteDATA[itemlist[i-1]]);
             else
                 loaditemimage(itemimage[i], realempty);
-           
         }
         
         yield return null;

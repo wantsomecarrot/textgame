@@ -5237,7 +5237,13 @@ MonoBehaviour:
   cameralist:
   - {fileID: 534669902}
   - {fileID: 484992198}
-  zoomlist: []
+  zoomlist:
+  - {fileID: 1011892520}
+  - {fileID: 1836576414}
+  - {fileID: 1640390522}
+  - {fileID: 1639031044}
+  - {fileID: 237535084}
+  - {fileID: 1579828449}
 --- !u!1 &945032666
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class charatercg : MonoBehaviour
     void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
+        anime =  character.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,12 +21,25 @@ public class charatercg : MonoBehaviour
     {
         
     }
-    void characterappear(Sprite character ,string type)
+    public void characterenter(string type)
     {
-
+        switch (type)
+        {
+            case "popout":
+                anime.SetTrigger("enter");
+                break;
+        }
     }
-    void characterdisappear(Sprite character, string type)
+    public void characterexit( string type)
     {
-
+        switch (type)
+        {
+            case "slide":
+                anime.SetTrigger("exit");
+                break;
+        }
+    }
+    void changeCG(Sprite CG)
+    {
     }
 }

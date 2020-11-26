@@ -12,6 +12,7 @@ public class GameManager_s : MonoBehaviour
     private  test_level_BETA levelmanager;//關卡腳本
     private converstation_frame talkframe;//對話界面腳本
     private item_frame itemframe;//物品欄腳本
+    private charatercg CG;
     public blackcontrol black;
     public string nowweareat = "story";//當下使用劇本的暫存
     public float level=0;//當下使用劇本的對話階段暫存
@@ -46,6 +47,7 @@ public class GameManager_s : MonoBehaviour
         optionframe = GameObject.Find("Option").GetComponent<option>();
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
         black = GameObject.Find("blackback").GetComponent<blackcontrol>();
+        CG = GameObject.Find("CharaterCG").GetComponent<charatercg>();
         levelmanager.story(nowweareat,level);
         
     }
@@ -149,6 +151,18 @@ public class GameManager_s : MonoBehaviour
                 level = 0;
                 anime = "textframeout";
                 nowweareat = "search";
+                break;
+        }
+    }
+    public void CGcontrol(string commend,string type)
+    {
+        switch (commend)
+        {
+            case "enter":
+                CG.characterenter(type);
+                break;
+            case "exit":
+                CG.characterexit(type);
                 break;
         }
     }
