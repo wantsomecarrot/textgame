@@ -569,7 +569,7 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 8:
                             gamemanager.playeritem.Add("key");
-                            gamemanager.playeritem.Remove("burnmatch");
+                            gamemanager.useitem();
                             gamemanager.talk("end");
                             break;
                         default:
@@ -1045,7 +1045,7 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 4:
                             gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.playeritem.Remove("key");
+                            gamemanager.useitem();
                             gamemanager.Speak(new talkform("真是太好了！你能玩到這邊就代表沒有BUG。第一關BETA已結束！", "謎之聲", " ", " "));
                             break;
                         case 5:

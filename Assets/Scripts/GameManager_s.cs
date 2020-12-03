@@ -13,6 +13,8 @@ public class GameManager_s : MonoBehaviour
     private converstation_frame talkframe;//對話界面腳本
     private item_frame itemframe;//物品欄腳本
     private charatercg CG;
+    private bool spacekeyactive=true;
+    private float spacekeycooldown;
     public blackcontrol black;
     public string nowweareat = "story";//當下使用劇本的暫存
     public float level=0;//當下使用劇本的對話階段暫存
@@ -51,17 +53,17 @@ public class GameManager_s : MonoBehaviour
         CG = GameObject.Find("CharaterCG").GetComponent<charatercg>();
         iteminfo = GameObject.Find("iteminfo").GetComponent<item_info>();
         levelmanager.story(nowweareat,level);
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
                 switch (gamemode)
                 {
                     case "converstation":
-                        if (Input.GetKey(KeyCode.Space)) {
+                        if (Input.GetKey(KeyCode.Space)&&spacekeyactive) {
+                            spacekeyactive = false;
                             converstationclickframe();
                         }
                 if (Input.GetKeyDown(KeyCode.S))
@@ -78,7 +80,6 @@ public class GameManager_s : MonoBehaviour
                         if (Physics.Raycast(mouseray, out hit, 1000f))
                         {
                             searchtrigger(hit.transform.name);
-                          
                         }
                     }
                     if (Input.mousePosition.x <= Screen.width * 0.05f)
@@ -129,6 +130,13 @@ public class GameManager_s : MonoBehaviour
                     }
                     break;
             }
+        if (spacekeycooldown<=0) {
+            spacekeyactive = true;
+            spacekeycooldown = 0.1f;
+        }
+        if (!spacekeyactive)
+            spacekeycooldown -= Time.deltaTime;
+
     }
     public void searchtrigger(string target) {
         nowweareat = target;
@@ -250,10 +258,13 @@ public class GameManager_s : MonoBehaviour
         {
             searchtrigger(levelmanager.combine(resentitem, playeritem[iteminfo.sensorstage - 1]));
             playeritem.Remove(playeritem[iteminfo.sensorstage - 1]);
-            playeritem.Remove(resentitem);
-            resentitem = "empty";
+            iteminfo.sensorstage = -1;
+            useitem();
         }
-
+    }
+    public void useitem() {
+        playeritem.Remove(resentitem);
+        resentitem = "empty";
     }
     public void loadgame()
     {
