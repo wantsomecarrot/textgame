@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class item_show : MonoBehaviour
 {
+    public int num;
+    
     // Start is called before the first frame update
-    public int number;
     void Start()
     {
         
@@ -16,7 +18,4 @@ public class item_show : MonoBehaviour
     {
         
     }
-    public void loadimage(string name) {
-        
-    } 
 }

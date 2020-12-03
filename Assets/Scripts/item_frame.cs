@@ -10,6 +10,7 @@ public class item_frame : MonoBehaviour
     public List<Image>itemimage;
     public Sprite realempty;
     public Animator anime;
+
     /*private bool animating()
     {
         bool animating = false;
@@ -59,6 +60,7 @@ public class item_frame : MonoBehaviour
     public void loaditemimage(Image image,Sprite sprite)
     {
         image.sprite = sprite;
+        
     }
 
     IEnumerator loaditemlist(List<string> itemlist)

@@ -7,7 +7,7 @@ public class zoomin_basic : MonoBehaviour
 {
     public Image backimage;
     // Start is called before the first frame update
-    public void chamgeimage(Sprite target)
+    public void changeimage(Sprite target)
     {
         backimage.sprite = target;
 

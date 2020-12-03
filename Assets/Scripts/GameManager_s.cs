@@ -21,6 +21,7 @@ public class GameManager_s : MonoBehaviour
     private RaycastHit hit ;//滑鼠偵測暫存
     private Ray mouseray;//鐳射暫存
     private option optionframe;//?
+    private item_info iteminfo;
     public string anime =null;//動畫名稱暫存
     public bool optionbool = false;//？
     public List<string> flag;//劇情要素蒐集區
@@ -48,6 +49,7 @@ public class GameManager_s : MonoBehaviour
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
         black = GameObject.Find("blackback").GetComponent<blackcontrol>();
         CG = GameObject.Find("CharaterCG").GetComponent<charatercg>();
+        iteminfo = GameObject.Find("iteminfo").GetComponent<item_info>();
         levelmanager.story(nowweareat,level);
         
     }
@@ -62,7 +64,11 @@ public class GameManager_s : MonoBehaviour
                         if (Input.GetKey(KeyCode.Space)) {
                             converstationclickframe();
                         }
-                        break;
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    skip();
+                }
+                break;
                     case "searching":
                 if (IsTouchedUI() == false)
                 {
@@ -71,8 +77,8 @@ public class GameManager_s : MonoBehaviour
                         mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
                         if (Physics.Raycast(mouseray, out hit, 1000f))
                         {
-                            nowweareat = hit.transform.name;
-                            levelmanager.story(nowweareat, level);
+                            searchtrigger(hit.transform.name);
+                          
                         }
                     }
                     if (Input.mousePosition.x <= Screen.width * 0.05f)
@@ -123,6 +129,10 @@ public class GameManager_s : MonoBehaviour
                     }
                     break;
             }
+    }
+    public void searchtrigger(string target) {
+        nowweareat = target;
+        levelmanager.story(nowweareat, level);
     }
     public void optionstart()
     {
@@ -180,14 +190,14 @@ public class GameManager_s : MonoBehaviour
         level++;
         levelmanager.story(nowweareat ,level);
     }
-    /*public void skip()//跳過劇情事件,已拔除
+    public void skip()//跳過劇情事件,秘技
     {
         if (gamemode == "converstation"&& levelmanager.skipvalue(nowweareat) != 0)
         {
             level = levelmanager.skipvalue(nowweareat);
             levelmanager.story(nowweareat, level);
         }
-    }*/
+    }
     public void converstationclickframe()//對話事件
     {
         if (gamemode== "converstation")
@@ -230,6 +240,20 @@ public class GameManager_s : MonoBehaviour
                 black.state = blackstate;
                 break;
         }
+    }
+    public string getiteminfo(string item)
+    {
+        return levelmanager.iteminfo[item];
+    }
+    public void combine() {
+        if (playeritem[iteminfo.sensorstage - 1] != resentitem && resentitem != "empty"&&levelmanager.combine(resentitem, playeritem[iteminfo.sensorstage - 1])!="fail")
+        {
+            searchtrigger(levelmanager.combine(resentitem, playeritem[iteminfo.sensorstage - 1]));
+            playeritem.Remove(playeritem[iteminfo.sensorstage - 1]);
+            playeritem.Remove(resentitem);
+            resentitem = "empty";
+        }
+
     }
     public void loadgame()
     {
