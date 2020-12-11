@@ -10,6 +10,7 @@ public class Text_s : MonoBehaviour
     public float type_delay;
     public Text speaker;
     public Text text;
+    public GameObject continunesign;
     void Start()
     {
         text = GetComponent<Text>();
@@ -33,7 +34,7 @@ public class Text_s : MonoBehaviour
         type_delay = 0.1f;
         type_clear();
         typing = true;
-        
+        continunesign.SetActive(false);
         foreach (char letter in word.ToCharArray())
         {
             text.text += letter;
@@ -41,6 +42,7 @@ public class Text_s : MonoBehaviour
             yield return new WaitForSeconds(type_delay);
         }
         typing = false;
+        continunesign.SetActive(true);
     }
     public void speaker_name_set(string name)
     {
