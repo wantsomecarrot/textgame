@@ -15,11 +15,11 @@ public class GameManager_s : MonoBehaviour
     private charatercg CG;
     private bool spacekeyactive=true;
     private float spacekeycooldown;
-    public blackcontrol black;
+    public blackcontrol black;//黑幕控制
     public string nowweareat = "story";//當下使用劇本的暫存
     public float level=0;//當下使用劇本的對話階段暫存
     public string gamemode = "converstation";//遊戲狀態暫存
-    public string UImode = "game";//?
+    //public string UImode = "game";//?
     private RaycastHit hit ;//滑鼠偵測暫存
     private Ray mouseray;//鐳射暫存
     private option optionframe;//?
@@ -127,7 +127,14 @@ public class GameManager_s : MonoBehaviour
                             anime = null;
                         }
                         break;
-                    }
+                    case "effectblackfadein":
+                        if (black.anime.GetCurrentAnimatorStateInfo(0).IsName("black_on"))
+                        {
+                            gamemode = "converstation";
+                            anime = null;
+                        }
+                        break;
+                }
                     break;
             }
         if (spacekeycooldown<=0) {
@@ -184,16 +191,13 @@ public class GameManager_s : MonoBehaviour
                 break;
         }
     }
-    /*public void Speak(string word)//將文字傳給文字腳本
-    {
-        Text.type_start(word);
-    }*/
+
     public void Speak(talkform talk)//將文字傳給文字腳本
     {
         Text.type_start(talk.words);
         Text.speaker_name_set(talk.speaker);
     }
-    public void next_level()//關卡數值+1，並傳給關卡腳本
+    public void next_level()//關卡數值+1，並                                                                                                                                          關卡腳本
     {
         level++;
         levelmanager.story(nowweareat ,level);
@@ -245,6 +249,13 @@ public class GameManager_s : MonoBehaviour
                 gamemode = "anime";
                 anime = "effectblackfadeout";
                 black.anime.SetTrigger("fadeout");
+                black.state = blackstate;
+                break;
+            case "blackfadein":
+                blackstate = "black";
+                gamemode = "anime";
+                anime = "effectblackfadein";
+                black.anime.SetTrigger("fadein");
                 black.state = blackstate;
                 break;
         }

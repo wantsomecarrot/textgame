@@ -8,7 +8,7 @@ public class charatercg : MonoBehaviour
     private GameManager_s gamemanager;
     private Animator anime;
     public Image character;
-
+    public string state;
     // Start is called before the first frame update
     void Start()
     {
