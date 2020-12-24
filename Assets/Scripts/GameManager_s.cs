@@ -202,6 +202,7 @@ public class GameManager_s : MonoBehaviour
     {
         Text.type_start(talk.words);
         Text.speaker_name_set(talk.speaker);
+        Text.recordtolog(talk.speaker, talk.words);
     }
     public void next_level()//關卡數值+1，並                                                                                                                                          關卡腳本
     {

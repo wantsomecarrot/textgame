@@ -10,6 +10,7 @@ public class Text_s : MonoBehaviour
     public float type_delay;
     public Text speaker;
     public Text text;
+    public Text logtext;
     public GameObject continunesign;
     void Start()
     {
@@ -47,5 +48,9 @@ public class Text_s : MonoBehaviour
     public void speaker_name_set(string name)
     {
         speaker.text = name;
+    }
+    public void recordtolog(string speaker,string word)
+    {
+        logtext.text = logtext.text+ "\n\n<color=#BCA276>"+speaker+"</color>"+"\n"+word;
     }
 }
