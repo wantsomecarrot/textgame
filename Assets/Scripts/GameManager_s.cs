@@ -9,23 +9,22 @@ public class GameManager_s : MonoBehaviour
 {
     // Start is called before the first frame update
     private Text_s Text ;//文字腳本
-    private  test_level_BETA levelmanager;//關卡腳本
+    private test_level_BETA levelmanager;//關卡腳本
     private converstation_frame talkframe;//對話界面腳本
     private item_frame itemframe;//物品欄腳本
-    private charatercg CG;
+    private charatercg CG;//角色立繪顯示系統
     private bool spacekeyactive=true;
     private float spacekeycooldown;
     public blackcontrol black;//黑幕控制
     public string nowweareat = "story";//當下使用劇本的暫存
     public float level=0;//當下使用劇本的對話階段暫存
     public string gamemode = "converstation";//遊戲狀態暫存
-    //public string UImode = "game";//?
     private RaycastHit hit ;//滑鼠偵測暫存
     private Ray mouseray;//鐳射暫存
-    private option optionframe;//?
-    private item_info iteminfo;
+    private option optionframe;//設定界面腳本
+    private item_info iteminfo;//物品資訊顯示腳本
     public string anime =null;//動畫名稱暫存
-    public bool optionbool = false;//？
+    public bool optionstate = false;//設定界面是否開啟
     public List<string> flag;//劇情要素蒐集區
     public List<string> playeritem ;//玩家物品蒐集區
     public string resentitem = "empty";//手上物品暫存
@@ -59,47 +58,52 @@ public class GameManager_s : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-                switch (gamemode)
-                {
-                    case "converstation":
-                        if (Input.GetKey(KeyCode.Space)&&spacekeyactive) {
-                            spacekeyactive = false;
-                            converstationclickframe();
-                        }
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                    skip();
-                }
-                break;
-                    case "searching":
-                if (IsTouchedUI() == false)
-                {
-                    if (Input.GetMouseButtonDown(0))
+        if (optionstate)
+        {
+
+        }
+        else
+            switch (gamemode)
+            {
+                case "converstation":
+                    if (Input.GetKey(KeyCode.Space) && spacekeyactive) {
+                        spacekeyactive = false;
+                        converstationclickframe();
+                    }
+                    if (Input.GetKeyDown(KeyCode.S))
                     {
-                        mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                        if (Physics.Raycast(mouseray, out hit, 1000f))
+                        skip();
+                    }
+                    break;
+                case "searching":
+                    if (IsTouchedUI() == false)
+                    {
+                        if (Input.GetMouseButtonDown(0))
                         {
-                            searchtrigger(hit.transform.name);
+                            mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                            if (Physics.Raycast(mouseray, out hit, 1000f))
+                            {
+                                searchtrigger(hit.transform.name);
+                            }
+                        }
+                        if (Input.mousePosition.x <= Screen.width * 0.05f)
+                        {
+                            Camera.main.transform.Rotate(0, -0.5f, 0);
+                        }
+                        else if (Input.mousePosition.x >= Screen.width * 0.95f)
+                        {
+                            Camera.main.transform.Rotate(0, 0.5f, 0);
+                        }
+                        else if (Input.mousePosition.x <= Screen.width * 0.25f && Input.mousePosition.x > Screen.width * 0.05f)
+                        {
+                            Camera.main.transform.Rotate(0, -0.15f, 0);
+                        }
+                        else if (Input.mousePosition.x >= Screen.width * 0.75f && Input.mousePosition.x < Screen.width * 0.95f)
+                        {
+                            Camera.main.transform.Rotate(0, 0.15f, 0);
                         }
                     }
-                    if (Input.mousePosition.x <= Screen.width * 0.05f)
-                    {
-                        Camera.main.transform.Rotate(0, -0.5f, 0);
-                    }
-                    else if (Input.mousePosition.x >= Screen.width * 0.95f)
-                    {
-                        Camera.main.transform.Rotate(0, 0.5f, 0);
-                    }
-                    else if (Input.mousePosition.x <= Screen.width * 0.25f && Input.mousePosition.x > Screen.width * 0.05f)
-                    {
-                        Camera.main.transform.Rotate(0, -0.15f, 0);
-                    }
-                    else if (Input.mousePosition.x >= Screen.width * 0.75f && Input.mousePosition.x < Screen.width * 0.95f)
-                    {
-                        Camera.main.transform.Rotate(0, 0.15f, 0);
-                    }
-                }
-                break;
+                    break;
                 case "anime":
                     switch (anime)
                     {
@@ -121,20 +125,20 @@ public class GameManager_s : MonoBehaviour
                             }
                             break;
                         case "effectblackfadeout":
-                        if (black.anime.GetCurrentAnimatorStateInfo(0).IsName("black_off"))
-                        {
-                            gamemode = "converstation";
-                            anime = null;
-                        }
-                        break;
-                    case "effectblackfadein":
-                        if (black.anime.GetCurrentAnimatorStateInfo(0).IsName("black_on"))
-                        {
-                            gamemode = "converstation";
-                            anime = null;
-                        }
-                        break;
-                }
+                            if (black.anime.GetCurrentAnimatorStateInfo(0).IsName("black_off"))
+                            {
+                                gamemode = "converstation";
+                                anime = null;
+                            }
+                            break;
+                        case "effectblackfadein":
+                            if (black.anime.GetCurrentAnimatorStateInfo(0).IsName("black_on"))
+                            {
+                                gamemode = "converstation";
+                                anime = null;
+                            }
+                            break;
+                    }
                     break;
             }
         if (spacekeycooldown<=0) {
@@ -149,15 +153,17 @@ public class GameManager_s : MonoBehaviour
         nowweareat = target;
         levelmanager.story(nowweareat, level);
     }
-    public void optionstart()
+    public void optionswitch()
     {
-        optionbool = true;
-        optionframe.enter();
-    }
-    public void optionend()
-    {
-        optionbool = false;
-        optionframe.exit();
+        if (optionstate)
+        {
+            optionframe.exit();
+            optionstate = false;
+        }
+        else {
+            optionframe.enter();
+            optionstate = true;
+        }
     }
     public void talk(string commend)//對話框動畫指令
     {
@@ -212,7 +218,7 @@ public class GameManager_s : MonoBehaviour
     }
     public void converstationclickframe()//對話事件
     {
-        if (gamemode== "converstation")
+        if (gamemode== "converstation"&& optionstate==false)
         {
             if (Text.typing)
                 Text.type_delay = 0.01F;
@@ -264,8 +270,12 @@ public class GameManager_s : MonoBehaviour
     {
         return levelmanager.iteminfo[item];
     }
+    public bool combinable()
+    {
+        return playeritem[iteminfo.sensorstage - 1] != resentitem && resentitem != "empty" && levelmanager.combine(resentitem, playeritem[iteminfo.sensorstage - 1]) != "fail";
+    }
     public void combine() {
-        if (playeritem[iteminfo.sensorstage - 1] != resentitem && resentitem != "empty"&&levelmanager.combine(resentitem, playeritem[iteminfo.sensorstage - 1])!="fail")
+        if (combinable())
         {
             searchtrigger(levelmanager.combine(resentitem, playeritem[iteminfo.sensorstage - 1]));
             playeritem.Remove(playeritem[iteminfo.sensorstage - 1]);

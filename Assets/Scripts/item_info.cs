@@ -7,6 +7,7 @@ public class item_info : MonoBehaviour
 {
     public Text iteminfotext;
     private GameManager_s gameManager;
+    public GameObject combinebutton;
     public bool sensor_0;
     public bool sensor_1;
     public bool sensor_2;
@@ -93,5 +94,13 @@ public class item_info : MonoBehaviour
     private void info()
     {
         iteminfotext.text = gameManager.getiteminfo(gameManager.playeritem[sensorstage-1]);
+        if (gameManager.combinable())
+        {
+            combinebutton.SetActive(true);
+        }
+        else
+        {
+            combinebutton.SetActive(false);
+        }
     }
 }

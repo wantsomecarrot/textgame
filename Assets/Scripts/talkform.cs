@@ -10,10 +10,8 @@ public class talkform : ScriptableObject {
         emotion = _emotion;
         effect = _effect;
     }
-
     public string words;
     public string speaker;
     public string emotion;
     public string effect;
-
 }

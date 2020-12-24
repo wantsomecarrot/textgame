@@ -12,7 +12,6 @@ public class item_show : MonoBehaviour
     {
         
     }
-
     // Update is called once per frame
     void Update()
     {

@@ -3,41 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class test_level_BETA : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     private GameManager_s gamemanager;
     public List<Sprite> DATAimage;
     public List<string> imagename;
     public Dictionary<string, Sprite> spriteDATA = new Dictionary<string, Sprite>();
     public Dictionary<string, string> iteminfo = new Dictionary<string, string>();
-    
+    public characterform Akun;
     public List<GameObject> cameralist;
     public List<GameObject> zoomlist;
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
-        StartCoroutine(Getimage());
+        StartCoroutine(Getimage(imagename, DATAimage));
         gamemanager.spriteDATA = spriteDATA;
         iteminfo.Add("match","賣女孩的小火柴");
         iteminfo.Add("matchbox", "沒有火柴的火柴盒？");
         iteminfo.Add("burnmatch", "燒毀！");
         iteminfo.Add("key", "開啟命運之門的石之鑰匙");
     }
-    IEnumerator Getimage()
+    IEnumerator Getimage(List<string>name,List<Sprite>image)
     {
-        for (int i = 0; i < imagename.Count; i++)
+        for (int i = 0; i < name.Count; i++)
         {
-            spriteDATA.Add(imagename[i], DATAimage[i]);
+            spriteDATA.Add(name[i], image[i]);
         }
-        imagename.Clear();
-        DATAimage.Clear();
+        name.Clear();
+        image.Clear();
         yield return null;
     }
     // Update is called once per frame
     void Update()
     {
-
     }
     public int skipvalue(string name)
     {
@@ -1197,7 +1198,7 @@ public class test_level_BETA : MonoBehaviour
                             break;
                     }
                     break;
-               
+               */
                 case "chair":
                     switch (level)
                     {
@@ -1206,10 +1207,10 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 1:
 
-                            gamemanager.Speak("結實的木頭椅子，上面躺著一顆軟墊。");
+                            gamemanager.Speak(new talkform("異常柔軟的沙發椅。", " ", " ", " "));
                             break;
                         case 2:
-                            gamemanager.Speak("坐起來感覺很舒服的樣子。");
+                            gamemanager.Speak(new talkform("坐在上面感覺自己的骨頭也變軟了。", " ", " ", " "));
                             break;
                         case 3:
                             gamemanager.talk("end");
@@ -1220,7 +1221,7 @@ public class test_level_BETA : MonoBehaviour
                     break;
                
 
-                */
+                
 
         }
     }

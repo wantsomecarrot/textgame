@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class option : MonoBehaviour
 {
+    public Animator anime;
     // Start is called before the first frame update
     void Start()
     {
-        
+        anime = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -17,10 +18,10 @@ public class option : MonoBehaviour
     }
     public void enter ()
     {
-        transform.localPosition = new Vector3(0, 0,0);
+        anime.SetTrigger("enter");
     }
     public void exit()
     {
-        transform.localPosition = new Vector3(0,500,0);
+        anime.SetTrigger("exit");
     }
 }
