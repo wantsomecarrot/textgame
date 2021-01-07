@@ -14,23 +14,27 @@ public class test_level_BETA : MonoBehaviour
     public Dictionary<string, Sprite> spriteDATA = new Dictionary<string, Sprite>();
     public Dictionary<string, string> iteminfo = new Dictionary<string, string>();
     public characterform Akun;
+    public List<Sprite> Akunimage;
+    public List<string> Akunimagename;
     public List<GameObject> cameralist;
     public List<GameObject> zoomlist;
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
-        StartCoroutine(Getimage(imagename, DATAimage));
+        Akun = new characterform("akun");
+        StartCoroutine(Getimage(imagename, DATAimage,spriteDATA));
         gamemanager.spriteDATA = spriteDATA;
         iteminfo.Add("match","賣女孩的小火柴");
         iteminfo.Add("matchbox", "沒有火柴的火柴盒？");
         iteminfo.Add("burnmatch", "燒毀！");
         iteminfo.Add("key", "開啟命運之門的石之鑰匙");
+        StartCoroutine(Getimage(Akunimagename, Akunimage, Akun.CG));
     }
-    IEnumerator Getimage(List<string>name,List<Sprite>image)
+    IEnumerator Getimage(List<string>name,List<Sprite>image,Dictionary<string, Sprite>dictionary)
     {
         for (int i = 0; i < name.Count; i++)
         {
-            spriteDATA.Add(name[i], image[i]);
+            dictionary.Add(name[i], image[i]);
         }
         name.Clear();
         image.Clear();
@@ -289,13 +293,13 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            gamemanager.Speak(new talkform("一張雙人大床，我們剛檢查過它。。", " ", " ", " "));
+                            gamemanager.Speak(new talkform("一張雙人大床，我們剛檢查過它。", " ", " ", " "));
                             break;
                         case 2:
                             gamemanager.Speak(new talkform("哈啾！", "我", " ", " "));
                             break;
                         case 3:
-                            gamemanager.Speak(new talkform("可惡的灰塵", "", " ", " "));
+                            gamemanager.Speak(new talkform("可惡的灰塵。", "", " ", " "));
                             break;
                         case 4:
                             gamemanager.talk("end");
@@ -427,7 +431,7 @@ public class test_level_BETA : MonoBehaviour
                         gamemanager.talk("begin");
                         break;
                     case 1:
-                        gamemanager.Speak(new talkform("盛著某種花卉，但花已經枯萎了", " ", " ", " "));
+                        gamemanager.Speak(new talkform("盛著某種花卉，但花已經枯萎了。", " ", " ", " "));
                         break;
                     case 2:
                         gamemanager.CGcontrol("enter", "popout");
@@ -616,7 +620,7 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 1:
                             openzoom(5);
-                            gamemanager.Speak(new talkform("古銅色的飛機模型，非常精緻", " ", " ", " "));
+                            gamemanager.Speak(new talkform("古銅色的飛機模型，非常精緻。", " ", " ", " "));
                             break;
                         case 2:
                             gamemanager.talk("end");
@@ -635,10 +639,10 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 1:
                             openzoom(5);
-                            gamemanager.Speak(new talkform("古銅色的飛機模型，非常精緻", " ", " ", " "));
+                            gamemanager.Speak(new talkform("古銅色的飛機模型，非常精緻。", " ", " ", " "));
                             break;
                         case 2:
-                            gamemanager.Speak(new talkform("裡面有根火柴", "我", " ", " "));
+                            gamemanager.Speak(new talkform("裡面有根火柴。", "我", " ", " "));
                             break;
                         case 3:
                             gamemanager.CGcontrol("enter", "popout");
@@ -724,7 +728,7 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 3:
                             changzoomimage(3,"book2");
-                            gamemanager.Speak(new talkform("書頁裡夾著一片透明的碎片", " ", " ", " "));
+                            gamemanager.Speak(new talkform("書頁裡夾著一片透明的碎片。", " ", " ", " "));
                             break;
                         case 4:
                             gamemanager.flag.Add("book");
@@ -823,7 +827,7 @@ public class test_level_BETA : MonoBehaviour
                         gamemanager.Speak(new talkform("…紙球？", "喵可", " ", " "));
                         break;
                     case 2:
-                        gamemanager.Speak(new talkform("我將紙球攤開", " ", " ", " "));
+                        gamemanager.Speak(new talkform("我將紙球攤開。", " ", " ", " "));
                         break;
                     case 3:
                         changzoomimage(0, "bussinesscase3");
@@ -925,7 +929,7 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 5:
                             changzoomimage(2,"clock2");
-                            gamemanager.Speak(new talkform("我把時鐘的時間調整到與找到的數字一致，時鐘喵了一聲後，一隻貓咪從裡面彈了出來", " ", " ", " "));
+                            gamemanager.Speak(new talkform("我把時鐘的時間調整到與找到的數字一致，時鐘喵了一聲後，一隻貓咪從裡面彈了出來。", " ", " ", " "));
                             break;
                         case 6:
                             gamemanager.Speak(new talkform("居然是貓咪？", "我", " ", " "));
@@ -941,11 +945,11 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak(new talkform("以我的品味來說這鐘確實是過於可愛了，她想要的話或許可以讓她帶走。", " ", " ", " "));
                             break;
                         case 10:
-                            gamemanager.Speak(new talkform("我觀察了一下沒有回到時鐘裡的貓咪", " ", " ", " "));
+                            gamemanager.Speak(new talkform("我觀察了一下沒有回到時鐘裡的貓咪。", " ", " ", " "));
                             break;
                         case 11:
                             changzoomimage(2, "clock3");
-                            gamemanager.Speak(new talkform("牠的嘴上咬著空的火柴盒", " ", " ", " "));
+                            gamemanager.Speak(new talkform("牠的嘴上咬著空的火柴盒。", " ", " ", " "));
                             break;
                         case 12:
                             changzoomimage(2, "clock4");
@@ -1046,7 +1050,6 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 4:
                             gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.useitem();
                             gamemanager.Speak(new talkform("真是太好了！你能玩到這邊就代表沒有BUG。第一關BETA已結束！", "謎之聲", " ", " "));
                             break;
                         case 5:
@@ -1056,7 +1059,8 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak(new talkform("感謝您的遊玩！", "謎之聲", " ", " "));
                             break;
                         case 7:
-                            //gamemanager.talk("end");
+                            gamemanager.useitem();
+                            gamemanager.talk("end");
                             break;
                         default:
                             break;
@@ -1120,6 +1124,26 @@ public class test_level_BETA : MonoBehaviour
                         break;
                     case 4:
                         gamemanager.playeritem.Add("burnmatch");
+                        gamemanager.talk("end");
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "chair":
+                switch (level)
+                {
+                    case 0:
+                        gamemanager.talk("begin");
+                        break;
+                    case 1:
+
+                        gamemanager.Speak(new talkform("異常柔軟的沙發椅。", " ", " ", " "));
+                        break;
+                    case 2:
+                        gamemanager.Speak(new talkform("坐在上面感覺自己的骨頭也變軟了。", " ", " ", " "));
+                        break;
+                    case 3:
                         gamemanager.talk("end");
                         break;
                     default:
@@ -1199,29 +1223,10 @@ public class test_level_BETA : MonoBehaviour
                     }
                     break;
                */
-                case "chair":
-                    switch (level)
-                    {
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
 
-                            gamemanager.Speak(new talkform("異常柔軟的沙發椅。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("坐在上面感覺自己的骨頭也變軟了。", " ", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-               
 
-                
+
+
 
         }
     }
