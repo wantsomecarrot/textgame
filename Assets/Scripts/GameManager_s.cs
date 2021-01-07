@@ -20,6 +20,7 @@ public class GameManager_s : MonoBehaviour
     public float level=0;//當下使用劇本的對話階段暫存
     public string gamemode = "converstation";//遊戲狀態暫存
     private RaycastHit hit ;//滑鼠偵測暫存
+    private RaycastHit2D hit2d;//滑鼠平面偵測暫存
     private Ray mouseray;//鐳射暫存
     private option optionframe;//設定界面腳本
     private item_info iteminfo;//物品資訊顯示腳本
