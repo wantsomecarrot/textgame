@@ -652,7 +652,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak(new talkform("但壁爐沒有炭呢……", "我", " ", " "));
                             break;
                         case 5:
-                            gamemanager.Speak(new talkform("柴都沒有一根。", " ", " ", " "));
+                            gamemanager.Speak(new talkform("連木柴都沒有一根。", " ", " ", " "));
                             break;
                         case 6:
                             gamemanager.flag.Add("toyplane");
@@ -823,7 +823,7 @@ public class test_level_BETA : MonoBehaviour
                         break;
                     case 1:
                         changzoomimage(0, "bussinesscase2");
-                        gamemanager.CGcontrol("enter","popout");
+                        //gamemanager.CGcontrol("enter","popout");
                         gamemanager.Speak(new talkform("…紙球？", "喵可", " ", " "));
                         break;
                     case 2:
@@ -844,7 +844,7 @@ public class test_level_BETA : MonoBehaviour
                         break;
                     case 7:
                         gamemanager.flag.Add("bussinesscase");
-                        gamemanager.CGcontrol("exit", "slide");
+                        //gamemanager.CGcontrol("exit", "slide");
                         gamemanager.talk("end");
                         break;
                     default:
@@ -946,6 +946,7 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 10:
                             gamemanager.Speak(new talkform("我觀察了一下沒有回到時鐘裡的貓咪。", " ", " ", " "));
+                            gamemanager.CGcontrol("exit", "slide");
                             break;
                         case 11:
                             changzoomimage(2, "clock3");
@@ -957,7 +958,6 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 13:
                             gamemanager.playeritem.Add("matchbox");
-                            gamemanager.CGcontrol("exit", "slide");
                             gamemanager.flag.Add("clockopened");
                             gamemanager.talk("end");
                             break;
@@ -998,7 +998,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak(new talkform("這種房子的造型應該是布穀鳥鐘吧？", "我", " ", " "));
                             break;
                         case 2:
-                            gamemanager.CGcontrol("enter","popout");
+                            //gamemanager.CGcontrol("enter","popout");
                             gamemanager.Speak(new talkform("我還是第一次看到實體的布穀鳥鐘呢。", "喵可", " ", " "));
                             break;
                         case 3:
@@ -1020,7 +1020,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak(new talkform("不過得先出去就是了。", " ", " ", " "));
                             break;
                         case 9:
-                            gamemanager.CGcontrol("exit", "slide");
+                            //gamemanager.CGcontrol("exit", "slide");
                             gamemanager.flag.Add("clock");
                             gamemanager.talk("end");
                             break;
@@ -1050,13 +1050,13 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 4:
                             gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.Speak(new talkform("真是太好了！你能玩到這邊就代表沒有BUG。第一關BETA已結束！", "謎之聲", " ", " "));
+                            gamemanager.Speak(new talkform("真是太好了！你過了第一關！", "謎之聲", " ", " "));
                             break;
                         case 5:
-                            gamemanager.Speak(new talkform("雖然還有很多東西施工中，依照慣例，請多多提供反饋吧～", "謎之聲", " ", " "));
+                            gamemanager.Speak(new talkform("請多多提供反饋～指著蘿蔔的鼻子把BUG都跟他說～", "謎之聲", " ", " "));
                             break;
                         case 6:
-                            gamemanager.Speak(new talkform("感謝您的遊玩！", "謎之聲", " ", " "));
+                            gamemanager.Speak(new talkform("接下來是....第二關的測試！", "謎之聲", " ", " "));
                             break;
                         case 7:
                             gamemanager.useitem();
