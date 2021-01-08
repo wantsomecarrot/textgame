@@ -1059,6 +1059,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak(new talkform("接下來是....第二關的測試！", "謎之聲", " ", " "));
                             break;
                         case 7:
+                            gamemanager.nextlevel();
                             gamemanager.useitem();
                             gamemanager.talk("end");
                             break;

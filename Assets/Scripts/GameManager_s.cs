@@ -32,7 +32,10 @@ public class GameManager_s : MonoBehaviour
     public int resentcamera = 0 ;//現在的攝影機
     private string blackstate ;//黑幕開關暫存
     public Dictionary<string, Sprite> spriteDATA;//存圖區
-    
+    public GameObject lv1sence;
+    public GameObject lv2sence;
+    public GameObject zaball;
+
     private bool IsTouchedUI()//判斷是否摸著UI圖標
     {
         bool touchedUI = false;
@@ -292,6 +295,12 @@ public class GameManager_s : MonoBehaviour
     public void loadgame()
     {
 
+    }
+    public void nextlevel()
+    {
+        zaball.SetActive(false);
+        lv1sence.SetActive(false);
+        lv2sence.SetActive(true);
     }
 }
 
