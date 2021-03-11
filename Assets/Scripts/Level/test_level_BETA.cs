@@ -20,6 +20,7 @@ public class test_level_BETA : MonoBehaviour
     public List<GameObject> zoombackgroundlist;
     public List<GameObject> zoomobjectlist;
     public List<GameObject> zoomlist;
+    public List<GameObject> puzzlelist;
     public void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager_s>();
@@ -45,6 +46,19 @@ public class test_level_BETA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch(gamemanager.stage)
+        {
+            case "stage_one":
+                if (puzzlelist[0].GetComponent<clockniddle>().good&& puzzlelist[1].GetComponent<clockniddle>().good&&gamemanager.flag.Contains("clockopened")==false&&gamemanager.gamemode=="searching")
+                {
+                    gamemanager.searchtrigger("clocktrigger");
+                    puzzlelist[0].GetComponent<clockniddle>().abled = false;
+                    puzzlelist[1].GetComponent<clockniddle>().abled = false;
+                }
+                break;
+            default:
+                break;
+        }
     }
     public int skipvalue(string name)
     {
@@ -1017,64 +1031,6 @@ public class test_level_BETA : MonoBehaviour
                             break;
                     }
                 }
-                else if (gamemanager.flag.Contains("bussinesscase") && gamemanager.flag.Contains("carpet") && gamemanager.flag.Contains("book") && gamemanager.flag.Contains("light"))
-                {
-                    switch (level)
-                    {
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            openzoom(4);
-                            gamemanager.Speak(new talkform("說到時間的話，就是時鐘了吧。", "我", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("有沒有辦法調整呢？", "我", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.Speak(new talkform("我將椅子搬了過來，踩上去看了看。", " ", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.Speak(new talkform("太好了，似乎可以轉看看。", "我", " ", " "));
-                            break;
-                        case 5:
-                            changzoomimage(zoombackgroundlist[3], "clock2");
-                            zoomobjectlist[7].SetActive(true);
-                            gamemanager.Speak(new talkform("我把時鐘的時間調整到與找到的數字一致，時鐘喵了一聲後，一隻貓咪從裡面彈了出來。", " ", " ", " "));
-                            break;
-                        case 6:
-                            gamemanager.Speak(new talkform("居然是貓咪？", "我", " ", " "));
-                            break;
-                        case 7:
-                            gamemanager.Speak(new talkform("有貓咪的布榖鐘啊……", "喵可", " ", " "));
-                            gamemanager.CGcontrol("enter", "popout");
-                            break;
-                        case 8:
-                            gamemanager.Speak(new talkform("她看起來很想要的樣子。", " ", " ", " "));
-                            break;
-                        case 9:
-                            gamemanager.Speak(new talkform("以我的品味來說這鐘確實是過於可愛了，她想要的話或許可以讓她帶走。", " ", " ", " "));
-                            break;
-                        case 10:
-                            gamemanager.Speak(new talkform("我觀察了一下沒有回到時鐘裡的貓咪。", " ", " ", " "));
-                            gamemanager.CGcontrol("exit", "slide");
-                            break;
-                        case 11:
-                            gamemanager.Speak(new talkform("牠的嘴上咬著空的火柴盒。", " ", " ", " "));
-                            break;
-                        case 12:
-                            zoomobjectlist[7].SetActive(false);
-                            gamemanager.Speak(new talkform("得到了火柴盒！", " ", " ", " "));
-                            break;
-                        case 13:
-                            gamemanager.playeritem.Add("matchbox");
-                            gamemanager.flag.Add("clockopened");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
                 else if (gamemanager.flag.Contains("clock"))
                 {
                     switch (level)
@@ -1139,6 +1095,63 @@ public class test_level_BETA : MonoBehaviour
                     }
                 }
                 break;
+                    case "clocktrigger":
+                        switch (level)
+                        {
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                openzoom(4);
+                                gamemanager.Speak(new talkform("說到時間的話，就是時鐘了吧。", "我", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.Speak(new talkform("有沒有辦法調整呢？", "我", " ", " "));
+                                break;
+                            case 3:
+                                gamemanager.Speak(new talkform("我將椅子搬了過來，踩上去看了看。", " ", " ", " "));
+                                break;
+                            case 4:
+                                gamemanager.Speak(new talkform("太好了，似乎可以轉看看。", "我", " ", " "));
+                                break;
+                            case 5:
+                                changzoomimage(zoombackgroundlist[3], "clock2");
+                                zoomobjectlist[7].SetActive(true);
+                                gamemanager.Speak(new talkform("我把時鐘的時間調整到與找到的數字一致，時鐘喵了一聲後，一隻貓咪從裡面彈了出來。", " ", " ", " "));
+                                break;
+                            case 6:
+                                gamemanager.Speak(new talkform("居然是貓咪？", "我", " ", " "));
+                                break;
+                            case 7:
+                                gamemanager.Speak(new talkform("有貓咪的布榖鐘啊……", "喵可", " ", " "));
+                                gamemanager.CGcontrol("enter", "popout");
+                                break;
+                            case 8:
+                                gamemanager.Speak(new talkform("她看起來很想要的樣子。", " ", " ", " "));
+                                break;
+                            case 9:
+                                gamemanager.Speak(new talkform("以我的品味來說這鐘確實是過於可愛了，她想要的話或許可以讓她帶走。", " ", " ", " "));
+                                break;
+                            case 10:
+                                gamemanager.Speak(new talkform("我觀察了一下沒有回到時鐘裡的貓咪。", " ", " ", " "));
+                                gamemanager.CGcontrol("exit", "slide");
+                                break;
+                            case 11:
+                                gamemanager.Speak(new talkform("牠的嘴上咬著空的火柴盒。", " ", " ", " "));
+                                break;
+                            case 12:
+                                zoomobjectlist[7].SetActive(false);
+                                gamemanager.Speak(new talkform("得到了火柴盒！", " ", " ", " "));
+                                break;
+                            case 13:
+                                gamemanager.playeritem.Add("matchbox");
+                                gamemanager.flag.Add("clockopened");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
             case "door":
                 if (gamemanager.resentitem == ("key"))
                 {
@@ -1263,10 +1276,7 @@ public class test_level_BETA : MonoBehaviour
                 break;
 
             case "niddleminute":
-                zoomobjectlist[6].GetComponent<clockniddle>().Drag();
-                break;
-            case "niddlehour":
-                zoomobjectlist[10].GetComponent<clockniddle>().Drag();
+
                 break;
             default:
                 break;
@@ -3388,17 +3398,7 @@ public class test_level_BETA : MonoBehaviour
     }
     public void puzzletrigger(string name)
     {
-        switch (name)
-        {
-            case "niddleminute":
-                zoomobjectlist[6].GetComponent<clockniddle>().Drag();
-                break;
-            case "niddlehour":
-                zoomobjectlist[10].GetComponent<clockniddle>().Drag();
-                break;
-            default:
-                break;
-        }
+        
     }
     public string combine(string a, string b)
     {

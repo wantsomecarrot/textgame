@@ -694,10 +694,7 @@ public class test_level_BETA2 : MonoBehaviour
                 }
                 break;
             case "niddleminute":
-                zoomobjectlist[6].GetComponent<clockniddle>().Drag();
-                break;
-            case "niddlehour":
-                zoomobjectlist[10].GetComponent<clockniddle>().Drag();
+
                 break;
             default:
                 break;
@@ -778,17 +775,7 @@ public class test_level_BETA2 : MonoBehaviour
     }
     public void puzzletrigger(string name)
     {
-        switch (name)
-        {
-            case "niddleminute":
-                zoomobjectlist[6].GetComponent<clockniddle>().Drag();
-                break;
-            case "niddlehour":
-                zoomobjectlist[10].GetComponent<clockniddle>().Drag();
-                break;
-            default:
-                break;
-        }
+       
     }
     public string combine(string a, string b)
     {
