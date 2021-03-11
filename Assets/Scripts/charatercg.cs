@@ -23,20 +23,25 @@ public class charatercg : MonoBehaviour
     }
     public void characterenter(string type)
     {
+        if (anime.GetCurrentAnimatorStateInfo(0).IsName("CG_out")) { 
         switch (type)
         {
             case "popout":
                 anime.SetTrigger("enter");
                 break;
         }
+        }
     }
     public void characterexit( string type)
     {
-        switch (type)
+        if (anime.GetCurrentAnimatorStateInfo(0).IsName("CG_centerstage"))
         {
-            case "slide":
-                anime.SetTrigger("exit");
-                break;
+            switch (type)
+            {
+                case "slide":
+                    anime.SetTrigger("exit");
+                    break;
+            }
         }
     }
     void changeCG(Sprite CG)

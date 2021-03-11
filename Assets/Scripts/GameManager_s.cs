@@ -19,11 +19,14 @@ public class GameManager_s : MonoBehaviour
     public string nowweareat = "story";//當下使用劇本的暫存
     public float level=0;//當下使用劇本的對話階段暫存
     public string gamemode = "converstation";//遊戲狀態暫存
+    public bool maincamera = true;//探索模式鏡頭狀態
+    public int changetargetcamera = 0;//切換鏡頭暫存
     private RaycastHit hit ;//滑鼠偵測暫存
     private RaycastHit2D hit2d;//滑鼠平面偵測暫存
     private Ray mouseray;//鐳射暫存
     private option optionframe;//設定界面腳本
     private item_info iteminfo;//物品資訊顯示腳本
+    public string stage; 
     public string anime =null;//動畫名稱暫存
     public bool optionstate = false;//設定界面是否開啟
     public List<string> flag;//劇情要素蒐集區
@@ -35,6 +38,7 @@ public class GameManager_s : MonoBehaviour
     public GameObject lv1sence;
     public GameObject lv2sence;
     public GameObject zaball;
+    public GameObject zoombackbutton;
 
     private bool IsTouchedUI()//判斷是否摸著UI圖標
     {
@@ -47,6 +51,7 @@ public class GameManager_s : MonoBehaviour
     }
     void Start()
     {
+        stage= SceneManager.GetActiveScene().name;
         Text = GameObject.Find("Words").GetComponent<Text_s>();
         levelmanager = GameObject.Find("LevelManager").GetComponent<test_level_BETA>();
         talkframe = GameObject.Find("Text_frame").GetComponent<converstation_frame>();
@@ -82,29 +87,51 @@ public class GameManager_s : MonoBehaviour
                 case "searching":
                     if (IsTouchedUI() == false)
                     {
-                        if (Input.GetMouseButtonDown(0))
+                        if (maincamera)
                         {
-                            mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                            if (Physics.Raycast(mouseray, out hit, 1000f))
+                            if (Input.GetMouseButtonDown(0))
                             {
-                                searchtrigger(hit.transform.name);
+                                mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                                if (Physics.Raycast(mouseray, out hit, 1000f))
+                                {
+                                    searchtrigger(hit.transform.name);
+                                }
+                            }
+                            if (Input.mousePosition.x <= Screen.width * 0.05f)
+                            {
+                                Camera.main.transform.Rotate(0, -0.5f, 0);
+                            }
+                            else if (Input.mousePosition.x >= Screen.width * 0.95f)
+                            {
+                                Camera.main.transform.Rotate(0, 0.5f, 0);
+                            }
+                            else if (Input.mousePosition.x <= Screen.width * 0.25f && Input.mousePosition.x > Screen.width * 0.05f)
+                            {
+                                Camera.main.transform.Rotate(0, -0.15f, 0);
+                            }
+                            else if (Input.mousePosition.x >= Screen.width * 0.75f && Input.mousePosition.x < Screen.width * 0.95f)
+                            {
+                                Camera.main.transform.Rotate(0, 0.15f, 0);
                             }
                         }
-                        if (Input.mousePosition.x <= Screen.width * 0.05f)
+                        else
                         {
-                            Camera.main.transform.Rotate(0, -0.5f, 0);
-                        }
-                        else if (Input.mousePosition.x >= Screen.width * 0.95f)
-                        {
-                            Camera.main.transform.Rotate(0, 0.5f, 0);
-                        }
-                        else if (Input.mousePosition.x <= Screen.width * 0.25f && Input.mousePosition.x > Screen.width * 0.05f)
-                        {
-                            Camera.main.transform.Rotate(0, -0.15f, 0);
-                        }
-                        else if (Input.mousePosition.x >= Screen.width * 0.75f && Input.mousePosition.x < Screen.width * 0.95f)
-                        {
-                            Camera.main.transform.Rotate(0, 0.15f, 0);
+                            if (Input.GetMouseButton(0))
+                            {
+                                mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                                hit2d = Physics2D.Raycast(mouseray.origin, mouseray.direction, 1000f);
+                                if (hit2d.collider) { 
+                                    if (hit2d.transform.CompareTag("Puzzle"))
+                                {
+                                       // levelmanager.puzzletrigger(hit2d.transform.name);
+                                }
+                                else
+                                {
+                                    if (Input.GetMouseButtonDown(0))
+                                        searchtrigger(hit2d.transform.name);
+                                }
+                            }
+                            }
                         }
                     }
                     break;
@@ -142,6 +169,10 @@ public class GameManager_s : MonoBehaviour
                                 anime = null;
                             }
                             break;
+                        case "camerachangeblackfadein":
+                            break;
+                        case "camerachangeblackfadeout":
+                            break;
                     }
                     break;
             }
@@ -151,7 +182,8 @@ public class GameManager_s : MonoBehaviour
         }
         if (!spacekeyactive)
             spacekeycooldown -= Time.deltaTime;
-
+        if (Input.GetKey(KeyCode.K))
+            nextstage();
     }
     public void searchtrigger(string target) {
         nowweareat = target;
@@ -249,6 +281,12 @@ public class GameManager_s : MonoBehaviour
     {
         levelmanager.cameralist[resentcamera].SetActive(false);
         levelmanager.cameralist[cameranumber].SetActive(true);
+        if (cameranumber == 0)
+            maincamera = true;
+        else {
+            maincamera = false;
+            zoombackbutton.SetActive(true);
+        }
         resentcamera = cameranumber;
     }
     public void effect(string effecttype)
@@ -256,18 +294,23 @@ public class GameManager_s : MonoBehaviour
         switch (effecttype)
         {
             case "blackfadeout":
-                blackstate = "off";
+                if (black.anime.GetCurrentAnimatorStateInfo(0).IsName("black_on")) { 
+                    blackstate = "off";
                 gamemode = "anime";
                 anime = "effectblackfadeout";
                 black.anime.SetTrigger("fadeout");
                 black.state = blackstate;
+                }
                 break;
             case "blackfadein":
-                blackstate = "black";
-                gamemode = "anime";
-                anime = "effectblackfadein";
-                black.anime.SetTrigger("fadein");
-                black.state = blackstate;
+                if (black.anime.GetCurrentAnimatorStateInfo(0).IsName("black_off"))
+                {
+                    blackstate = "black";
+                    gamemode = "anime";
+                    anime = "effectblackfadein";
+                    black.anime.SetTrigger("fadein");
+                    black.state = blackstate;
+                }
                 break;
         }
     }
@@ -296,11 +339,22 @@ public class GameManager_s : MonoBehaviour
     {
 
     }
-    public void nextlevel()
+    public void nextstage()
     {
-        zaball.SetActive(false);
-        lv1sence.SetActive(false);
-        lv2sence.SetActive(true);
+        switch (stage)
+        {
+            case "stage_one":
+        load("stage_two");
+                break;
+            case "stage_two":
+                load("stage_three");
+                break;
+        }
+
+    }
+    public void load(string nextsence)
+    {
+        SceneManager.LoadScene(nextsence);
     }
 }
 

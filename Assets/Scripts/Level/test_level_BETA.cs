@@ -17,6 +17,8 @@ public class test_level_BETA : MonoBehaviour
     public List<Sprite> Akunimage;
     public List<string> Akunimagename;
     public List<GameObject> cameralist;
+    public List<GameObject> zoombackgroundlist;
+    public List<GameObject> zoomobjectlist;
     public List<GameObject> zoomlist;
     public void Start()
     {
@@ -60,6 +62,9 @@ public class test_level_BETA : MonoBehaviour
     }
     public void story(string name, float level)
     {
+        switch (gamemanager.stage)
+        {
+            case"stage_one" :
         switch (name)
         {
             case "story":
@@ -277,6 +282,7 @@ public class test_level_BETA : MonoBehaviour
                         gamemanager.Speak(new talkform("那麼就開始吧，先把能看能摸的地方都先看過一次。", " ", " ", " "));
                         break;
                     case 69:
+                        gamemanager.effect("blackfadeout");
                         gamemanager.CGcontrol("exit", "slide");
                         gamemanager.talk("end");
                         break;
@@ -366,10 +372,11 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 1:
                             gamemanager.Speak(new talkform("房間裡的光源，燈火在裏頭搖曳著。", " ", " ", " "));
+                            openzoom(7);
                             break;
                         case 2:
                             gamemanager.Speak(new talkform("裡面有一片銅片，上頭寫著數字。", " ", " ", " "));
-                            openzoom(4);
+
                             break;
                         case 3:
                             gamemanager.talk("end");
@@ -387,6 +394,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
+                            openzoom(7);
                             gamemanager.Speak(new talkform("一盞壁燈，房間的光源似乎全都來自於他。", " ", " ", " "));
                             break;
                         case 2:
@@ -397,7 +405,7 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 4:
                             gamemanager.Speak(new talkform("裡面有一片銅片，上頭寫著數字。", " ", " ", " "));
-                            openzoom(4);
+                            zoomobjectlist[9].SetActive(true);
                             break;
                         case 5:
                             gamemanager.flag.Add("light");
@@ -518,7 +526,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak(new talkform("奇怪？", "我", " ", " "));
                             break;
                         case 2:
-                            gamemanager.CGcontrol("enter","popout");
+                            gamemanager.CGcontrol("enter", "popout");
                             gamemanager.Speak(new talkform("怎麼了？", "喵可", " ", " "));
                             break;
                         case 3:
@@ -541,75 +549,149 @@ public class test_level_BETA : MonoBehaviour
                 }
                 break;
             case "candle":
-                if (gamemanager.resentitem=="burnmatch")
-                {
-                    switch (level)
-                    {
+                        if (gamemanager.flag.Contains("key"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
 
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("我用火柴點燃了燭台上的蠟燭。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("『碦咚』一聲，一個東西從燭台的中間掉了出來。", " ", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.Speak(new talkform("是一把鑰匙。", " ", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.CGcontrol("enter", "popout");
-                            gamemanager.Speak(new talkform("這該不會就是？", "喵可", " ", " "));
-                            break;
-                        case 5:
-                            gamemanager.Speak(new talkform("這該不會就是？", "我", " ", " "));
-                            break;
-                        case 6:
-                            gamemanager.Speak(new talkform("拿去試試看吧。", " ", " ", " "));
-                            gamemanager.CGcontrol("exit", "slide");
-                            break;
-                        case 7:
-                            gamemanager.Speak(new talkform("獲得了鑰匙！", " ", " ", " "));
-                            break;
-                        case 8:
-                            gamemanager.playeritem.Add("key");
-                            gamemanager.useitem();
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (level)
-                    {
+                                    gamemanager.Speak(new talkform("即使點燃了燭台，對房間的糟糕採光仍然沒有任何幫助。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("真的只有裝飾功能啊...", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
 
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("一個燭台。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("我稍微摸了一下。", " ", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.Speak(new talkform("這個燭台是空心的。", " ", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.Speak(new talkform("有意思。", " ", " ", " "));
-                            break;
-                        case 5:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    openzoom(5);
+                                    gamemanager.Speak(new talkform("一個燭台放在梳妝台上面。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("雖然好像跟整個房間的氣氛很合，但是都有燈了，擺一個燭台在這裡還是有些奇怪。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                 break;
-            case "toyplane":
+                    case "candletrigger":
+                        if (gamemanager.resentitem == "burnmatch")
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    changzoomimage(zoomobjectlist[11], "candlelighton");
+                                    gamemanager.Speak(new talkform("我用火柴點燃了燭台上的蠟燭。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("『碦咚』一聲，一個東西從燭台的中間掉了出來。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("是一把鑰匙。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.CGcontrol("enter", "popout");
+                                    gamemanager.Speak(new talkform("這該不會就是？", "喵可", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("這該不會就是？", "我", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("拿去試試看吧。", " ", " ", " "));
+                                    gamemanager.CGcontrol("exit", "slide");
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("獲得了鑰匙！", " ", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.playeritem.Add("key");
+                                    gamemanager.flag.Add("key");
+                                    gamemanager.useitem();
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if(gamemanager.flag.Contains("key"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    
+                                    gamemanager.Speak(new talkform("點燃了蠟燭之後，鑰匙從燭台裡掉了出來。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("是機關燭台！不曉得它是怎麼偵測蠟燭有沒有點燃的？溫度感測嗎？", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("被點燃就會打開的話，作為保險箱感覺不怎麼安全呢...", "喵可", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("應該就只是個裝飾吧。", "我", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    
+                                    gamemanager.Speak(new talkform("裝飾用的燭台。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("我稍微摸了一下。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("燭台中間的這個地方裡面是空心的。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("有意思。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "toyplane":
                 if (gamemanager.flag.Contains("toyplane"))
                 {
                     switch (level)
@@ -619,7 +701,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            openzoom(5);
+                            openzoom(6);
                             gamemanager.Speak(new talkform("古銅色的飛機模型，非常精緻。", " ", " ", " "));
                             break;
                         case 2:
@@ -638,7 +720,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            openzoom(5);
+                            openzoom(6);
                             gamemanager.Speak(new talkform("古銅色的飛機模型，非常精緻。", " ", " ", " "));
                             break;
                         case 2:
@@ -666,26 +748,26 @@ public class test_level_BETA : MonoBehaviour
                 break;
             case "toyplanetrigger":
                 {
-                    if (gamemanager.flag.Contains("match")==false) {
+                    if (gamemanager.flag.Contains("match") == false) {
                         switch (level)
-                    {
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            changzoomimage(5,"plane2");
-                            gamemanager.Speak(new talkform("得到了火柴！", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.playeritem.Add("match");
-                            gamemanager.flag.Add("match"); 
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
+                        {
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                zoomobjectlist[8].SetActive(false);
+                                gamemanager.Speak(new talkform("得到了火柴！", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.playeritem.Add("match");
+                                gamemanager.flag.Add("match");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                    }
-                    
+
                 }
                 break;
             case "book":
@@ -698,10 +780,11 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
+                            openzoom(1);
                             gamemanager.Speak(new talkform("我又嘗試翻了一些其他書頁，但是都是空白的，真奇怪。", " ", " ", " "));
                             break;
                         case 2:
-                            openzoom(3);
+
                             gamemanager.Speak(new talkform("這裡的書本都是白的嗎？", " ", " ", " "));
                             break;
                         case 3:
@@ -720,18 +803,16 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            gamemanager.Speak(new talkform("我撿起幾本書翻看。", " ", " ", " "));
+                            openzoom(1);
+                            gamemanager.Speak(new talkform("這些書就這樣散落在地上。", " ", " ", " "));
                             break;
                         case 2:
-                            openzoom(3);
-                            gamemanager.Speak(new talkform("嗯？", "我", " ", " "));
+                            gamemanager.Speak(new talkform("想把它們都撿起來收回書櫃上，但是書櫃上沒有塞得下的位置。", " ", " ", " "));
                             break;
                         case 3:
-                            changzoomimage(3,"book2");
                             gamemanager.Speak(new talkform("書頁裡夾著一片透明的碎片。", " ", " ", " "));
                             break;
                         case 4:
-                            gamemanager.flag.Add("book");
                             gamemanager.talk("end");
                             break;
                         default:
@@ -739,6 +820,33 @@ public class test_level_BETA : MonoBehaviour
                     }
                 }
                 break;
+                    case"booktrigger":
+                        switch (level)
+                        {
+
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                openzoom(1);
+                                gamemanager.Speak(new talkform("這本書就這樣開著，放在地板上。", " ", " ", " "));
+                                break;
+                            case 2:
+
+                                gamemanager.Speak(new talkform("嗯？", "我", " ", " "));
+                                break;
+                            case 3:
+                                zoomobjectlist[1].SetActive(true);
+                                gamemanager.Speak(new talkform("書頁裡夾著一片透明的碎片。", " ", " ", " "));
+                                break;
+                            case 4:
+                                gamemanager.flag.Add("book");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
             case "carpet":
                 if (gamemanager.flag.Contains("carpet"))
                 {
@@ -749,7 +857,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            openzoom(1);
+                            openzoom(2);
                             gamemanager.Speak(new talkform("毛茸茸的地毯，邊角有狼的花紋裝飾。", " ", " ", " "));
                             break;
                         case 2:
@@ -767,7 +875,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            openzoom(1);
+                            openzoom(2);
                             gamemanager.Speak(new talkform("毛茸茸的地毯，邊角有狼的花紋裝飾。", " ", " ", " "));
                             break;
                         case 2:
@@ -782,14 +890,15 @@ public class test_level_BETA : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        changzoomimage(1,"carpet2");
+
                         gamemanager.talk("begin");
                         break;
                     case 1:
+                        changzoomimage(zoomobjectlist[2], "carpet2");
                         gamemanager.Speak(new talkform("藏在地毯底下的地板刻著字。", " ", " ", " "));
                         break;
                     case 2:
-                        if (gamemanager.flag.Contains("carpet")==false)
+                        if (gamemanager.flag.Contains("carpet") == false)
                             gamemanager.flag.Add("carpet");
                         gamemanager.talk("end");
                         break;
@@ -797,24 +906,24 @@ public class test_level_BETA : MonoBehaviour
                         break;
                 }
                 break;
-                 case "bussinesscase":
-                        switch (level)
-                        {
-                            case 0:
-                                gamemanager.talk("begin");
-                                break;
-                            case 1:
-                                gamemanager.Speak(new talkform("規矩的黑色公事包，在房裡顯得有些突兀。", " ", " ", " "));
-                                openzoom(0);
-                                break;
-                            case 2:
-                                gamemanager.talk("end");
-                                break;
-                            default:
-                                break;
-                        
-                        }
-                    break;
+            case "bussinesscase":
+                switch (level)
+                {
+                    case 0:
+                        gamemanager.talk("begin");
+                        break;
+                    case 1:
+                        gamemanager.Speak(new talkform("規矩的黑色公事包，在房裡顯得有些突兀。", " ", " ", " "));
+                        openzoom(3);
+                        break;
+                    case 2:
+                        gamemanager.talk("end");
+                        break;
+                    default:
+                        break;
+
+                }
+                break;
             case "bussinesscasetrigger":
                 switch (level)
                 {
@@ -822,7 +931,8 @@ public class test_level_BETA : MonoBehaviour
                         gamemanager.talk("begin");
                         break;
                     case 1:
-                        changzoomimage(0, "bussinesscase2");
+                        changzoomimage(zoomobjectlist[3], "bussinesscase2");
+                        zoomobjectlist[4].SetActive(true);
                         //gamemanager.CGcontrol("enter","popout");
                         gamemanager.Speak(new talkform("…紙球？", "喵可", " ", " "));
                         break;
@@ -830,7 +940,7 @@ public class test_level_BETA : MonoBehaviour
                         gamemanager.Speak(new talkform("我將紙球攤開。", " ", " ", " "));
                         break;
                     case 3:
-                        changzoomimage(0, "bussinesscase3");
+                        changzoomimage(zoomobjectlist[4], "bussinesscase3");
                         gamemanager.Speak(new talkform("獲得了打開的便條，上面似乎寫著一段文字。", " ", " ", " "));
                         break;
                     case 4:
@@ -878,7 +988,7 @@ public class test_level_BETA : MonoBehaviour
                         break;
                     case 1:
 
-                        gamemanager.Speak(new talkform("造型簡單的床頭櫃，櫃子似乎還打不開。", " ", " ", " "));
+                        gamemanager.Speak(new talkform("造型簡單的床頭櫃，上面的桌燈散發著溫暖的光芒，櫃子抽屜似乎還打不開。", " ", " ", " "));
                         break;
                     case 2:
                         gamemanager.talk("end");
@@ -897,7 +1007,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            openzoom(2);
+                            openzoom(4);
                             gamemanager.Speak(new talkform("一個貓咪時鐘，我真的沒想到他居然是貓咪時鐘……", " ", " ", " "));
                             break;
                         case 2:
@@ -915,7 +1025,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            openzoom(2);
+                            openzoom(4);
                             gamemanager.Speak(new talkform("說到時間的話，就是時鐘了吧。", "我", " ", " "));
                             break;
                         case 2:
@@ -928,7 +1038,8 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak(new talkform("太好了，似乎可以轉看看。", "我", " ", " "));
                             break;
                         case 5:
-                            changzoomimage(2,"clock2");
+                            changzoomimage(zoombackgroundlist[3], "clock2");
+                            zoomobjectlist[7].SetActive(true);
                             gamemanager.Speak(new talkform("我把時鐘的時間調整到與找到的數字一致，時鐘喵了一聲後，一隻貓咪從裡面彈了出來。", " ", " ", " "));
                             break;
                         case 6:
@@ -936,7 +1047,7 @@ public class test_level_BETA : MonoBehaviour
                             break;
                         case 7:
                             gamemanager.Speak(new talkform("有貓咪的布榖鐘啊……", "喵可", " ", " "));
-                            gamemanager.CGcontrol("enter","popout");
+                            gamemanager.CGcontrol("enter", "popout");
                             break;
                         case 8:
                             gamemanager.Speak(new talkform("她看起來很想要的樣子。", " ", " ", " "));
@@ -949,11 +1060,10 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.CGcontrol("exit", "slide");
                             break;
                         case 11:
-                            changzoomimage(2, "clock3");
                             gamemanager.Speak(new talkform("牠的嘴上咬著空的火柴盒。", " ", " ", " "));
                             break;
                         case 12:
-                            changzoomimage(2, "clock4");
+                            zoomobjectlist[7].SetActive(false);
                             gamemanager.Speak(new talkform("得到了火柴盒！", " ", " ", " "));
                             break;
                         case 13:
@@ -974,7 +1084,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            openzoom(2);
+                            openzoom(4);
                             gamemanager.Speak(new talkform("木製樹屋外觀的時鐘，這麼說來應該是個布穀鳥鐘了。", " ", " ", " "));
                             break;
                         case 2:
@@ -994,7 +1104,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.talk("begin");
                             break;
                         case 1:
-                            openzoom(2);
+                            openzoom(4);
                             gamemanager.Speak(new talkform("這種房子的造型應該是布穀鳥鐘吧？", "我", " ", " "));
                             break;
                         case 2:
@@ -1030,7 +1140,7 @@ public class test_level_BETA : MonoBehaviour
                 }
                 break;
             case "door":
-                if (gamemanager.resentitem==("key"))
+                if (gamemanager.resentitem == ("key"))
                 {
                     switch (level)
                     {
@@ -1059,7 +1169,7 @@ public class test_level_BETA : MonoBehaviour
                             gamemanager.Speak(new talkform("接下來是....第二關的測試！", "謎之聲", " ", " "));
                             break;
                         case 7:
-                            gamemanager.nextlevel();
+                            gamemanager.nextstage();
                             gamemanager.useitem();
                             gamemanager.talk("end");
                             break;
@@ -1151,563 +1261,14 @@ public class test_level_BETA : MonoBehaviour
                         break;
                 }
                 break;
-            case "bookshelflv2":
-                if (gamemanager.flag.Contains("pianolv2unlock"))
-                {
-                    switch (level)
-                    {
 
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("翻了面的樂譜牆上掛著好幾把小刀，以及一把鐵製的大提琴。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("這麼多武器.......？你有看過這面牆嗎？", "我", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.CGcontrol("enter", "popout");
-                            gamemanager.Speak(new talkform("沒、沒有！我是第一次看到這個......", "喵可", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.Speak(new talkform("雖然不是沒有看過，但這麼多的刀具擺在一起還是很嚇人。", " ", " ", " "));
-                            break;
-                        case 5:
-                            gamemanager.Speak(new talkform("不過旁邊這把大提琴更令人在意了，既不是古典的木製大提琴，也不是常見的電子大提琴。", " ", " ", " "));
-                            break;
-                        case 6:
-                            gamemanager.Speak(new talkform("大提琴的上面好像有什麼？", "喵可", " ", " "));
-                            break;
-                        case 7:
-                            gamemanager.Speak(new talkform("看起來是一些機械的機關，我試著能不能把他解開。", " ", " ", " "));
-                            break;
-                        case 8:
-                            gamemanager.Speak(new talkform("大提琴發出了齒輪運轉的聲音，音箱的上蓋被打開了。", " ", " ", " "));
-                            break;
-                        case 9:
-                            gamemanager.Speak(new talkform("打開了！", "喵可", " ", " "));
-                            break;
-                        case 10:
-                            gamemanager.Speak(new talkform("獲得了音樂盒！", " ", " ", " "));
-                            break;
-                        case 11:
-                            gamemanager.Speak(new talkform("音樂盒的上面是抱在一起的家族木偶。", " ", " ", " "));
-                            break;
-                        case 12:
-                            gamemanager.Speak(new talkform("我打開了音樂盒，奏響了曲子。", " ", " ", " "));
-                            break;
-                        case 13:
-                            gamemanager.Speak(new talkform("聽起來不像是常見的古典樂曲。", "我", " ", " "));
-                            break;
-                        case 14:
-                            gamemanager.Speak(new talkform(".......這首曲子老師很常彈呢，老師說是她自己做的曲子。", "喵可", " ", " "));
-                            break;
-                        case 15:
-                            gamemanager.Speak(new talkform("是首很溫暖的曲子呢。", "我", " ", " "));
-                            break;
-                        case 16:
-                            gamemanager.Speak(new talkform("明明是第一次聽到的曲子，卻能沒來由地讓我感到一陣鼻酸。", " ", " ", " "));
-                            break;
-                        case 17:
-                            gamemanager.Speak(new talkform("啊。", "我", " ", " "));
-                            break;
-                        case 18:
-                            gamemanager.Speak(new talkform("我打算把音樂盒翻過來端詳，但盒子卻瞬間在我手上解體了。", " ", " ", " "));
-                            break;
-                        case 19:
-                            gamemanager.Speak(new talkform("欸？我弄壞了嗎？", " ", " ", " "));
-                            break;
-                        case 20:
-                            gamemanager.Speak(new talkform("不，可是我什麼都沒碰啊.......", " ", " ", " "));
-                            break;
-                        case 21:
-                            gamemanager.Speak(new talkform("嗚啊！你、你、你！", "喵可", " ", " "));
-                            break;
-                        case 22:
-                            gamemanager.Speak(new talkform("我發誓我什麼都沒做喔。", "我", " ", " "));
-                            break;
-                        case 23:
-                            gamemanager.Speak(new talkform(".....", "喵可", " ", " "));
-                            break;
-                        case 24:
-                            gamemanager.Speak(new talkform("別一臉惋惜地看著我，我的心臟都愧疚起來了。", " ", " ", " "));
-                            break;
-                        case 25:
-                            gamemanager.Speak(new talkform("有什麼東西在音樂盒解體時落到了地上。", " ", " ", " "));
-                            break;
-                        case 26:
-                            gamemanager.Speak(new talkform("相片？", "我", " ", " "));
-                            break;
-                        case 27:
-                            gamemanager.Speak(new talkform("啪答。", " ", " ", " "));
-                            break;
-                        case 28:
-                            gamemanager.Speak(new talkform("在我彎下腰，撿起相片時，肩膀上突然有股濕濕黏黏的感覺。", " ", " ", " "));
-                            break;
-                        case 29:
-                            gamemanager.Speak(new talkform("嗯？", "我", " ", " "));
-                            break;
-                        case 30:
-                            gamemanager.Speak(new talkform("艾德先生！別動！", "喵可", " ", " "));
-                            break;
-                        case 31:
-                            gamemanager.Speak(new talkform("濕濕黏黏的感覺跑到了頭上，我照著喵可說的不動。", " ", " ", " "));
-                            break;
-                        case 32:
-                            gamemanager.Speak(new talkform("不如說那感覺太噁心了，我僵著根本不敢動。", " ", " ", " "));
-                            break;
-                        case 33:
-                            gamemanager.Speak(new talkform("喝啊！！！", "喵可", " ", " "));
-                            break;
-                        case 34:
-                            gamemanager.Speak(new talkform("呼！的一下，什麼東西的重量從我的頭上消失了。地板上隨機傳來啪嗒地一聲響。", " ", " ", " "));
-                            break;
-                        case 35:
-                            gamemanager.Speak(new talkform("相片的觸覺也從指尖溜走了，不過我還僵著，不敢轉頭去確認。", " ", " ", " "));
-                            break;
-                        case 36:
-                            gamemanager.Speak(new talkform("艾德先生，沒事了。", "喵可", " ", " "));
-                            break;
-                        case 37:
-                            gamemanager.Speak(new talkform("我轉身看向聲音傳來的方向。只見喵可拿起了一旁放在刀鞘內的武士刀，呈現了揮棒完了的姿勢。", " ", " ", " "));
-                            break;
-                        case 38:
-                            gamemanager.Speak(new talkform("她剛剛是拿那個從我的頭上揮過去嗎？", " ", " ", " "));
-                            break;
-                        case 39:
-                            gamemanager.Speak(new talkform("咕嚕，我嚥了一口口水。", " ", " ", " "));
-                            break;
-                        case 40:
-                            gamemanager.Speak(new talkform("要是我再高出個3公分，剛才那下大概會讓我腦震盪。", " ", " ", " "));
-                            break;
-                        case 41:
-                            gamemanager.Speak(new talkform("啊！別跑！", "喵可", " ", " "));
-                            break;
-                        case 42:
-                            gamemanager.Speak(new talkform("我這才往地上確認，那坨濕黏的東西跑得飛快，糊著相片鑽往通風口滑去。", " ", " ", " "));
-                            break;
-                        case 43:
-                            gamemanager.Speak(new talkform("不過似乎因為太胖了，那坨「生物」他......", " ", " ", " "));
-                            break;
-                        case 44:
-                            gamemanager.Speak(new talkform("完美地堵塞在通風口，也就是卡住了。", " ", " ", " "));
-                            break;
-                        case 45:
-                            gamemanager.Speak(new talkform("好茨好茨！", "生物", " ", " "));
-                            break;
-                        case 46:
-                            gamemanager.Speak(new talkform("貓咪......嗎？", "我", " ", " "));
-                            break;
-                        case 47:
-                            gamemanager.Speak(new talkform("兩個尖尖的突起像是貓耳朵形狀，身體則是軟軟的一糊。", " ", " ", " "));
-                            break;
-                        case 48:
-                            gamemanager.Speak(new talkform("身體兩側延伸出兩條細細的軀幹，末端則是圓圓的一球。", " ", " ", " "));
-                            break;
-                        case 49:
-                            gamemanager.Speak(new talkform("那是...手？不對，這整坨糊糊的到底是什麼？", " ", " ", " "));
-                            break;
-                        case 50:
-                            gamemanager.Speak(new talkform("等一下！給我把相片吐出來！", "喵可", " ", " "));
-                            break;
-                        case 51:
-                            gamemanager.Speak(new talkform("好茨好ㄘ——好ㄘ…….", "生物", " ", " "));
-                            break;
-                        case 52:
-                            gamemanager.Speak(new talkform("咚。", " ", " ", " "));
-                            break;
-                        case 53:
-                            gamemanager.Speak(new talkform("喵可的劍鞘又一次揮了下去。", " ", " ", " "));
-                            break;
-                        case 54:
-                            gamemanager.Speak(new talkform("異樣的生物身體整個被砸扁了，但是他完全沒有要把嘴裡的相片放開的樣子。", "", " ", " "));
-                            break;
-                        case 55:
-                            gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.Speak(new talkform("這....超出常識了，難以理解。", " ", " ", " "));
-                            break;
-                        case 56:
-
-                            gamemanager.Speak(new talkform("究竟接下來會如何發展呢....敬請期待囉。", "謎之聲", " ", " "));
-                            break;
-                        case 57:
-                            gamemanager.Speak(new talkform("先讓我睡一下....", "謎之聲", " ", " "));
-                            break;
-                        case 58:
-                            gamemanager.Speak(new talkform("感謝你的遊玩，到這裡就是目前為止的全部內容囉。", "謎之聲", " ", " "));
-                            break;
-                        case 59:
-
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else if (gamemanager.flag.Contains("bookshelflv2"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("書櫃上放滿了樂譜，寫著簡譜規則的書被我們翻開來放在一旁。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("一個巨大的書櫃，裡頭放滿了較薄的書本。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("全部都是樂譜。", "我", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.CGcontrol("enter", "popout");
-                            gamemanager.Speak(new talkform("畢竟老師很喜歡音樂嘛。", "喵可", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.Speak(new talkform("被叫做老師又是放滿樂譜。", "喵可", " ", " "));
-                            break;
-                        case 5:
-                            gamemanager.Speak(new talkform("音樂老師？", "我", " ", " "));
-                            break;
-                        case 6:
-                            gamemanager.Speak(new talkform("沒錯！聽說老師還有其他的工作，但她本人不怎麼願意講。", "喵可", " ", " "));
-                            break;
-                        case 7:
-                            gamemanager.Speak(new talkform("所以詳細是什麼我也不太清楚....", "喵可", " ", " "));
-                            break;
-                        case 8:
-                            gamemanager.Speak(new talkform("不為人知的工作啊.......", " ", " ", " "));
-                            break;
-                        case 9:
-                            gamemanager.Speak(new talkform("不，還是別想了。", " ", " ", " "));
-                            break;
-                        case 10:
-                            gamemanager.Speak(new talkform("越想越覺得不妙。", " ", " ", " "));
-                            break;
-                        case 11:
-                            gamemanager.Speak(new talkform("我隨意地拿起一本樂譜來翻看。", " ", " ", " "));
-                            break;
-                        case 12:
-                            gamemanager.Speak(new talkform("啊，是數字譜呢！", "喵可", " ", " "));
-                            break;
-                        case 13:
-                            gamemanager.Speak(new talkform("是簡譜。", "我", " ", " "));
-                            break;
-                        case 14:
-                            gamemanager.Speak(new talkform("恕我失禮，但簡譜很沒有感覺.......", "我", " ", " "));
-                            break;
-                        case 15:
-                            gamemanager.Speak(new talkform("感覺整個房間的格調都被這些數字拉低了。", " ", " ", " "));
-                            break;
-                        case 16:
-                            gamemanager.Speak(new talkform("老師也說過類似的話呢，但是我真的看不懂那些黑色的豆子想表達什麼.....", "喵可", " ", " "));
-                            break;
-                        case 17:
-                            gamemanager.Speak(new talkform("黑色的豆子......算了。", "我", " ", " "));
-                            break;
-                        case 18:
-                            gamemanager.Speak(new talkform("的確對太多接觸樂器的人來說，簡譜比較容易吧。", " ", " ", " "));
-                            break;
-                        case 19:
-                            gamemanager.Speak(new talkform("話說回來......會這樣想的我，應該是學過樂理的？", " ", " ", " "));
-                            break;
-                        case 20:
-                            gamemanager.Speak(new talkform("這或許是幫助我找到記憶的一個關鍵。", " ", " ", " "));
-                            break;
-                        case 21:
-                            gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.flag.Add("bookshelflv2");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
+            case "niddleminute":
+                zoomobjectlist[6].GetComponent<clockniddle>().Drag();
                 break;
-            case "violinlv2":
-                if (gamemanager.flag.Contains("violinlv2"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("曲面的提琴櫃，裡面放了五把小提琴。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("小提琴上有著不明顯的標記。", " ", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("曲面的提琴櫃，裡面放了五把小提琴。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("我拿了一把小提琴擺弄了一下。但沒有聲音。", " ", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.CGcontrol("enter", "popout");
-                            gamemanager.Speak(new talkform("喔！姿勢一百分！艾德先生很有架式呢。", "喵可", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.Speak(new talkform("嗯......？沒有聲音？", "我", " ", " "));
-                            break;
-                        case 5:
-                            gamemanager.Speak(new talkform("我應該沒有拉錯才對。", " ", " ", " "));
-                            break;
-                        case 6:
-                            gamemanager.Speak(new talkform("等等，這股自信是從哪裡冒出來的？", " ", " ", " "));
-                            break;
-                        case 7:
-                            gamemanager.Speak(new talkform("不可能，老師平常都拉得出聲音喔！", "喵可", " ", " "));
-                            break;
-                        case 8:
-                            gamemanager.Speak(new talkform("喵可接過小提琴試著拉了一下，還是沒有聲音。", " ", " ", " "));
-                            break;
-                        case 9:
-                            gamemanager.Speak(new talkform("看起來不是我們兩個的問題。", "我", " ", " "));
-                            break;
-                        case 10:
-                            gamemanager.Speak(new talkform("嗯！不過這裡有個數字標記呢。", "喵可", " ", " "));
-                            break;
-                        case 11:
-                            gamemanager.Speak(new talkform("喵可手上的提琴尾部標上了一個數字。", " ", " ", " "));
-                            break;
-                        case 12:
-                            gamemanager.Speak(new talkform("我翻了翻櫃子上的其他提琴，尾部同樣有著標記，但幾乎都快看不清楚了。", " ", " ", " "));
-                            break;
-                        case 13:
-                            gamemanager.Speak(new talkform("真虧你能注意到......看起來並沒有照著順序排。", "我", " ", " "));
-                            break;
-                        case 14:
-                            gamemanager.Speak(new talkform("....有一股想照順序擺好的衝動。", " ", " ", " "));
-                            break;
-                        case 15:
-                            gamemanager.Speak(new talkform("不過要是反而是弄亂好像就有點不好意思了。", " ", " ", " "));
-                            break;
-                        case 16:
-                            gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.flag.Add("violinlv2");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                    break;
-            case "bedlv2":
-                switch (level)
-                {
-                    case 0:
-                        gamemanager.talk("begin");
-                        break;
-                    case 1:
-                        gamemanager.Speak(new talkform("有著絨毛被的床鋪，非常柔軟的樣子。", " ", " ", " "));
-                        break;
-                    case 2:
-                        gamemanager.Speak(new talkform("如果這是我的床，我會很想躺在上面。", " ", " ", " "));
-                        break;
-                    case 3:
-                        gamemanager.talk("end");
-                        break;
-                    default:
-                        break;
-                }
+            case "niddlehour":
+                zoomobjectlist[10].GetComponent<clockniddle>().Drag();
                 break;
-            case "pianolv2":
-                if (gamemanager.flag.Contains("pianolv2unlock"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("琴鍵上有著隨意標示的符號。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("高音譜記號、音符還有低音譜記號？", "我", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.Speak(new talkform("琴鍵上面為什麼會畫上符號呢？", " ", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.CGcontrol("enter", "popout");
-                            gamemanager.Speak(new talkform("說起來這些符號很常在這個房間的一些地方看到呢，老師的床頭櫃也是這些圖案，意外的很可愛呢。", "喵可", " ", " "));
-                            break;
-                        case 5:
-                            gamemanager.Speak(new talkform("該說臻不愧是音樂老師嗎？連家具都是充滿音樂的元素啊。", "我", " ", " "));
-                            break;
-                        case 6:
-                            gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else if(gamemanager.flag.Contains("violinlv2")&& gamemanager.flag.Contains("pianolv2"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("按照提琴上的音階彈奏後，鋼琴發出了輕脆的旋律後，房間傳來了巨大的撞擊聲。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.CGcontrol("enter", "popout");
-                            gamemanager.Speak(new talkform("艾德先生快看！牆壁翻過來了。", "喵可", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.Speak(new talkform("原先書櫃的位置換成了一面黑色的牆。", " ", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.flag.Add("pianolv2unlock");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("傳統的三腳鋼琴，保養得非常好。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.CGcontrol("enter", "popout");
-                            gamemanager.Speak(new talkform("雖然我不會彈，但只要聽到老師演奏鋼琴，心情就會非常好呢。", "喵可", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.Speak(new talkform("........", "喵可", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.Speak(new talkform("喵可看起來心情不太好的樣子。", " ", " ", " "));
-                            break;
-                        case 5:
-                            gamemanager.Speak(new talkform("也是，畢竟老師受到了襲擊。", " ", " ", " "));
-                            break;
-                        case 6:
-                            gamemanager.Speak(new talkform("得趕快找找看有沒有什麼線索才行。", " ", " ", " "));
-                            break;
-                        case 7:
-                            gamemanager.Speak(new talkform("我繞著鋼琴看了一圈，發現了琴鍵上隨意標記著ㄧ些符號。", " ", " ", " "));
-                            break;
-                        case 8:
-                            gamemanager.Speak(new talkform("這些符號似乎有什麼用的樣子，先記起來吧。", "我", " ", " "));
-                            break;
-                        case 9:
-                            gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.flag.Add("pianolv2");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                break;
-            case "bedsidetablelv2":
-                if (gamemanager.flag.Contains("bedsidetablelv2"))
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("精細的床頭櫃，每一層抽屜都有著漂亮的花紋。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("好想打開來看看。", " ", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.Speak(new talkform("....", " ", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.Speak(new talkform("感受到了來自喵可的灼熱視線。", " ", " ", " "));
-                            break;
-                        case 5:
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (level)
-                    {
-
-                        case 0:
-                            gamemanager.talk("begin");
-                            break;
-                        case 1:
-                            gamemanager.Speak(new talkform("可愛的四層櫃子，但放在這間房間裡並不突兀。", " ", " ", " "));
-                            break;
-                        case 2:
-                            gamemanager.Speak(new talkform("雖然不該翻開來看，但一想到裡面會不會有線索就好好奇啊......", " ", " ", " "));
-                            break;
-                        case 3:
-                            gamemanager.CGcontrol("enter", "popout");
-                            gamemanager.Speak(new talkform("艾德先生，我覺得不要亂翻比較好喔。", "喵可", " ", " "));
-                            break;
-                        case 4:
-                            gamemanager.Speak(new talkform("我想也是。", " ", " ", " "));
-                            break;
-                        case 5:
-                            gamemanager.CGcontrol("exit", "slide");
-                            gamemanager.flag.Add("bedsidetablelv2");
-                            gamemanager.talk("end");
-                            break;
-                        default:
-                            break;
-                    }
-                }
+            default:
                 break;
                 /*
                 case "curtain":
@@ -1782,11 +1343,2061 @@ public class test_level_BETA : MonoBehaviour
                     }
                     break;
                */
+        }
+                break;
+            case "stage_two":
+                switch (name)
+                {
+                    case "story":
+                        switch (level)
+                        {
+                            case 0:
+                                gamemanager.black.state = "on";
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("我們來到被稱為喵可稱為『老師』的一名女性的房間。", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.Speak(new talkform("然而卻發現她倒在地上失去了意識....", " ", " ", " "));
+                                break;
+                            case 3:
+                                gamemanager.Speak(new talkform("要找出這裡究竟發生了什麼事！", " ", " ", " "));
+                                break;
+                            case 4:
+                                gamemanager.effect("blackfadeout");
+                                gamemanager.CGcontrol("exit", "slide");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
 
+                    case "bookshelflv2":
+                        if (gamemanager.flag.Contains("pianolv2unlock"))
+                        {
+                            switch (level)
+                            {
 
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("翻了面的樂譜牆上掛著好幾把小刀，以及一把鐵製的大提琴。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("這麼多武器.......？你有看過這面牆嗎？", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.CGcontrol("enter", "popout");
+                                    gamemanager.Speak(new talkform("沒、沒有！我是第一次看到這個......", "喵可", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("雖然不是沒有看過，但這麼多的刀具擺在一起還是很嚇人。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("不過旁邊這把大提琴更令人在意了，既不是古典的木製大提琴，也不是常見的電子大提琴。", " ", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("大提琴的上面好像有什麼？", "喵可", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("看起來是一些機械的機關，我試著能不能把他解開。", " ", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("大提琴發出了齒輪運轉的聲音，音箱的上蓋被打開了。", " ", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("打開了！", "喵可", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("獲得了音樂盒！", " ", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("音樂盒的上面是抱在一起的家族木偶。", " ", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("我打開了音樂盒，奏響了曲子。", " ", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("聽起來不像是常見的古典樂曲。", "我", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform(".......這首曲子老師很常彈呢，老師說是她自己做的曲子。", "喵可", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("是首很溫暖的曲子呢。", "我", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.Speak(new talkform("明明是第一次聽到的曲子，卻能沒來由地讓我感到一陣鼻酸。", " ", " ", " "));
+                                    break;
+                                case 17:
+                                    gamemanager.Speak(new talkform("啊。", "我", " ", " "));
+                                    break;
+                                case 18:
+                                    gamemanager.Speak(new talkform("我打算把音樂盒翻過來端詳，但盒子卻瞬間在我手上解體了。", " ", " ", " "));
+                                    break;
+                                case 19:
+                                    gamemanager.Speak(new talkform("欸？我弄壞了嗎？", " ", " ", " "));
+                                    break;
+                                case 20:
+                                    gamemanager.Speak(new talkform("不，可是我什麼都沒碰啊.......", " ", " ", " "));
+                                    break;
+                                case 21:
+                                    gamemanager.Speak(new talkform("嗚啊！你、你、你！", "喵可", " ", " "));
+                                    break;
+                                case 22:
+                                    gamemanager.Speak(new talkform("我發誓我什麼都沒做喔。", "我", " ", " "));
+                                    break;
+                                case 23:
+                                    gamemanager.Speak(new talkform(".....", "喵可", " ", " "));
+                                    break;
+                                case 24:
+                                    gamemanager.Speak(new talkform("別一臉惋惜地看著我，我的心臟都愧疚起來了。", " ", " ", " "));
+                                    break;
+                                case 25:
+                                    gamemanager.Speak(new talkform("有什麼東西在音樂盒解體時落到了地上。", " ", " ", " "));
+                                    break;
+                                case 26:
+                                    gamemanager.Speak(new talkform("相片？", "我", " ", " "));
+                                    break;
+                                case 27:
+                                    gamemanager.Speak(new talkform("啪答。", " ", " ", " "));
+                                    break;
+                                case 28:
+                                    gamemanager.Speak(new talkform("在我彎下腰，撿起相片時，肩膀上突然有股濕濕黏黏的感覺。", " ", " ", " "));
+                                    break;
+                                case 29:
+                                    gamemanager.Speak(new talkform("嗯？", "我", " ", " "));
+                                    break;
+                                case 30:
+                                    gamemanager.Speak(new talkform("艾德先生！別動！", "喵可", " ", " "));
+                                    break;
+                                case 31:
+                                    gamemanager.Speak(new talkform("濕濕黏黏的感覺跑到了頭上，我照著喵可說的不動。", " ", " ", " "));
+                                    break;
+                                case 32:
+                                    gamemanager.Speak(new talkform("不如說那感覺太噁心了，我僵著根本不敢動。", " ", " ", " "));
+                                    break;
+                                case 33:
+                                    gamemanager.Speak(new talkform("喝啊！！！", "喵可", " ", " "));
+                                    break;
+                                case 34:
+                                    gamemanager.Speak(new talkform("呼！的一下，什麼東西的重量從我的頭上消失了。地板上隨機傳來啪嗒地一聲響。", " ", " ", " "));
+                                    break;
+                                case 35:
+                                    gamemanager.Speak(new talkform("相片的觸覺也從指尖溜走了，不過我還僵著，不敢轉頭去確認。", " ", " ", " "));
+                                    break;
+                                case 36:
+                                    gamemanager.Speak(new talkform("艾德先生，沒事了。", "喵可", " ", " "));
+                                    break;
+                                case 37:
+                                    gamemanager.Speak(new talkform("我轉身看向聲音傳來的方向。只見喵可拿起了一旁放在刀鞘內的武士刀，呈現了揮棒完了的姿勢。", " ", " ", " "));
+                                    break;
+                                case 38:
+                                    gamemanager.Speak(new talkform("她剛剛是拿那個從我的頭上揮過去嗎？", " ", " ", " "));
+                                    break;
+                                case 39:
+                                    gamemanager.Speak(new talkform("咕嚕，我嚥了一口口水。", " ", " ", " "));
+                                    break;
+                                case 40:
+                                    gamemanager.Speak(new talkform("要是我再高出個3公分，剛才那下大概會讓我腦震盪。", " ", " ", " "));
+                                    break;
+                                case 41:
+                                    gamemanager.Speak(new talkform("啊！別跑！", "喵可", " ", " "));
+                                    break;
+                                case 42:
+                                    gamemanager.Speak(new talkform("我這才往地上確認，那坨濕黏的東西跑得飛快，糊著相片鑽往通風口滑去。", " ", " ", " "));
+                                    break;
+                                case 43:
+                                    gamemanager.Speak(new talkform("不過似乎因為太胖了，那坨「生物」他......", " ", " ", " "));
+                                    break;
+                                case 44:
+                                    gamemanager.Speak(new talkform("完美地堵塞在通風口，也就是卡住了。", " ", " ", " "));
+                                    break;
+                                case 45:
+                                    gamemanager.Speak(new talkform("好茨好茨！", "生物", " ", " "));
+                                    break;
+                                case 46:
+                                    gamemanager.Speak(new talkform("貓咪......嗎？", "我", " ", " "));
+                                    break;
+                                case 47:
+                                    gamemanager.Speak(new talkform("兩個尖尖的突起像是貓耳朵形狀，身體則是軟軟的一糊。", " ", " ", " "));
+                                    break;
+                                case 48:
+                                    gamemanager.Speak(new talkform("身體兩側延伸出兩條細細的軀幹，末端則是圓圓的一球。", " ", " ", " "));
+                                    break;
+                                case 49:
+                                    gamemanager.Speak(new talkform("那是...手？不對，這整坨糊糊的到底是什麼？", " ", " ", " "));
+                                    break;
+                                case 50:
+                                    gamemanager.Speak(new talkform("等一下！給我把相片吐出來！", "喵可", " ", " "));
+                                    break;
+                                case 51:
+                                    gamemanager.Speak(new talkform("好茨好ㄘ——好ㄘ…….", "生物", " ", " "));
+                                    break;
+                                case 52:
+                                    gamemanager.Speak(new talkform("咚。", " ", " ", " "));
+                                    break;
+                                case 53:
+                                    gamemanager.Speak(new talkform("喵可的劍鞘又一次揮了下去。", " ", " ", " "));
+                                    break;
+                                case 54:
+                                    gamemanager.Speak(new talkform("異樣的生物身體整個被砸扁了，但是他完全沒有要把嘴裡的相片放開的樣子。", "", " ", " "));
+                                    break;
+                                case 55:
+                                    gamemanager.CGcontrol("exit", "slide");
+                                    gamemanager.Speak(new talkform("這....超出常識了，難以理解。", " ", " ", " "));
+                                    break;
+                                case 56:
 
+                                    gamemanager.Speak(new talkform("究竟接下來會如何發展呢....敬請期待囉。", "謎之聲", " ", " "));
+                                    break;
+                                case 57:
+                                    gamemanager.Speak(new talkform("不過這裡有個第三關", "謎之聲", " ", " "));
+                                    break;
+                                case 58:
+                                    
+                                    gamemanager.talk("end");
+                                    gamemanager.nextstage();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("bookshelflv2"))
+                        {
+                            switch (level)
+                            {
 
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("書櫃上放滿了樂譜，寫著簡譜規則的書被我們翻開來放在一旁。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("一個巨大的書櫃，裡頭放滿了較薄的書本。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("全部都是樂譜。", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.CGcontrol("enter", "popout");
+                                    gamemanager.Speak(new talkform("畢竟老師很喜歡音樂嘛。", "喵可", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("被叫做老師又是放滿樂譜。", "喵可", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("音樂老師？", "我", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("沒錯！聽說老師還有其他的工作，但她本人不怎麼願意講。", "喵可", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("所以詳細是什麼我也不太清楚....", "喵可", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("不為人知的工作啊.......", " ", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("不，還是別想了。", " ", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("越想越覺得不妙。", " ", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("我隨意地拿起一本樂譜來翻看。", " ", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("啊，是數字譜呢！", "喵可", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("是簡譜。", "我", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("恕我失禮，但簡譜很沒有感覺.......", "我", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("感覺整個房間的格調都被這些數字拉低了。", " ", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.Speak(new talkform("老師也說過類似的話呢，但是我真的看不懂那些黑色的豆子想表達什麼.....", "喵可", " ", " "));
+                                    break;
+                                case 17:
+                                    gamemanager.Speak(new talkform("黑色的豆子......算了。", "我", " ", " "));
+                                    break;
+                                case 18:
+                                    gamemanager.Speak(new talkform("的確對太多接觸樂器的人來說，簡譜比較容易吧。", " ", " ", " "));
+                                    break;
+                                case 19:
+                                    gamemanager.Speak(new talkform("話說回來......會這樣想的我，應該是學過樂理的？", " ", " ", " "));
+                                    break;
+                                case 20:
+                                    gamemanager.Speak(new talkform("這或許是幫助我找到記憶的一個關鍵。", " ", " ", " "));
+                                    break;
+                                case 21:
+                                    gamemanager.CGcontrol("exit", "slide");
+                                    gamemanager.flag.Add("bookshelflv2");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "violinlv2":
+                        if (gamemanager.flag.Contains("violinlv2"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("曲面的提琴櫃，裡面放了五把小提琴。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("小提琴上有著不明顯的標記。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("曲面的提琴櫃，裡面放了五把小提琴。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("我拿了一把小提琴擺弄了一下。但沒有聲音。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.CGcontrol("enter", "popout");
+                                    gamemanager.Speak(new talkform("喔！姿勢一百分！艾德先生很有架式呢。", "喵可", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("嗯......？沒有聲音？", "我", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("我應該沒有拉錯才對。", " ", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("等等，這股自信是從哪裡冒出來的？", " ", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("不可能，老師平常都拉得出聲音喔！", "喵可", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("喵可接過小提琴試著拉了一下，還是沒有聲音。", " ", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("看起來不是我們兩個的問題。", "我", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("嗯！不過這裡有個數字標記呢。", "喵可", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("喵可手上的提琴尾部標上了一個數字。", " ", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("我翻了翻櫃子上的其他提琴，尾部同樣有著標記，但幾乎都快看不清楚了。", " ", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("真虧你能注意到......看起來並沒有照著順序排。", "我", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("....有一股想照順序擺好的衝動。", " ", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("不過要是反而是弄亂好像就有點不好意思了。", " ", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.CGcontrol("exit", "slide");
+                                    gamemanager.flag.Add("violinlv2");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "bedlv2":
+                        switch (level)
+                        {
+                            case 0:
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("有著絨毛被的床鋪，非常柔軟的樣子。", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.Speak(new talkform("如果這是我的床，我會很想躺在上面。", " ", " ", " "));
+                                break;
+                            case 3:
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case "pianolv2":
+                        if (gamemanager.flag.Contains("pianolv2unlock"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("琴鍵上有著隨意標示的符號。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("高音譜記號、音符還有低音譜記號？", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("琴鍵上面為什麼會畫上符號呢？", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.CGcontrol("enter", "popout");
+                                    gamemanager.Speak(new talkform("說起來這些符號很常在這個房間的一些地方看到呢，老師的床頭櫃也是這些圖案，意外的很可愛呢。", "喵可", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("該說臻不愧是音樂老師嗎？連家具都是充滿音樂的元素啊。", "我", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.CGcontrol("exit", "slide");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("violinlv2") && gamemanager.flag.Contains("pianolv2"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("按照提琴上的音階彈奏後，鋼琴發出了輕脆的旋律後，房間傳來了巨大的撞擊聲。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.CGcontrol("enter", "popout");
+                                    gamemanager.Speak(new talkform("艾德先生快看！牆壁翻過來了。", "喵可", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("原先書櫃的位置換成了一面黑色的牆。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.CGcontrol("exit", "slide");
+                                    gamemanager.flag.Add("pianolv2unlock");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("傳統的三腳鋼琴，保養得非常好。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.CGcontrol("enter", "popout");
+                                    gamemanager.Speak(new talkform("雖然我不會彈，但只要聽到老師演奏鋼琴，心情就會非常好呢。", "喵可", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("........", "喵可", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("喵可看起來心情不太好的樣子。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("也是，畢竟老師受到了襲擊。", " ", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("得趕快找找看有沒有什麼線索才行。", " ", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("我繞著鋼琴看了一圈，發現了琴鍵上隨意標記著ㄧ些符號。", " ", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("這些符號似乎有什麼用的樣子，先記起來吧。", "我", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.CGcontrol("exit", "slide");
+                                    gamemanager.flag.Add("pianolv2");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "bedsidetablelv2":
+                        if (gamemanager.flag.Contains("bedsidetablelv2"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("精細的床頭櫃，每一層抽屜都有著漂亮的花紋。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("好想打開來看看。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("....", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("感受到了來自喵可的灼熱視線。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
 
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("可愛的四層櫃子，但放在這間房間裡並不突兀。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("雖然不該翻開來看，但一想到裡面會不會有線索就好好奇啊......", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.CGcontrol("enter", "popout");
+                                    gamemanager.Speak(new talkform("艾德先生，我覺得不要亂翻比較好喔。", "喵可", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("我想也是。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.CGcontrol("exit", "slide");
+                                    gamemanager.flag.Add("bedsidetablelv2");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "sofalv2":
+                        if (gamemanager.flag.Contains("sofalv2"))
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("柔軟的家具，坐在上面感覺自己的骨頭也變軟了。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("惡魔的陷阱。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("柔軟的家具，坐在上面感覺自己的骨頭也變軟了。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("身體慢慢地往下沉......再這樣下去的話...會被吞噬的！", " ", " ", " "));
+                                    break;
+
+                                case 3:
+                                    gamemanager.CGcontrol("enter", "popout");
+                                    gamemanager.Speak(new talkform("艾德先生！快振作起來，不然....", "喵可", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("不要！別管我了，你也會遭殃的！", "我", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("剩下的....就交給你了....", "我", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("艾德先生，艾德先生！不～～～", "喵可", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.CGcontrol("exit", "slide");
+                                    gamemanager.flag.Add("sofalv2");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                }
+                        break;
+            case "stage_three":
+                switch (name)
+                {
+                    case "story":
+                        switch (level)
+                        {
+                            case 0:
+                                gamemanager.black.state = "on";
+                                gamemanager.talk("begin");
+                                break;
+                            case 1:
+                                gamemanager.Speak(new talkform("來到了被喵可稱為『酒保』的男性的房間。", " ", " ", " "));
+                                break;
+                            case 2:
+                                gamemanager.Speak(new talkform("讓我在這裡也找找，應該能找到恢復記憶的線索。", " ", " ", " "));
+                                break;
+                            case 3:
+                                gamemanager.effect("blackfadeout");
+                                gamemanager.CGcontrol("exit", "slide");
+                                gamemanager.talk("end");
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+
+                    case "fish":
+                        if (gamemanager.flag.Contains("case")&& gamemanager.flag.Contains("keylv3"))
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("迷你的鑰匙與小巧的鎖對上，喀的一聲打開了。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("太好了！是這把鑰匙沒錯。", "喵可", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("那麼，裡面究竟裝著什麼呢？", "我", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("…..！", "柯斯莫", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("柯斯莫從公事包裡摸出一個方柱狀的東西。", " ", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("唔…….這個是什麼？", "喵可", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("我……我也沒有頭緒。", "我", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("是獎盃的底座，這裡刻了我的名字，柯斯莫．西蘭托。", "柯斯莫", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("原來酒保先生姓西蘭托啊……", "我", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("回想一下自己的姓氏，果然也是一片空白。", " ", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("我從房間醒來時，就只記得自己的名字。", " ", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("還真是有點氣餒啊，直到現在，還是沒有想起關於自己的事情。", " ", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("不過在這裡只要知道彼此的名字就夠了！畢竟我們都是直稱名字啊！", "喵可", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("分辨的出來就夠了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("雖然不知道柯斯莫先生如何，但喵可大概是真的在安慰我吧。", " ", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.Speak(new talkform("我沒想起來的事情還堆積如山的多，但還有時間。", " ", " ", " "));
+                                    break;
+                                case 17:
+                                    gamemanager.Speak(new talkform("我還有很漫長的時間可以在這裡找尋自己。", " ", " ", " "));
+                                    break;
+                                case 18:
+                                    gamemanager.Speak(new talkform("並且，不是孤單一個人。", " ", " ", " "));
+                                    break;
+                                case 19:
+                                    gamemanager.Speak(new talkform("也是。回歸正題，這個底座有讓柯斯莫先生想起什麼嗎？", "我", " ", " "));
+                                    break;
+                                case 20:
+                                    gamemanager.Speak(new talkform("是我在和心向館的主人分享這場比賽的事，不過前因後果，更詳細的就想不起來了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 21:
+                                    gamemanager.Speak(new talkform("但要想起來大概不難，畢竟有獎盃的底座，就一定有獎盃的上半部分。", "柯斯莫", " ", " "));
+                                    break;
+                                case 22:
+                                    gamemanager.Speak(new talkform("上面有一個可以插入東西的凹槽呢！", "喵可", " ", " "));
+                                    break;
+                                case 23:
+                                    gamemanager.Speak(new talkform("只要找到上半部分，把他鑲進獎盃的底座，或許就能讓酒保想起失去的部分記憶。", " ", " ", " "));
+                                    break;
+                                case 24:
+                                    gamemanager.Speak(new talkform("就差一步了。", " ", " ", " "));
+                                    break;
+                                case 25:
+                                    gamemanager.Speak(new talkform("將「獎盃底座」放入了背包。", " ", " ", " "));
+                                    break;
+                                case 26:
+                                    gamemanager.flag.Add("base");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("case"))
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("從水族箱裡撈出了溼答答的公事包，上頭有個小巧的鐵鎖。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("找找看解鎖的鑰匙吧。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("fish")&& gamemanager.flag.Contains("string") && gamemanager.flag.Contains("hook"))
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("柯斯莫拉了一張吧檯的高腳椅讓我踩著上去。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("我把綁著鉤子的線丟入水族箱，沒有因為太輕而浮起來真是太好了。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("好，勾起來看看。", "我", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("喔喔！看起來很有機會！", "喵可", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("鉤子順著重力慢慢的沉到底部，我調整它的角度，勾住公事包上頭的提把。", " ", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("吸飽水的公事包有些重，這不太妙，我擔心釣魚線會從鉤子上脫落。", " ", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("要是公事包裡面裝的東西太重，或許真的要潛下去拿了。", " ", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("還好實際拉上來的過程並沒有大礙，我很快就抓到了濕漉漉的公事包。", " ", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("嗯？比想像中的輕。", "我", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("避免大量的水淋到地上，我簡單的擰了擰公事包。", " ", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("公事包扁扁的，摸起來像是沒裝任何東西。", " ", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("只有接近底部的地方，能夠摸到方型的柱狀物。", " ", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("酒保先生在裡面裝了什麼呢？", "喵可", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("…..我不記得。", "柯斯莫", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("是因為很久沒打開過的關係嗎？", "喵可", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.Speak(new talkform("不。", "柯斯莫", " ", " "));
+                                    break;
+                                case 17:
+                                    gamemanager.Speak(new talkform("我從椅子上爬下來，把公事包交給柯斯莫先生。", " ", " ", " "));
+                                    break;
+                                case 18:
+                                    gamemanager.Speak(new talkform("我大概知道他想說什麼，畢竟我實際目睹過書蟲橫掃過這間房間的瞬間。", " ", " ", " "));
+                                    break;
+                                case 19:
+                                    gamemanager.Speak(new talkform("估計是書蟲搗亂的關係，這間房間的記憶被打亂了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 20:
+                                    gamemanager.Speak(new talkform("所以連帶影響到我的記憶，就像伊芙琳的音樂盒被弄壞了一樣。", "柯斯莫", " ", " "));
+                                    break;
+                                case 21:
+                                    gamemanager.Speak(new talkform("大概我的房間裡也有什麼與記憶有關的東西壞掉了吧。", "柯斯莫", " ", " "));
+                                    break;
+                                case 22:
+                                    gamemanager.Speak(new talkform("想起今天與柯斯莫先生見面時，滿房間的書蟲。", " ", " ", " "));
+                                    break;
+                                case 23:
+                                    gamemanager.Speak(new talkform("希望書蟲只是弄壞而不是帶走房間的物品。", " ", " ", " "));
+                                    break;
+                                case 24:
+                                    gamemanager.Speak(new talkform("沒事的！只要一邊找一邊收拾，總會知道的！我們也才整理到一半啊。", "喵可", " ", " "));
+                                    break;
+                                case 25:
+                                    gamemanager.Speak(new talkform("的確，要是現在就這麼悲觀的話，也無法解決事情。", " ", " ", " "));
+                                    break;
+                                case 26:
+                                    gamemanager.Speak(new talkform("不如先做盡嘗試再說。", " ", " ", " "));
+                                    break;
+                                case 27:
+                                    gamemanager.Speak(new talkform("況且我們連公事包都還沒打開。", " ", " ", " "));
+                                    break;
+                                case 28:
+                                    gamemanager.Speak(new talkform("總之，打開來看看就會知道是什麼了。", "我", " ", " "));
+                                    break;
+                                case 29:
+                                    gamemanager.Speak(new talkform("這個嘛，他鎖住了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 30:
+                                    gamemanager.Speak(new talkform("咦？", " ", " ", " "));
+                                    break;
+                                case 31:
+                                    gamemanager.Speak(new talkform("溼答答的公事包上有個鐵鎖，緊緊的將他扣緊。", " ", " ", " "));
+                                    break;
+                                case 32:
+                                    gamemanager.Speak(new talkform("酒保先生，你知道鑰匙……", "喵可", " ", " "));
+                                    break;
+                                case 33:
+                                    gamemanager.Speak(new talkform("被我藏在某個地方……但在哪裡屬於不記得的範疇。", "柯斯莫", " ", " "));
+                                    break;
+                                case 34:
+                                    gamemanager.Speak(new talkform("果然是這個樣子啊…….", "喵可", " ", " "));
+                                    break;
+                                case 35:
+                                    gamemanager.Speak(new talkform("(吸氣", "喵可", " ", " "));
+                                    break;
+                                case 36:
+                                    gamemanager.Speak(new talkform("(吐氣", "喵可", " ", " "));
+                                    break;
+                                case 37:
+                                    gamemanager.Speak(new talkform("好！來找鑰匙吧！", "喵可", " ", " "));
+                                    break;
+                                case 38:
+                                    gamemanager.Speak(new talkform("一想到柯斯莫先生和我一樣失去了一些記憶，心情就跟著有點低落了起來。", " ", " ", " "));
+                                    break;
+                                case 39:
+                                    gamemanager.Speak(new talkform("這時候有喵可在真是太好了。", " ", " ", " "));
+                                    break;
+                                case 40:
+                                    gamemanager.Speak(new talkform("有她在的時候，總是會讓我感覺事情會好起來。", " ", " ", " "));
+                                    break;
+                                case 41:
+                                    gamemanager.Speak(new talkform("嗯，找找吧。既然被好好藏起來了，就不會不見。", "我", " ", " "));
+                                    break;
+                                case 42:
+                                    gamemanager.Speak(new talkform("只要找出來就行了。", "我", " ", " "));
+                                    break;
+                                case 43:
+                                    gamemanager.Speak(new talkform("……", "柯斯莫", " ", " "));
+                                    break;
+                                case 44:
+                                    gamemanager.Speak(new talkform("唉……我知道了，我也會嘗試回想。", "柯斯莫", " ", " "));
+                                    break;
+                                case 45:
+                                    gamemanager.Speak(new talkform("太好了，柯斯莫先生看起來放鬆了一點。", " ", " ", " "));
+                                    break;
+                                case 46:
+                                    gamemanager.Speak(new talkform("把手頭上的東西整理好，找找看鑰匙吧", " ", " ", " "));
+                                    break;
+                                case 47:
+                                    gamemanager.Speak(new talkform("說起來，那幾本撿到的書，也要找地方放好才行呢。", "我", " ", " "));
+                                    break;
+                    
+                                case 48:
+                                    gamemanager.flag.Add("case");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("string"))
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("不曉得找不找的到鉤子。", "柯斯莫", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("柯斯莫先生想的到有什麼類似的東西嗎？", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("想到的話就告訴你了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("說的也是，再找找看吧。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("總之，找到什麼就拿去用吧，我不是很在意。", "柯斯莫", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("hook"))
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("這個窗簾鉤應該是取代鉤子的好東西。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("要找到一條線綁住它才行。", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("fish"))
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("巨大的水族箱，魚兒在裏頭隨意游動，看的我也不禁放鬆了起來。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("但現在還是快點幫柯斯莫先生恢復房間吧，得快點找到遺失的物品，確定有沒有被書蟲弄壞了才行。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("在找到可以釣起公事包的東西以前，似乎沒有回來的必要。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("一個比我還高的大型水族箱，正發出螢藍的光。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("從進門後我就很在意這裏。", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("這麼大的水族箱放在房間裡也太不可思議了……", "我", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("簡直像是在水族館裡一樣。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("哇哇！好大喔！", "喵可", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("這個是藍帶神仙魚、小丑魚、親嘴魚！", "喵可", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("喔？喵可認得出這麼多啊。", "我", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("欸嘿嘿…小動物的話我都很擅長分辨種類的喔！", "喵可", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("那邊那個橫紋的是六線狐，那邊游過來的是紅尾蝶，還有還有！直條紋的是三間雀，紅白色像花瓣的那幾隻是玩具虎，下面還有獅子魚……", "喵可", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("……這孩子是魚類圖鑑嗎？", " ", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("除了小丑魚和神仙魚，我還真沒有看到半隻認識的魚類。", " ", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("不，要一般人知道也太難了。", " ", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("話說回來這些魚通通放在一起養是沒問題的嗎！？", " ", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("他們被照料的很好呢！呣呣！我也好想在房間裡養寵物！", "喵可", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("大概沒辦法？來到這裡，我們的房間就已經是長這樣。", "柯斯莫", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.Speak(new talkform("回想那間到現在都還讓我有著陌生的熟悉感的房間，還是覺得很不可思議。", " ", " ", " "));
+                                    break;
+                                case 17:
+                                    gamemanager.Speak(new talkform("但起初我也沒有想認真飼養。", "柯斯莫", " ", " "));
+                                    break;
+                                case 18:
+                                    gamemanager.Speak(new talkform("不過想到裡面數不清的傢伙都是備用糧食，就突然覺得可以認真養一下了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 19:
+                                    gamemanager.Speak(new talkform("你要吃牠們嗎……？", "喵可", " ", " "));
+                                    break;
+                                case 20:
+                                    gamemanager.Speak(new talkform("我有把握可以做的很美味，給各位當早餐。", "柯斯莫", " ", " "));
+                                    break;
+                                case 21:
+                                    gamemanager.Speak(new talkform("不，請你不要，拜託不要。", "我", " ", " "));
+                                    break;
+                                case 22:
+                                    gamemanager.Speak(new talkform("不懂魚類如我，但彩度這麼高的一群魚吃下肚一定會出事。", " ", " ", " "));
+                                    break;
+                                case 23:
+                                    gamemanager.Speak(new talkform("處理掉有毒的部分還是能吃的。", "柯斯莫", " ", " "));
+                                    break;
+                                case 24:
+                                    gamemanager.Speak(new talkform("咦——", "我", " ", " "));
+                                    break;
+                                case 25:
+                                    gamemanager.Speak(new talkform("等等，他是認真的嗎？", " ", " ", " "));
+                                    break;
+                                case 26:
+                                    gamemanager.Speak(new talkform("但是肉都偏少呢，嘖。", "柯斯莫", " ", " "));
+                                    break;
+                                case 27:
+                                    gamemanager.Speak(new talkform("還請你放過這些備用糧食。", " ", " ", " "));
+                                    break;
+                                case 28:
+                                    gamemanager.Speak(new talkform("說起來，下面那些是什麼？", " ", " ", " "));
+                                    break;
+                                case 29:
+                                    gamemanager.Speak(new talkform("我有把握可以做的很美味，給各位當早餐。", "柯斯莫", " ", " "));
+                                    break;
+                                case 30:
+                                    gamemanager.Speak(new talkform("搖來晃去，細的像原子筆的生物一隻一隻的插在水族箱的底部。", " ", " ", " "));
+                                    break;
+                                case 31:
+                                    gamemanager.Speak(new talkform("這麼奇葩的外型，卻隱約讓我覺得有點可愛。", " ", " ", " "));
+                                    break;
+                                case 32:
+                                    gamemanager.Speak(new talkform("那些是花園鰻喔！是一種盯著會讓人想睡覺的鰻類。", "喵可", " ", " "));
+                                    break;
+                                case 33:
+                                    gamemanager.Speak(new talkform("啊，我可以理解。有種身心都放鬆的感覺。", "我", " ", " "));
+                                    break;
+                                case 34:
+                                    gamemanager.Speak(new talkform("旁邊也有海星跟……嗯？", "喵可", " ", " "));
+                                    break;
+                                case 35:
+                                    gamemanager.Speak(new talkform("她輕輕拉了我一下，我跟她一起看向了某個方向。", " ", " ", " "));
+                                    break;
+                                case 36:
+                                    gamemanager.Speak(new talkform("那是造景……不，那好像是……", "我", " ", " "));
+                                    break;
+                                case 37:
+                                    gamemanager.Speak(new talkform("我換了一個角度重新觀察。", " ", " ", " "));
+                                    break;
+                                case 38:
+                                    gamemanager.Speak(new talkform("雖然造型跟擺在我房間裡的那一個不太一樣，但在水族箱角落的確實是個「公事包」。", " ", " ", " "));
+                                    break;
+                                case 39:
+                                    gamemanager.Speak(new talkform("公事包在這種地方突兀的讓我很難不去在意他，究竟為什麼這種格格不入的東西會放在房間裡呢？", " ", " ", " "));
+                                    break;
+                                case 40:
+                                    gamemanager.Speak(new talkform("是公事包！不過怎麼會在裡面？", "喵可", " ", " "));
+                                    break;
+                                case 41:
+                                    gamemanager.Speak(new talkform("書蟲丟進去的？", "柯斯莫", " ", " "));
+                                    break;
+                                case 42:
+                                    gamemanager.Speak(new talkform("我感受到柯斯莫先生語氣裡的困惑，看來不是他刻意放在水族箱裡的了。", " ", " ", " "));
+                                    break;
+                                case 43:
+                                    gamemanager.Speak(new talkform("如果真的是他做的我也不會訝異就是了。", " ", " ", " "));
+                                    break;
+                                case 44:
+                                    gamemanager.Speak(new talkform("先拿起來吧？", "我", " ", " "));
+                                    break;
+                                case 45:
+                                    gamemanager.Speak(new talkform("墊著酒吧的椅子可以進去拿，不過你想要全身溼透？", "柯斯莫", " ", " "));
+                                    break;
+                                case 46:
+                                    gamemanager.Speak(new talkform("可以的話請饒了我。", "我", " ", " "));
+                                    break;
+                                case 47:
+                                    gamemanager.Speak(new talkform("雖然是換件衣服就可以解決的事情，但當然是可以不要就不要。", " ", " ", " "));
+                                    break;
+                                case 48:
+                                    gamemanager.Speak(new talkform("如果用釣起來的呢？酒保先生有沒有釣竿？", "喵可", " ", " "));
+                                    break;
+                                case 49:
+                                    gamemanager.Speak(new talkform("非常抱歉，但我沒有。", "柯斯莫", " ", " "));
+                                    break;
+                                case 50:
+                                    gamemanager.Speak(new talkform("用釣的是一個很好的主意，我回憶過伊芙琳小姐的房間，也並沒有見過釣魚桿的印象。", " ", " ", " "));
+                                    break;
+                                case 51:
+                                    gamemanager.Speak(new talkform("雖然麻煩了一點，看來我們得想點別的辦法。", " ", " ", " "));
+                                    break;
+                                case 52:
+                                    gamemanager.Speak(new talkform("或許，我們可以做個類似的東西。", "我", " ", " "));
+                                    break;
+                                case 53:
+                                    gamemanager.Speak(new talkform("只要能夠把東西鉤起來就行，比方說用線綁著鉤子……", "我", " ", " "));
+                                    break;
+                                case 54:
+                                    gamemanager.Speak(new talkform("鉤子不確定，但我記得某處的櫃子裡有線。", "柯斯莫", " ", " "));
+                                    break;
+                                case 55:
+                                    gamemanager.Speak(new talkform("希望不要被書蟲亂拿就好，不然就要認真考慮下水了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 56:
+                                    gamemanager.Speak(new talkform("這麼說著的柯斯莫先生，卻銳利的盯著我看。", " ", " ", " "));
+                                    break;
+                                case 57:
+                                    gamemanager.Speak(new talkform("他看起來真的很想推我下水，各種層面上的。", " ", " ", " "));
+                                    break;
+                                case 58:
+                                    gamemanager.Speak(new talkform("為了阻止自己成為犧牲者，我想我最好找到線與可以用來作為鉤子的東西。", " ", " ", " "));
+                                    break;
+                                case 59:
+                                    gamemanager.flag.Add("fish");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "bed":
+                        if (gamemanager.flag.Contains("book_wolf"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("簡約的被單整齊的折放在上頭。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("剛剛在上面找到了一本書。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("床單上放著一本書。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("「森林守護者：狼」。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("看起來是一本講述狼在食物鏈中扮演的角色的書。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("真是好書名。", "我", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("很多人總是會認為狼會攻擊人和其它動物，而把牠視為掠奪者。這其實是個天大的誤會呢。", "喵可", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("真虧喵可你能知道，很多人都害怕狼所以沒有深入理解過呢。", "我", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("狼很帥啊！我很喜歡喔。", "喵可", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("狼是種優雅的動物，我也很喜歡。", " ", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("那本順便拿下來吧，一起放回書櫃。", "柯斯莫", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("將「森林守護者：狼」放入了背包。", " ", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.flag.Add("book_wolf");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "bookshelfbed":
+                        if (gamemanager.flag.Contains("string"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("下層放滿書櫃的雙層床，雖然很特別，但放在酒吧感覺的房間內一點都不突兀。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("好特別的雙層床，下層竟然全部都是書櫃。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("一般來說會是另一個床或是書桌之類的吧？", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("在書之間找到了一捆釣魚線。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("放在這裡啊。", "柯斯莫", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("要用到的話就拿走吧。", "柯斯莫", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("將「釣魚線」放入了背包。", " ", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.flag.Add("string");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "bar":
+                        if (gamemanager.flag.Contains("bar"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("簡約時尚的酒吧吧檯，已經被柯斯莫先生整理過了。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("一個非常大的酒吧吧檯，連後面的酒櫃都能看的一清二楚。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("我終於理解為什麼喵可要叫柯斯莫先生「酒保先生」了。", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("呵，關於酒的問題儘管來問我。", "柯斯莫", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("或者要來杯特製的雞尾酒、One Shot，我都能馬上現做。", "柯斯莫", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("沒有，我是第一次來酒保先生的房間。會這麼叫他只是因為一提到酒，他就會變這樣而已。", "喵可", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("看的出來，從冰山變成沸騰的岩漿大概就是這種感覺。", " ", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("所以艾德放輕鬆一點和酒保先生相處沒關係的，他的臉皮很厚。", "喵可", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("不厚臉皮一點，無法成為一個優秀的調酒師。", "柯斯莫", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("對吧？", "喵可", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("這樣子直接說出來沒有問題嗎？", " ", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("不，應該說優秀的調酒師不需要具備厚臉皮的能力吧。", " ", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("我腦袋中關於柯斯莫先生的世界觀刷新了一次。", " ", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("所以，艾德里安，要來一杯酒嗎？", "柯斯莫", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("這還真是，同時具備了壓迫、慫恿與期待的、熱切的目光。", " ", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("這、這個嘛……抱歉，我不清楚我是不是已經成年了，所以就讓我婉拒吧。", "我", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.Speak(new talkform("呼呣，真可惜。整理完房間後，問問伊芙琳或羅瑟要不要來一杯好了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 17:
+                                    gamemanager.Speak(new talkform("酒鬼先生，還請收斂一點。", "喵可", " ", " "));
+                                    break;
+                                case 18:
+                                    gamemanager.Speak(new talkform("我想不起來自己的歲數，但事實上我的確對調酒充滿了興趣，也對於酒的知識有或多或少的印象。", " ", " ", " "));
+                                    break;
+                                case 19:
+                                    gamemanager.Speak(new talkform("……", " ", " ", " "));
+                                    break;
+                                case 20:
+                                    gamemanager.Speak(new talkform("不知道他特調出來的酒會是怎麼樣的。", " ", " ", " "));
+                                    break;
+                                case 21:
+                                    gamemanager.Speak(new talkform("有機會的話看看菜單好了。", " ", " ", " "));
+                                    break;
+                                case 22:
+                                    gamemanager.flag.Add("bar");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "sofa":
+                        if (gamemanager.flag.Contains("book_fox"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("矮矮的多人沙發……等等，現在不是該睡覺的時候，冷靜。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("矮矮的多人沙發，躺上去感覺會起不來。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("說不定在上面睡覺都沒問題。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("沙發的扶手上有一本孤單的書。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("「王子與狐」", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("是一本圖文小說呢。", "喵可", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("不知道是什麼樣的內容？", "我", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("是一對狐狸兄弟的故事，哥哥拯救了精靈，得到了變成人類的機會。", "柯斯莫", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("他要替弟弟去看更廣闊的世界，哥哥也的確憑著非凡的成就，被國王收養為王子，和公主過著美滿的日子。但他卻逐漸忘了回去森林找弟弟。", "柯斯莫", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("某次在森林狩獵實，王子遭到了刺客的襲擊。但一隻狐狸卻衝出來咬住了刺客的手，王子也因此有機會反擊。", "柯斯莫", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("刺客雖然被阻止，但那隻狐狸卻重傷而死了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("那隻狐狸是……", "喵可", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("……", "我", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("王子發現了那隻狐狸是自己的弟弟，悲痛的離開了王國。沒有人知道他到底去了哪裡。", "柯斯莫", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("在那之後的很多年，那座森林出現了一個傳說。凡是遭遇危機的旅人，都會被兩隻狐狸拯救而平安無事。", "柯斯莫", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("大概就是這樣的傳說故事。", "柯斯莫", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.Speak(new talkform("其實是個不壞的結局呢。", "我", " ", " "));
+                                    break;
+                                case 17:
+                                    gamemanager.Speak(new talkform("兄弟姊妹的情誼啊……我是獨生女所以沒有什麼機會感受到呢。", "喵可", " ", " "));
+                                    break;
+                                case 18:
+                                    gamemanager.Speak(new talkform("但也不是兄弟姊妹都會這麼要好。", "柯斯莫", " ", " "));
+                                    break;
+                                case 19:
+                                    gamemanager.Speak(new talkform("這種時候就別潑冷水了啊！", "喵可", " ", " "));
+                                    break;
+                                case 20:
+                                    gamemanager.Speak(new talkform("將「王子與狐」放進了背包。", " ", " ", " "));
+                                    break;
+                                case 21:
+                                    gamemanager.flag.Add("book_fox");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "menu":
+                        if (gamemanager.flag.Contains("book_mink"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("寫著推薦調酒的菜單，名字的由來和這個房間的景物有關。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("「一、爵士明星，二、高枕無憂，三、浸染星空。」", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("菜單上寫著三款推薦調酒，清一色都無法從名字看出喝起來會是什麼感覺。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("為什麼會叫這三個名字呢？", "喵可", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("調酒的命名有幾種依據。", "柯斯莫", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("像是味道的感覺、使用的材料、顏色，當然也有抽象的命名方式，像是用「景物」來命名。", "柯斯莫", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("……", "我", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("常見的調酒就有不少是用這樣的方式命名對吧？", "我", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("沒錯。我想你既然有所了解，應該可以喝酒吧？", "柯斯莫", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("不知怎麼的，我清晰的記得有人跟我提過這件事情。", " ", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("難道，我開始回想起記憶了嗎？", " ", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("這三種調酒的命名方式，莫非也是以景物為主題嗎？", "喵可", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("嗯…….我總覺得，有點眼熟？", "喵可", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("眼熟？", "我", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("呵呵，調酒師原創的調酒，當然就該冠上屬於自己的名字。", "柯斯莫", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("為了紀念在這個酒吧裡被創造出來的調酒，這三款調酒都是以房間裡的景物命名的。", "柯斯莫", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.Speak(new talkform("唔……總覺得突然少了很大一部分的情調……", "喵可", " ", " "));
+                                    break;
+                                case 17:
+                                    gamemanager.Speak(new talkform("如果知道名字的由來的話確實……", "我", " ", " "));
+                                    break;
+                                case 18:
+                                    gamemanager.Speak(new talkform("確實失去了某種浪漫的感覺。", " ", " ", " "));
+                                    break;
+                                case 19:
+                                    gamemanager.Speak(new talkform("不過柯斯莫先生似乎不太在意的樣子。", " ", " ", " "));
+                                    break;
+                                case 20:
+                                    gamemanager.Speak(new talkform("菜單的旁邊有本落單的書。", " ", " ", " "));
+                                    break;
+                                case 21:
+                                    gamemanager.Speak(new talkform("「貂的生態」", " ", " ", " "));
+                                    break;
+                                case 22:
+                                    gamemanager.Speak(new talkform("貂啊，感覺不太常見呢。", "我", " ", " "));
+                                    break;
+                                case 23:
+                                    gamemanager.Speak(new talkform("其實在20世紀末期以後，把貂當作寵物的人越來越多了喔。", "喵可", " ", " "));
+                                    break;
+                                case 24:
+                                    gamemanager.Speak(new talkform("我還看過有人在馬路上遛貂呢！腿短短的非常可愛！", "喵可", " ", " "));
+                                    break;
+                                case 25:
+                                    gamemanager.Speak(new talkform("這、這種動物是這麼容易遛的嗎？", " ", " ", " "));
+                                    break;
+                                case 26:
+                                    gamemanager.Speak(new talkform("將「貂的生態」放進了背包。", " ", " ", " "));
+                                    break;
+                                case 27:
+                                    gamemanager.flag.Add("book_mink");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "window":
+                        if (gamemanager.flag.Contains("hook"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("連接星空的落地窗，剛開始看覺得有些恐怖，但久了就習慣了。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("比起我房間裡的一片黑已經好很多了。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("從天花板直接接到地板上的大落地窗，外面是一片星空。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("很漂亮呢，我的房間窗戶外面直接就是暗的了。", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("缺點就是這扇窗站太近會有點可怕，還不如黑的一片好。", "柯斯莫", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("嗚哇，星空沒有接到地板！好像飄在星空裡面。", "喵可", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("嗯……其實我覺得意外的有趣。跟在外太空有異曲同工之妙。", "我", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("我是不是該跟你們換房間。", "柯斯莫", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("酒保先生應該捨不得這些酒吧……", "喵可", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("合理。", "柯斯莫", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("那一聲合理真是鏗鏘有力。", " ", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("窗戶一旁有一根很長的桿子。", " ", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("好大的桿子，這跟也是需要收起來的東西嗎？", "喵可", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("那是要掛窗簾用的，本來是今天要裝，但一大早就被書蟲吵醒，就放到現在。", "柯斯莫", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("走近一看，桿子下面堆著一環環鐵鉤，應該是用來鉤窗簾布的鉤子。我將其中一個鐵鉤拿了起來。", " ", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("把「窗簾鉤」放進了背包。", " ", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.flag.Add("hook");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "table":
+                        if (gamemanager.flag.Contains("table"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("被整理乾淨的桌子上留著柯斯莫先生的便條紙。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("「紅酒/狼」、「威士忌/雪貂」、「萊姆酒/狐狸」", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("不管看幾次都覺得動物搭配酒的方法很有趣。", "我", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("這大概是目前最亂的地方了。", "我", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("我和柯斯莫合力清裡掉了破掉的玻璃碎屑，喵可則將桌子擦了乾淨。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("柯斯莫很快的拿出一張便條紙，在上頭寫了些什麼。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("「紅酒/狼」、「威士忌/雪貂」、「萊姆酒/狐狸」", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("這是什麼？", "喵可", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("我的小興趣，一種酒要對應一種杯子。", "柯斯莫", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("吧檯後面的櫃子有很多動物造型的玻璃杯，也有酒杯。", "柯斯莫", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("這個是方便我記得哪些杯子打破，要換新的。", "柯斯莫", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("有機會的話還真想看看這些杯子完好的樣子。", " ", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("歡迎找我喝酒。", "柯斯莫", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("酒鬼先生真的是酒鬼先生。", "喵可", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("喵可果然是故意的吧。", " ", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.flag.Add("table");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case "mixshelf":
+                        if (gamemanager.flag.Contains("keylv3"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("琳瑯滿目的酒櫃，上頭也陳列著書籍。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("已經把散落的書放回去了。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("mixshelf")&& gamemanager.flag.Contains("table")&& gamemanager.flag.Contains("book_wolf")&& gamemanager.flag.Contains("book_fox")&& gamemanager.flag.Contains("book_mink"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("把三本書照著柯斯莫寫的提示擺了上去。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("喀。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("鏗鏗。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("有東西掉落在地板上的聲音。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("欸咻！是艾德掉的吧？給你。", "喵可", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("謝謝，不過它好像是從其他地方掉下來的……", "我", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("是一把小鑰匙，鐵製的。", "我", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("這麼小的一把鑰匙，會是用來鎖什麼的呢？", "喵可", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("這間房間大部分是銅或鋼作成的鎖……", "我", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("把「鐵製小鑰匙」放進了背包。", " ", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.flag.Add("keylv3");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("mixshelf")  && gamemanager.flag.Contains("book_wolf") && gamemanager.flag.Contains("book_fox") && gamemanager.flag.Contains("book_mink"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("把三本書對著書櫃的空位塞了進去。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("雖然書本放了上去，卻凸了出來。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("我：嗯……明明跟旁邊的書寬度一樣啊？", "我", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("總覺得不太對勁。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (gamemanager.flag.Contains("mixshelf"))
+                        {
+                            switch (level)
+                            {
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("琳瑯滿目的酒櫃，上頭也陳列著書籍。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("還有空位可以將書本放進去。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("好多種酒喔……", "喵可", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("還真是壯觀。", "我", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("四個酒櫃擺放著琳瑯滿目的酒，但有些地方空了下來。", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("硬要說起來，也只是看起來多。", "柯斯莫", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.Speak(new talkform("除了左手邊收藏酒專用的櫃子外，其它三個櫃子分別放了紅酒、萊姆酒、威士忌三種酒而已。", "柯斯莫", " ", " "));
+                                    break;
+                                case 6:
+                                    gamemanager.Speak(new talkform("而且因為書蟲亂跑，已經有不少摔破的被清掉了。", "柯斯莫", " ", " "));
+                                    break;
+                                case 7:
+                                    gamemanager.Speak(new talkform("酒瓶基本上佔了最上層與最下層，意外的是除了酒以外，中間那一層卻是獨立出來放書的。", " ", " ", " "));
+                                    break;
+                                case 8:
+                                    gamemanager.Speak(new talkform("心向館裡每個人的房間都充滿了書本啊。", " ", " ", " "));
+                                    break;
+                                case 9:
+                                    gamemanager.Speak(new talkform("還真是特別的設計。", "我", " ", " "));
+                                    break;
+                                case 10:
+                                    gamemanager.Speak(new talkform("畢竟是儲藏記憶的圖書館啊。", "柯斯莫", " ", " "));
+                                    break;
+                                case 11:
+                                    gamemanager.Speak(new talkform("不過上面還缺了幾本，如果收拾途中有撿到的話就放過來吧。", "柯斯莫", " ", " "));
+                                    break;
+                                case 12:
+                                    gamemanager.Speak(new talkform("難道是寫著跟酒保先生記憶有關的書嗎！", "喵可", " ", " "));
+                                    break;
+                                case 13:
+                                    gamemanager.Speak(new talkform("這樣的話…….我不會翻開來看的。", "我", " ", " "));
+                                    break;
+                                case 14:
+                                    gamemanager.Speak(new talkform("雖然在這裡的人們負責整理記憶，對他們而言，看到書本上記錄的「記憶」或許是家常便飯吧。", " ", " ", " "));
+                                    break;
+                                case 15:
+                                    gamemanager.Speak(new talkform("但我還是不太想在未經過允許的狀況下看到。", " ", " ", " "));
+                                    break;
+                                case 16:
+                                    gamemanager.Speak(new talkform("不必擔心，缺的那三本是純粹的資料書跟故事集。", "柯斯莫", " ", " "));
+                                    break;
+                                case 17:
+                                    gamemanager.Speak(new talkform("裡面並不會寫到我本人有多麼愛喝酒之類的。", "柯斯莫", " ", " "));
+                                    break;
+                                case 18:
+                                    gamemanager.Speak(new talkform("哎呀好可惜。", "喵可", " ", " "));
+                                    break;
+                                case 19:
+                                    gamemanager.Speak(new talkform("等等，如果是的話你真的有打算看嗎？", "我", " ", " "));
+                                    break;
+                                case 20:
+                                    gamemanager.Speak(new talkform("開玩笑的啦！真的想要看的話，我會好好問過的。", "喵可", " ", " "));
+                                    break;
+                                case 21:
+                                    gamemanager.Speak(new talkform("不過，我已經很習慣有她在的氛圍了。", " ", " ", " "));
+                                    break;
+                                case 22:
+                                    gamemanager.Speak(new talkform("這孩子偶爾會有點調皮呢……", " ", " ", " "));
+                                    break;
+                                case 23:
+                                    gamemanager.Speak(new talkform("總之，有找到的話會拿過來吧。", "我", " ", " "));
+                                    break;
+                                case 24:
+                                    gamemanager.flag.Add("mixshelf");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case " liqueurshelf":
+                        if (gamemanager.flag.Contains("sofalv2"))
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("精細的床頭櫃，每一層抽屜都有著漂亮的花紋。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("好想打開來看看。", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("....", " ", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("感受到了來自喵可的灼熱視線。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (level)
+                            {
+
+                                case 0:
+                                    gamemanager.talk("begin");
+                                    break;
+                                case 1:
+                                    gamemanager.Speak(new talkform("可愛的四層櫃子，但放在這間房間裡並不突兀。", " ", " ", " "));
+                                    break;
+                                case 2:
+                                    gamemanager.Speak(new talkform("雖然不該翻開來看，但一想到裡面會不會有線索就好好奇啊......", " ", " ", " "));
+                                    break;
+                                case 3:
+                                    gamemanager.Speak(new talkform("艾德先生，我覺得不要亂翻比較好喔。", "喵可", " ", " "));
+                                    break;
+                                case 4:
+                                    gamemanager.Speak(new talkform("我想也是。", " ", " ", " "));
+                                    break;
+                                case 5:
+                                    gamemanager.flag.Add("liqueurshelf");
+                                    gamemanager.talk("end");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                }
+                break;
+        }
+    }
+    public void puzzletrigger(string name)
+    {
+        switch (name)
+        {
+            case "niddleminute":
+                zoomobjectlist[6].GetComponent<clockniddle>().Drag();
+                break;
+            case "niddlehour":
+                zoomobjectlist[10].GetComponent<clockniddle>().Drag();
+                break;
+            default:
+                break;
         }
     }
     public string combine(string a, string b)
@@ -1804,15 +3415,17 @@ public class test_level_BETA : MonoBehaviour
                 break;
         }
     }
-    public void quite(GameObject zoom)
+    public void quite()
     {
-        zoom.SetActive(false);
+        //zoom.SetActive(false);
+        gamemanager.camerachange(0);
     }
     public void openzoom(int num) {
-        zoomlist[num].SetActive(true);
+        //zoomlist[num].SetActive(true);
+        gamemanager.camerachange(num);
     }
-    public void changzoomimage(int zoomnum,string image)
+    public void changzoomimage(GameObject target,string image)
     {
-        zoomlist[zoomnum].GetComponent<zoomin_basic>().changeimage(spriteDATA[image]);
+        target.GetComponent<zoomin_basic>().changeimage(spriteDATA[image]);
     }
 }

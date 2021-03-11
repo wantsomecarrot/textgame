@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class zoomin_basic : MonoBehaviour
 {
-    public Image backimage;
+    private SpriteRenderer sprite;
     // Start is called before the first frame update
-    public void changeimage(Sprite target)
-    {
-        backimage.sprite = target;
-
-    }
+    
     void Start()
     {
-        
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void changeimage(Sprite target)
+    {
+        sprite.sprite = target;
     }
 }

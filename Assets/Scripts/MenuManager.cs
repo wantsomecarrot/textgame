@@ -9,26 +9,37 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     private GameObject starttext;
     private GameObject black;
+    private GameObject menu;
+    private GameObject logo;
     void Start()
     {
         starttext = GameObject.Find("start");
         black = GameObject.Find("blackfront");
+        menu = GameObject.Find("首頁02");
+        logo = GameObject.Find("首頁LOGO");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0)) {
-            starttext.GetComponent<Animator>().SetTrigger("Start");
-        }
-        if (starttext.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("starttext_void"))
+        
+        if (logo.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("logo_stay"))
         {
-            black.GetComponent<Animator>().SetTrigger("fadein");
+            openmenu();
+            
         }
         if (black.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("black_on"))
         {
-            load();
+           load();
         }
+    }
+    public void openmenu()
+    {
+        menu.GetComponent<Animator>().SetTrigger("on");
+    }
+    public void startload()
+    {
+black.GetComponent<Animator>().SetTrigger("fadein");
     }
     public void load()
     {
