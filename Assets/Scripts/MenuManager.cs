@@ -11,35 +11,48 @@ public class MenuManager : MonoBehaviour
     private GameObject black;
     private GameObject menu;
     private GameObject logo;
+    private GameObject white;
     void Start()
     {
         starttext = GameObject.Find("start");
         black = GameObject.Find("blackfront");
+        white = GameObject.Find("whitefront");
         menu = GameObject.Find("首頁02");
         logo = GameObject.Find("首頁LOGO");
+        Cursor.visible = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (logo.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("logo_stay"))
+
+        if (white.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("black_off"))
         {
-            openmenu();
-            
+            logo.GetComponent<Animator>().SetTrigger("in");
+
         }
         if (black.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("black_on"))
         {
-           load();
+            load();
+            
         }
+        if (logo.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("logo_stay"))
+        {
+           openmenu();
+        }
+    }
+    public void endbutton()
+    {
+        Application.Quit();
     }
     public void openmenu()
     {
         menu.GetComponent<Animator>().SetTrigger("on");
     }
-    public void startload()
+    public void startloadbutton()
     {
-black.GetComponent<Animator>().SetTrigger("fadein");
+        black.GetComponent<Animator>().SetTrigger("fadein");
     }
     public void load()
     {

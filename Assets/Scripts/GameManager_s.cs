@@ -13,6 +13,7 @@ public class GameManager_s : MonoBehaviour
     private converstation_frame talkframe;//對話界面腳本
     private item_frame itemframe;//物品欄腳本
     private charatercg CG;//角色立繪顯示系統
+    private Animator CGanime;
     private bool spacekeyactive=true;
     private float spacekeycooldown;
     public blackcontrol black;//黑幕控制
@@ -26,6 +27,8 @@ public class GameManager_s : MonoBehaviour
     private Ray mouseray;//鐳射暫存
     private option optionframe;//設定界面腳本
     private item_info iteminfo;//物品資訊顯示腳本
+    private itemget itemget;
+    private audiosource audio;
     public string stage; 
     public string anime =null;//動畫名稱暫存
     public bool optionstate = false;//設定界面是否開啟
@@ -35,10 +38,12 @@ public class GameManager_s : MonoBehaviour
     public int resentcamera = 0 ;//現在的攝影機
     private string blackstate ;//黑幕開關暫存
     public Dictionary<string, Sprite> spriteDATA;//存圖區
+    public GameObject tutorial;
     public GameObject lv1sence;
     public GameObject lv2sence;
     public GameObject zaball;
     public GameObject zoombackbutton;
+    public bool custersetzoom;
 
     private bool IsTouchedUI()//判斷是否摸著UI圖標
     {
@@ -59,8 +64,12 @@ public class GameManager_s : MonoBehaviour
         itemframe = GameObject.Find("Item_frame").GetComponent<item_frame>();
         black = GameObject.Find("blackback").GetComponent<blackcontrol>();
         CG = GameObject.Find("CharaterCG").GetComponent<charatercg>();
+        CGanime = GameObject.Find("CG").GetComponent<Animator>();
         iteminfo = GameObject.Find("iteminfo").GetComponent<item_info>();
+        itemget = GameObject.Find("Itemget").GetComponent<itemget>();
+        audio = GameObject.Find("Audio Source").GetComponent<audiosource>();
         levelmanager.story(nowweareat,level);
+
 
     }
 
@@ -81,6 +90,7 @@ public class GameManager_s : MonoBehaviour
                     }
                     if (Input.GetKeyDown(KeyCode.S))
                     {
+
                         skip();
                     }
                     break;
@@ -115,23 +125,21 @@ public class GameManager_s : MonoBehaviour
                             }
                         }
                         else
-                        {
-                            if (Input.GetMouseButton(0))
-                            {
+                        {                           
                                 mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
                                 hit2d = Physics2D.Raycast(mouseray.origin, mouseray.direction, 1000f);
-                                if (hit2d.collider) { 
-                                    if (hit2d.transform.CompareTag("Puzzle"))
+                            if (hit2d.collider)
+                            {
+                                if (Input.GetMouseButtonDown(0))
+                                searchtrigger(hit2d.transform.name); 
+                                if (hit2d.transform.CompareTag("Zoom"))
                                 {
-                                       // levelmanager.puzzletrigger(hit2d.transform.name);
+                                    custersetzoom = true;
                                 }
                                 else
-                                {
-                                    if (Input.GetMouseButtonDown(0))
-                                        searchtrigger(hit2d.transform.name);
-                                }
+                                    custersetzoom = false;
                             }
-                            }
+                                                      
                         }
                     }
                     break;
@@ -173,7 +181,10 @@ public class GameManager_s : MonoBehaviour
                             break;
                         case "camerachangeblackfadeout":
                             break;
+                        
                     }
+                    break;
+                case "tutorial":
                     break;
             }
         if (spacekeycooldown<=0) {
@@ -185,9 +196,32 @@ public class GameManager_s : MonoBehaviour
         if (Input.GetKey(KeyCode.K))
             nextstage();
     }
+    public void entertutorial() {
+        tutorial.SetActive(true);
+        gamemode = "tutorial";
+    }
+    public void exittutorial() {
+        tutorial.SetActive(false);
+        gamemode = "searching";
+    }
     public void searchtrigger(string target) {
         nowweareat = target;
         levelmanager.story(nowweareat, level);
+    }
+    public void CGcontrol(string commend)
+    {
+        if (gamemode== "converstation")
+        switch (commend)//開始或結束
+        {
+            case "show":
+                CGanime.SetTrigger("on");
+                break;
+            case "hide":
+                    CGanime.SetTrigger("off");
+                break;
+            case "change":
+                break;
+        }
     }
     public void optionswitch()
     {
@@ -221,15 +255,15 @@ public class GameManager_s : MonoBehaviour
                 break;
         }
     }
-    public void CGcontrol(string commend,string type)
+    public void charactercontrol(float num, string commend,string type)
     {
         switch (commend)
         {
             case "enter":
-                CG.characterenter(type);
+                CG.characterenter(num,type);
                 break;
             case "exit":
-                CG.characterexit(type);
+                CG.characterexit(num,type);
                 break;
         }
     }
@@ -247,9 +281,9 @@ public class GameManager_s : MonoBehaviour
     }
     public void skip()//跳過劇情事件,秘技
     {
-        if (gamemode == "converstation"&& levelmanager.skipvalue(nowweareat) != 0)
+        if (gamemode == "converstation"&& levelmanager.skipvalue(nowweareat,stage) != 0&&Text.typing==false)
         {
-            level = levelmanager.skipvalue(nowweareat);
+            level = levelmanager.skipvalue(nowweareat,stage);
             levelmanager.story(nowweareat, level);
         }
     }
@@ -258,9 +292,15 @@ public class GameManager_s : MonoBehaviour
         if (gamemode== "converstation"&& optionstate==false)
         {
             if (Text.typing)
-                Text.type_delay = 0.01F;
+                Text.type_delay = 0.005F;
             else
+            {
+                itemget.exit();
                 next_level();
+
+            }
+
+                
         }
     }
     public void selectitem(int num)//選取物品事件
@@ -276,6 +316,11 @@ public class GameManager_s : MonoBehaviour
         }
         }
         
+    }
+    public void itemadd(string item,string name)
+    {
+        playeritem.Add(item);
+        itemget.enter(name, getiteminfo(item),levelmanager.spriteDATA[item]);
     }
     public void camerachange(int cameranumber)//切換攝影機事件
     {
@@ -351,6 +396,14 @@ public class GameManager_s : MonoBehaviour
                 break;
         }
 
+    }
+    public void changemusic(int num)
+    {
+        audio.change(num);
+    }
+    public void stopmusic()
+    {
+        audio.stop();
     }
     public void load(string nextsence)
     {
